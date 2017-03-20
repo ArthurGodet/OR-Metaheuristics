@@ -1,7 +1,7 @@
 Structure du projet :
 * une classe Instance contenant les donnees de l'instance ----> calquer Flowshop
 * une classe Solution
-* une classe Solver
+* une classe Solver dont heritent les algorithmes
 * une classe principale Main
 
 Structures des algos :
