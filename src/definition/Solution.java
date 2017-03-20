@@ -8,6 +8,8 @@ public class Solution implements Comparable<Solution>{
 	public Solution(Instance i){
 		this.instance = i;
 		this.order = new int[i.getNbJobs()];
+		for(int j = 0; j<this.order.length; j++)
+			this.order[j] = -1;
 		this.cmax = Integer.MAX_VALUE;
 	}
 
@@ -40,11 +42,13 @@ public class Solution implements Comparable<Solution>{
 	
 	public void evaluate(){
 		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
-		for(int i = 0; i<this.order.length; i++){
+		int i = 0;
+		while(i<this.order.length && this.order[i] != -1){
 			dateDisponibilite[0] += this.instance.getDureeOperation(this.order[i],0);
 			for(int j = 1; j<this.instance.getNbMachines(); j++){
 				dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + this.instance.getDureeOperation(this.order[i],j);
 			}
+			i++;
 		}
 		this.cmax = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
@@ -71,5 +75,6 @@ public class Solution implements Comparable<Solution>{
 	public void retirerJob(int job, int pos){
 		for(int k = pos; k<this.order.length-1; k++)
 			this.order[k] = this.order[k+1];
+		this.order[this.order.length-1] = -1;
 	}
 }
