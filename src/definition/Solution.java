@@ -16,7 +16,7 @@ public class Solution implements Comparable<Solution>{
 	}
 	
 	public void setOrder(int[] o){
-		this.order = o;
+		this.order = o.clone();
 	}
 	
 	public void setOrder(int job, int pos){
@@ -40,7 +40,7 @@ public class Solution implements Comparable<Solution>{
 	
 	public void evaluate(){
 		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
-		for(int i = 0; i<this.instance.getNbJobs(); i++){
+		for(int i = 0; i<this.order.length; i++){
 			dateDisponibilite[0] += this.instance.getDureeOperation(this.order[i],0);
 			for(int j = 1; j<this.instance.getNbMachines(); j++){
 				dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + this.instance.getDureeOperation(this.order[i],j);
@@ -60,5 +60,16 @@ public class Solution implements Comparable<Solution>{
 		}
 		s += ")";
 		return s;
+	}
+	
+	public void insererJob(int job, int pos){
+		for(int k = this.order.length-1; k>pos; k--)
+			this.order[k] = this.order[k-1];
+		this.order[pos] = job;
+	}
+	
+	public void retirerJob(int job, int pos){
+		for(int k = pos; k<this.order.length-1; k++)
+			this.order[k] = this.order[k+1];
 	}
 }

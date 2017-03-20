@@ -34,22 +34,22 @@ public class Neh extends Solver{
 		this.getSolution().evaluate();
 		int[] bestList = this.getSolution().getOrder().clone();
 		int bestValue = this.getSolution().getCmax();
-		this.sequence.supprimerJob(j);
+		this.getSolution().retirerJob(j,k);
 		
 		// On cherche le meilleur emplacement pour le Job j dans l'Ordonnancement actuel
-		for(int i = 0; i<this.sequence.nombreJobs(); i++){
-			this.sequence.ajouterJob(j,i); <------ BESOIN D'UNE LIST POUR FAIRE CA ET NON UN TABLEAU (bestList)
-			this.miseAJourDateDispo();
-			if(this.duree<bestValue){
-				bestList = this.sequence.clone();
-				bestValue = this.duree;
+		for(int i = 0; i<k; i++){
+			this.getSolution().insererJob(j,i);
+			this.getSolution().evaluate();
+			if(this.getSolution().getCmax()<bestValue){
+				bestList = this.getSolution().getOrder().clone();
+				bestValue = this.getSolution().getCmax();
 			}
-			this.sequence.supprimerJob(j);
+			this.getSolution().retirerJob(j,i);
 		}
 		
 		// on retient la meilleure solution trouvee et on met a jour les dates de disponibilite
-		this.sequence = bestList; 
-		this.miseAJourDateDispo();
+		this.getSolution().setOrder(bestList); 
+		this.getSolution().evaluate();
 	}
 	
 	public class Job implements Comparable<Job>{
