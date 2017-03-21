@@ -72,7 +72,7 @@ public class Solution implements Comparable<Solution>{
 		this.order[pos] = job;
 	}
 	
-	public void retirerJob(int job, int pos){
+	public void retirerJob(int pos){
 		for(int k = pos; k<this.order.length-1; k++)
 			this.order[k] = this.order[k+1];
 		this.order[this.order.length-1] = -1;

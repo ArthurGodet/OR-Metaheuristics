@@ -34,7 +34,7 @@ public class Neh extends Solver{
 		this.getSolution().evaluate();
 		int[] bestList = this.getSolution().getOrder().clone();
 		int bestValue = this.getSolution().getCmax();
-		this.getSolution().retirerJob(j,k);
+		this.getSolution().retirerJob(k);
 		
 		// On cherche le meilleur emplacement pour le Job j dans l'Ordonnancement actuel
 		for(int i = 0; i<k; i++){
@@ -44,7 +44,7 @@ public class Neh extends Solver{
 				bestList = this.getSolution().getOrder().clone();
 				bestValue = this.getSolution().getCmax();
 			}
-			this.getSolution().retirerJob(j,i);
+			this.getSolution().retirerJob(i);
 		}
 		
 		// on retient la meilleure solution trouvee et on met a jour les dates de disponibilite
