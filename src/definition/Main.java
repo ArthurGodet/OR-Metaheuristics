@@ -10,6 +10,7 @@ public class Main {
 		
 		sol.solve();
 		
+		System.out.println(sol.getNameOfMethod());
 		System.out.println(sol.getSolution());
 	}
 }

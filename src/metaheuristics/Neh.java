@@ -10,6 +10,7 @@ public class Neh extends Solver{
 
 	public Neh(Instance inst) {
 		super(inst);
+		this.nameOfMethod = "NEH";
 	}
 	
 	public void solve(){

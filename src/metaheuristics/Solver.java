@@ -6,10 +6,16 @@ import definition.Solution;
 public class Solver {
 	private Solution solution;
 	private Instance instance;
+	protected String nameOfMethod;
 
 	public Solver(Instance inst){
 		this.instance = inst;
 		this.solution = new Solution(this.instance);
+		this.nameOfMethod = "Order";
+	}
+	
+	public String getNameOfMethod(){
+		return this.nameOfMethod;
 	}
 
 	/** @return the problem Solution */
