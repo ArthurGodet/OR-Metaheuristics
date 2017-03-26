@@ -42,13 +42,11 @@ public class Solution implements Comparable<Solution>{
 	
 	public void evaluate(){
 		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
-		int i = 0;
-		while(i<this.order.length && this.order[i] != -1){
+		for(int i = 0; i<this.order.length && this.order[i] != -1; i++){
 			dateDisponibilite[0] += this.instance.getDureeOperation(this.order[i],0);
 			for(int j = 1; j<this.instance.getNbMachines(); j++){
 				dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + this.instance.getDureeOperation(this.order[i],j);
 			}
-			i++;
 		}
 		this.cmax = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
