@@ -8,7 +8,7 @@ import definition.Solution;
  * Solver par recherche de minimum local pour un certain voisinage
  */
 public class LocalSearch extends Solver{
-	private Neighborhood neighbor;
+	protected Neighborhood neighbor;
 	
 	/**
 	 * Constructeur
