@@ -10,9 +10,10 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 
 Bonus :
 [ ] Parallelisation des calculs
+[ ] Ajout d'un parametre de temps au solveur general #ITD
 [X] une classe GRASP
-[ ] une classe ILS
-[ ] une classe VNS
+[X] une classe ILS
+[X] une classe VNS
 [ ] une classe ANN
 [ ] une classe Fourmis
 [X] une classe Genetique

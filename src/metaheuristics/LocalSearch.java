@@ -21,6 +21,10 @@ public class LocalSearch extends Solver{
 		this.neighbor = n;
 		this.setSolution(s);
 	}
+	
+	public void setNeighborhood(Neighborhood nh){
+		this.neighbor = nh;
+	}
 
 	public void solve() {
 		int cmax = this.getSolution().getCmax();
