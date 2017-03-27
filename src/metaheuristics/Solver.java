@@ -21,6 +21,15 @@ public abstract class Solver {
 	public String getName(){
 		return this.name;
 	}
+	
+	/**
+	 * Sets a new name for the Solver.
+	 * 
+	 * @param name : new name
+	 */
+	public String setName(String name){
+		return this.name = name;
+	}
 
 	/** @return the problem Solution */
 	public Solution getSolution() {
@@ -55,4 +64,13 @@ public abstract class Solver {
 	 * Run the solver
 	 */
 	public abstract void solve();
+	
+	/**
+	 * Return a String with the name of the solver and its solution
+	 */
+	public String toString(){
+		String s = this.getName() + "\n";
+		s += this.getSolution().toString();
+		return s;
+	}
 }
