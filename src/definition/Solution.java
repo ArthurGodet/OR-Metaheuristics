@@ -1,8 +1,5 @@
 package definition;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution implements Comparable<Solution>, Cloneable{
 	private int[] order;
 	private int cmax;
@@ -109,42 +106,76 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.order[pos3] = job2;
 	}
 
-	// decalage d'une chaine de jobs : jobEnd en posBegin, jobBegin en posBegin+1, ... jobEnd-1 en posEnd
-	public void shift(int posBegin, int posEnd){
+	// decalage vers la droite d'une chaine de jobs : jobEnd en posBegin, jobBegin en posBegin+1, ... jobEnd-1 en posEnd
+	public void rightShift(int posBegin, int posEnd){
 		int job = this.order[posEnd];
 		for(int i = posEnd; i>posBegin; i--)
 			this.order[i] = this.order[i-1];
 		this.order[posBegin] = job;
 	}
+	
+	// decalage vers la gauche d'une chaine de jobs : jobEnd en posBegin, jobBegin en posBegin+1, ... jobEnd-1 en posEnd
+		public void leftShift(int posBegin, int posEnd){
+			int job = this.order[posBegin];
+			for(int i = posBegin; i<posEnd; i++)
+				this.order[i] = this.order[i+1];
+			this.order[posEnd] = job;
+		}
 
-	public List<Solution> generateNeighbors(Neighborhood nh){
-		List<Solution> neighbors = new ArrayList<Solution>();
+	public Solution generateBestNeighbor(Neighborhood nh){
+		Solution neighbor;
 		switch(nh){
 		case SWAP :
-			neighbors = generateNeighborsSwap(); break;
+			neighbor = generateBestNeighborSwap(); break;
 		case CHANGE :
-			neighbors = generateNeighborsChange(); break;
+			neighbor = generateBestNeighborChange(); break;
 		default :
-			neighbors = generateNeighborsShift(); break;
+			neighbor = generateBestNeighborShift(); break;
 		}
-		return neighbors;
+		return neighbor;
 	}
 
-	private List<Solution> generateNeighborsSwap(){
-		List<Solution> neighbors = new ArrayList<Solution>();
-
-		return neighbors;
+	private Solution generateBestNeighborSwap(){
+		Solution currentNeighbor = this.clone();
+		Solution bestNeighbor = this.clone();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				currentNeighbor.swap(i,j);
+				currentNeighbor.evaluate();
+				bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+				currentNeighbor.swap(j,i);
+			}
+		}
+		return bestNeighbor;
 	}
 
-	private List<Solution> generateNeighborsChange(){
-		List<Solution> neighbors = new ArrayList<Solution>();
-
-		return neighbors;
+	private Solution generateBestNeighborChange(){
+		Solution currentNeighbor = this.clone();
+		Solution bestNeighbor = this.clone();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				for(int k = j+1; k<this.order.length; k++){
+					currentNeighbor.change(i,j,k);
+					currentNeighbor.evaluate();
+					bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+					currentNeighbor.change(k,j,i);
+				}
+			}
+		}
+		return bestNeighbor;
 	}
 
-	private List<Solution> generateNeighborsShift(){
-		List<Solution> neighbors = new ArrayList<Solution>();
-
-		return neighbors;
+	private Solution generateBestNeighborShift(){
+		Solution currentNeighbor = this.clone();
+		Solution bestNeighbor = this.clone();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				currentNeighbor.rightShift(i,j);
+				currentNeighbor.evaluate();
+				bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+				currentNeighbor.leftShift(i,j);
+			}
+		}
+		return bestNeighbor;
 	}
 }
