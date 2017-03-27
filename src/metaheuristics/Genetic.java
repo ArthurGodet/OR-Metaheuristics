@@ -3,6 +3,7 @@ package metaheuristics;
 import java.util.ArrayList;
 
 import definition.Instance;
+import definition.Neighborhood;
 import definition.Solution;
 
 /**
@@ -128,7 +129,40 @@ public class Genetic extends Solver{
 		
 	}
 
-	@Override
+	public void mutation (Solution child, Neighborhood nh){
+		int pos1=0;
+ 		int pos2=0;
+ 		int pos3 =0;
+		switch (nh){
+		 	
+		 	case SWAP :
+		 		do{
+		 			pos1 = (int) Math.random()*child.getInstance().getNbJobs();
+		 			pos2 = (int) Math.random()*child.getInstance().getNbJobs();
+		 		}while( pos1 == pos2);
+		 		child.swap(pos1, pos2); break;
+		 		
+		 	case CHANGE :
+		 		do{
+		 			pos1 = (int) Math.random()*child.getInstance().getNbJobs();
+		 			pos2 = (int) Math.random()*child.getInstance().getNbJobs();
+			 	}while (pos1 == pos2 );
+		 		
+		 		do{
+		 			pos3 = (int) Math.random()*child.getInstance().getNbJobs();
+		 		} while(pos3 == pos1 && pos3==pos2);
+	 			child.change(pos1, pos2, pos3);break;
+	 			
+		 	case SHIFT :
+		 		do{
+		 			pos1 = (int) Math.random()*child.getInstance().getNbJobs();
+		 			pos2 = (int) Math.random()*child.getInstance().getNbJobs();
+			 	}while (pos1 >= pos2 );
+		 		
+		 		child.rightShift(pos1,pos2); break;
+		 }
+	}
+	
 	public void solve() {
 		// TODO Auto-generated method stub
 		
