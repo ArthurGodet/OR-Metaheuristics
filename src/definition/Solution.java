@@ -180,7 +180,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 			for(int j = i+1; j<this.order.length; j++){
 				currentNeighbor.swap(i,j);
 				currentNeighbor.evaluate();
-				bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+				if(currentNeighbor.compareTo(bestNeighbor)<0)
+					bestNeighbor = currentNeighbor.clone();
 				currentNeighbor.swap(j,i);
 			}
 		}
@@ -196,7 +197,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 				for(int k = j+1; k<this.order.length; k++){
 					currentNeighbor.change(i,j,k);
 					currentNeighbor.evaluate();
-					bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+					if(currentNeighbor.compareTo(bestNeighbor)<0)
+						bestNeighbor = currentNeighbor.clone();
 					currentNeighbor.change(k,j,i);
 				}
 			}
@@ -212,7 +214,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 			for(int j = i+1; j<this.order.length; j++){
 				currentNeighbor.rightShift(i,j);
 				currentNeighbor.evaluate();
-				bestNeighbor = (currentNeighbor.getCmax()>bestNeighbor.getCmax() ? currentNeighbor.clone() : bestNeighbor);
+				if(currentNeighbor.compareTo(bestNeighbor)<0)
+					bestNeighbor = currentNeighbor.clone();
 				currentNeighbor.leftShift(i,j);
 			}
 		}
