@@ -13,10 +13,6 @@ public class Solution implements Comparable<Solution>{
 		this.cmax = Integer.MAX_VALUE;
 	}
 
-	public int[] getOrder() {
-		return order;
-	}
-	
 	public void setOrder(int[] o){
 		this.order = o.clone();
 	}
