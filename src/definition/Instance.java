@@ -4,38 +4,40 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Représentation d'un problème de flowshop de permutation
+ */
 public class Instance {
 	private int nbJobs;
 	private int nbMachines;
 	private int[][] dureesOperations;
-	
-	// cree un probleme a partir d'un fichier
+
+	/**
+	 * Construit un problème à partir d'un fichier
+	 * @param s nom du fichier
+	 */
 	public Instance(String s) {
 		try {
 			Scanner scanner = new Scanner(new FileReader(s));
 
 			// lecture du nombre de jobs
-			if (scanner.hasNextInt()) {
+			if (scanner.hasNextInt())
 				this.nbJobs = scanner.nextInt();
-			}
 
 			// lecture du nombre de machines
-			if (scanner.hasNextInt()) {
+			if (scanner.hasNextInt())
 				this.nbMachines = scanner.nextInt();
-			}
 
 			this.dureesOperations = new int[this.nbJobs][this.nbMachines];
-			int i = 0; // indice du job
-			int j = 0; // indice de l'operation
+			int job = 0;
+			int machine = 0;
 			while (scanner.hasNextInt()) {
-				this.dureesOperations[i][j] = scanner.nextInt();
-				//System.out.println(j + " " + d[j]);
-				if (j < nbMachines - 1) {
-					j++; // operation suivante
-				}
-				else { // sinon on cree le job et on passe au suivant
-					i++;
-					j = 0;
+				this.dureesOperations[job][machine] = scanner.nextInt();
+				if (machine < nbMachines - 1)
+					machine++;
+				else {
+					job++;
+					machine = 0;
 				}
 			}
 			scanner.close();
@@ -46,14 +48,17 @@ public class Instance {
 		}
 	}
 
+	/** @return le nombre de jobs du problème */
 	public int getNbJobs() {
 		return nbJobs;
 	}
 
+	/** @return le nombre de machines du problème */
 	public int getNbMachines() {
 		return nbMachines;
 	}
-	
+
+	/** @return la durée de traitement d'un job sur une machine */
 	public int getDureeOperation(int job, int machine){
 		return this.dureesOperations[job][machine];
 	}
