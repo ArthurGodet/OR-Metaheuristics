@@ -1,6 +1,7 @@
 package definition;
 
 import metaheuristics.Genetic;
+import metaheuristics.Grasp;
 import metaheuristics.LocalSearch;
 import metaheuristics.Memetic;
 import metaheuristics.Neh;
@@ -10,7 +11,7 @@ import metaheuristics.TabuSearch;
 public class Main {
 	public static void main(String[] args) {
 		Instance instance = new Instance("instances/tai21.txt");
-		
+		/*
 		Solver solver = new Memetic(instance);
 		solver.solve();
 		
@@ -20,5 +21,9 @@ public class Main {
 		System.out.println(solver);
 		System.out.println("--------");
 		System.out.println(solver2);
+		//*/
+		Solver solver = new Grasp(instance,1000);
+		solver.solve();
+		System.out.println(solver);
 	}
 }

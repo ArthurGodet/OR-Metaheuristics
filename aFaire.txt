@@ -10,7 +10,7 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 
 Bonus :
 [ ] Parallelisation des calculs
-[ ] une classe GRASP
+[X] une classe GRASP
 [ ] une classe ILS
 [ ] une classe VNS
 [ ] une classe ANN
