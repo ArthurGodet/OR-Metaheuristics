@@ -12,6 +12,10 @@ public class Solution implements Comparable<Solution>{
 			this.order[j] = -1;
 		this.cmax = Integer.MAX_VALUE;
 	}
+	
+	public int getJob(int pos){
+		return this.order[pos];
+	}
 
 	public void setOrder(int[] o){
 		this.order = o.clone();
@@ -70,5 +74,36 @@ public class Solution implements Comparable<Solution>{
 		for(int k = pos; k<this.order.length-1; k++)
 			this.order[k] = this.order[k+1];
 		this.order[this.order.length-1] = -1;
+	}
+	
+	public boolean contains(int job){
+		for(int i = 0; i<this.order.length; i++)
+			if(this.order[i]==job)
+				return true;
+		return false;
+	}
+	
+	// echange les jobs aux positions pos1 et pos2
+	public void swap(int pos1, int pos2){
+		int job = this.order[pos1];
+		this.order[pos1] = this.order[pos2];
+		this.order[pos2] = job;
+	}
+	
+	// cycle de permutation des jobs : job1 en pos2, job2 en pos3 et job3 en pos1
+	public void change(int pos1, int pos2, int pos3){
+		int job2 = this.order[pos2];
+		
+		this.order[pos2] = this.order[pos1];
+		this.order[pos1] = this.order[pos3];
+		this.order[pos3] = job2;
+	}
+	
+	// decalage d'une chaine de jobs : jobEnd en posBegin, jobBegin en posBegin+1, ... jobEnd-1 en posEnd
+	public void shift(int posBegin, int posEnd){
+		int job = this.order[posEnd];
+		for(int i = posEnd; i>posBegin; i--)
+			this.order[i] = this.order[i-1];
+		this.order[posBegin] = job;
 	}
 }
