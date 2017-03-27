@@ -53,10 +53,6 @@ public class Instance {
 	public int getNbMachines() {
 		return nbMachines;
 	}
-
-	public int[][] getDureesOperations() {
-		return dureesOperations;
-	}
 	
 	public int getDureeOperation(int job, int machine){
 		return this.dureesOperations[job][machine];
