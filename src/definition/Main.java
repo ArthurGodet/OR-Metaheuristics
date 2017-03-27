@@ -10,17 +10,15 @@ import metaheuristics.TabuSearch;
 public class Main {
 	public static void main(String[] args) {
 		Instance instance = new Instance("instances/tai21.txt");
-		Solver solv = new Neh(instance);
-		solv.solve();
-		//Solver solver = new Memetic(instance);
-		Solver solver = new TabuSearch(instance,Neighborhood.SHIFT,solv.getSolution());
-		Solver solver2 = new LocalSearch(instance,Neighborhood.SHIFT,solv.getSolution());
 		
+		Solver solver = new Memetic(instance);
 		solver.solve();
+		
+		Solver solver2 = new TabuSearch(instance,Neighborhood.SHIFT,solver.getSolution());
 		solver2.solve();
 		
 		System.out.println(solver);
-		System.out.println("-------");
+		System.out.println("--------");
 		System.out.println(solver2);
 	}
 }

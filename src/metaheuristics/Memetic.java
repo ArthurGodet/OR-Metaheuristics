@@ -24,14 +24,16 @@ public class Memetic extends Genetic{
 	}
 	
 	public void solve(){
-		Neh neh = new Neh(this.getInstance());
-		neh.solve();
-		this.setSolution(neh.getSolution());
-		System.out.println(neh);
-		System.out.println("--------");
+		if(this.getSolution().getJob(0)==-1){
+			Neh neh = new Neh(this.getInstance());
+			neh.solve();
+			this.setSolution(neh.getSolution());
+			System.out.println(neh);
+			System.out.println("--------");
+		}
 		// Génération de la population initiale
 		ArrayList<Solution> population = new ArrayList<Solution>();
-		population.add(neh.getSolution());
+		population.add(this.getSolution());
 		for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
 			population.add(Solution.generateSolution(this.getInstance()));
 
