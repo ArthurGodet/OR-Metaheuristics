@@ -14,9 +14,13 @@ public class Main {
 		solv.solve();
 		//Solver solver = new Memetic(instance);
 		Solver solver = new TabuSearch(instance,Neighborhood.SHIFT,solv.getSolution());
+		Solver solver2 = new LocalSearch(instance,Neighborhood.SHIFT,solv.getSolution());
 		
 		solver.solve();
+		solver2.solve();
 		
 		System.out.println(solver);
+		System.out.println("-------");
+		System.out.println(solver2);
 	}
 }

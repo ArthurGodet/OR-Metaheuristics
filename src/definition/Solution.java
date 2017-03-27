@@ -159,67 +159,6 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.order[posEnd] = job;
 	}
 
-	/** @return les voisins pour le voisinage nh */
-	public List<Solution> generateNeighbors(Neighborhood nh){
-		List<Solution> neighbors;
-		switch(nh){
-			case SWAP :
-				neighbors = generateNeighborsSwap(); break;
-			case CHANGE :
-				neighbors = generateNeighborsChange(); break;
-			default :
-				neighbors = generateNeighborsShift(); break;
-		}
-		return neighbors;
-	}
-
-	/** @return le meilleur voisin dans le voisinage des swaps */
-	private List<Solution> generateNeighborsSwap(){
-		Solution currentNeighbor = this.clone();
-		List<Solution> neighbors = new ArrayList<Solution>();
-		for(int i = 0; i<this.order.length; i++){
-			for(int j = i+1; j<this.order.length; j++){
-				currentNeighbor.swap(i,j);
-				currentNeighbor.evaluate();
-				neighbors.add(currentNeighbor.clone());
-				currentNeighbor.swap(j,i);
-			}
-		}
-		return neighbors;
-	}
-
-	/** @return le meilleur voisin dans le voisinage des permutations circulaires de trois jobs */
-	private List<Solution> generateNeighborsChange(){
-		Solution currentNeighbor = this.clone();
-		List<Solution> neighbors = new ArrayList<Solution>();
-		for(int i = 0; i<this.order.length; i++){
-			for(int j = i+1; j<this.order.length; j++){
-				for(int k = j+1; k<this.order.length; k++){
-					currentNeighbor.change(i,j,k);
-					currentNeighbor.evaluate();
-					neighbors.add(currentNeighbor.clone());
-					currentNeighbor.change(k,j,i);
-				}
-			}
-		}
-		return neighbors;
-	}
-
-	/** @return le meilleur voisin dans le voisinage des décalages à droite */
-	private List<Solution> generateNeighborsShift(){
-		Solution currentNeighbor = this.clone();
-		List<Solution> neighbors = new ArrayList<Solution>();
-		for(int i = 0; i<this.order.length; i++){
-			for(int j = i+1; j<this.order.length; j++){
-				currentNeighbor.rightShift(i,j);
-				currentNeighbor.evaluate();
-				neighbors.add(currentNeighbor.clone());
-				currentNeighbor.leftShift(i,j);
-			}
-		}
-		return neighbors;
-	}
-	
 	/** @return le meilleur voisin pour le voisinage nh */
 	public Solution generateBestNeighbor(Neighborhood nh){
 		Solution neighbor;
@@ -282,6 +221,67 @@ public class Solution implements Comparable<Solution>, Cloneable{
 			}
 		}
 		return bestNeighbor;
+	}
+	
+	/** @return le meilleur voisin pour le voisinage nh */
+	public List<Solution> generateNeighbors(Neighborhood nh){
+		List<Solution> neighbors;
+		switch(nh){
+			case SWAP :
+				neighbors = generateNeighborsSwap(); break;
+			case CHANGE :
+				neighbors = generateNeighborsChange(); break;
+			default :
+				neighbors = generateNeighborsShift(); break;
+		}
+		return neighbors;
+	}
+
+	/** @return la listes des voisins pour le voisinage des swaps */
+	private List<Solution> generateNeighborsSwap(){
+		Solution currentNeighbor = this.clone();
+		List<Solution> neighbors = new ArrayList<Solution>();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				currentNeighbor.swap(i,j);
+				currentNeighbor.evaluate();
+				neighbors.add(currentNeighbor.clone());
+				currentNeighbor.swap(j,i);
+			}
+		}
+		return neighbors;
+	}
+
+	/** @return la liste des voisins pour le voisinage des permutations circulaires de trois jobs */
+	private List<Solution> generateNeighborsChange(){
+		Solution currentNeighbor = this.clone();
+		List<Solution> neighbors = new ArrayList<Solution>();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				for(int k = j+1; k<this.order.length; k++){
+					currentNeighbor.change(i,j,k);
+					currentNeighbor.evaluate();
+					neighbors.add(currentNeighbor.clone());
+					currentNeighbor.change(k,j,i);
+				}
+			}
+		}
+		return neighbors;
+	}
+
+	/** @return la liste des voisins pour le voisinage des décalages à droite */
+	private List<Solution> generateNeighborsShift(){
+		Solution currentNeighbor = this.clone();
+		List<Solution> neighbors = new ArrayList<Solution>();
+		for(int i = 0; i<this.order.length; i++){
+			for(int j = i+1; j<this.order.length; j++){
+				currentNeighbor.rightShift(i,j);
+				currentNeighbor.evaluate();
+				neighbors.add(currentNeighbor.clone());
+				currentNeighbor.leftShift(i,j);
+			}
+		}
+		return neighbors;
 	}
 	
 	public static Solution generateSolution(Instance inst){
