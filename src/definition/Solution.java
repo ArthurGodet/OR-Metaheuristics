@@ -1,5 +1,7 @@
 package definition;
 
+import java.util.ArrayList;
+
 /**
  * Représentation d'une solution du problème de flowshop de permutation
  */
@@ -62,8 +64,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.cmax = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
 
-	@Override
-	public int compareTo(Solution s) {
+	public int compareTo(Solution s){
 		return Integer.compare(this.getCmax(),s.getCmax());
 	}
 
@@ -216,5 +217,19 @@ public class Solution implements Comparable<Solution>, Cloneable{
 			}
 		}
 		return bestNeighbor;
+	}
+	
+	public static Solution generateSolution(Instance inst){
+		ArrayList<Integer> index = new ArrayList<Integer>();
+		for(int i = 0; i<inst.getNbJobs(); i++)
+			index.add(i);
+		
+		Solution s = new Solution(inst);
+		for(int i = 0; i<inst.getNbJobs(); i++){
+			int j = index.remove((int)(Math.random()*index.size()));
+			s.setOrder(j,i);
+		}
+		s.evaluate();
+		return s;
 	}
 }
