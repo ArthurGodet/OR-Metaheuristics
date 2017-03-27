@@ -4,9 +4,18 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 
+/**
+ * Solver par recherche de minimum local pour un certain voisinage
+ */
 public class LocalSearch extends Solver{
 	private Neighborhood neighbor;
 	
+	/**
+	 * Constructeur
+	 * @param inst instance du problème
+	 * @param n voisinage à explorer
+	 * @param s solution de départ
+	 */
 	public LocalSearch(Instance inst, Neighborhood n, Solution s) {
 		super(inst,"Local Search");
 		this.neighbor = n;
