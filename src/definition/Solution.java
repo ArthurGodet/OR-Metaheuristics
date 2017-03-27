@@ -2,6 +2,7 @@ package definition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -220,7 +221,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		}
 		return bestNeighbor;
 	}
-	
+
 	/** @return le meilleur voisin pour le voisinage nh */
 	public List<Solution> generateNeighbors(Neighborhood nh){
 		List<Solution> neighbors;
@@ -281,18 +282,20 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		}
 		return neighbors;
 	}
-	
+
+	/** Génère une solution aléatoire */
 	public static Solution generateSolution(Instance inst){
-		ArrayList<Integer> index = new ArrayList<Integer>();
+		ArrayList<Integer> jobs = new ArrayList<Integer>();
 		for(int i = 0; i<inst.getNbJobs(); i++)
-			index.add(i);
-		
+			jobs.add(i);
+
+		Collections.shuffle(jobs);
+
 		Solution s = new Solution(inst);
-		for(int i = 0; i<inst.getNbJobs(); i++){
-			int j = index.remove((int)(Math.random()*index.size()));
-			s.setOrder(j,i);
-		}
+		for(int i = 0; i<inst.getNbJobs(); i++)
+			s.setOrder(jobs.get(i), i);
 		s.evaluate();
+
 		return s;
 	}
 
