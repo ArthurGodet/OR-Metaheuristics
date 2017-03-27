@@ -6,7 +6,7 @@ Structure du projet :
 
 Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heriter de Solver
 [X] une classe NEH ----> equivalent du Greedy en ITD
-[ ] une classe Memetique
+[X] une classe Memetique
 
 Bonus :
 [ ] Parallelisation des calculs
@@ -15,6 +15,6 @@ Bonus :
 [ ] une classe VNS
 [ ] une classe ANN
 [ ] une classe Fourmis
-[ ] une classe Genetique
-[ ] une classe Tabou
+[X] une classe Genetique
+[X] une classe Tabou
 [ ] une classe Recuit Simule
