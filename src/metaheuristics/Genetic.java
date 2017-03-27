@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import definition.Instance;
 import definition.Solution;
 
+/**
+ * Solver utilisant un algorithme génétique
+ */
 public class Genetic extends Solver{
 
 	public Genetic(Instance inst) {
-		super(inst);
+		super(inst, "Genetic");
 	}
 	
 	public Solution onePointCrossover (Solution parent1, Solution parent2){

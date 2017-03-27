@@ -3,19 +3,23 @@ package metaheuristics;
 import definition.Instance;
 import definition.Solution;
 
+/**
+ * Classe de base des Solvers
+ */
 public abstract class Solver {
 	private Solution solution;
 	private Instance instance;
-	protected String nameOfMethod;
+	protected String name;
 
-	public Solver(Instance inst){
+	public Solver(Instance inst, String name){
 		this.instance = inst;
 		this.solution = new Solution(this.instance);
-		this.nameOfMethod = "Order";
+		this.name = name;
 	}
 	
-	public String getNameOfMethod(){
-		return this.nameOfMethod;
+	/** @return Solver method name */
+	public String getName(){
+		return this.name;
 	}
 
 	/** @return the problem Solution */
@@ -47,6 +51,8 @@ public abstract class Solver {
 		this.instance = inst;
 	}
 
-	// Met les jobs dans l'ordre, par defaut
+	/**
+	 * Run the solver
+	 */
 	public abstract void solve();
 }
