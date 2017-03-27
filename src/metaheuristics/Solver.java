@@ -3,7 +3,7 @@ package metaheuristics;
 import definition.Instance;
 import definition.Solution;
 
-public class Solver {
+public abstract class Solver {
 	private Solution solution;
 	private Instance instance;
 	protected String nameOfMethod;
@@ -48,9 +48,5 @@ public class Solver {
 	}
 
 	// Met les jobs dans l'ordre, par defaut
-	public void solve(){
-		for(int j = 0; j<this.instance.getNbJobs(); j++)
-			this.solution.setOrder(j,j);
-		this.solution.evaluate();
-	}
+	public abstract void solve();
 }
