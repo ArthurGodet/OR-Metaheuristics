@@ -7,11 +7,13 @@ import java.util.List;
 import definition.Instance;
 import definition.Solution;
 
+/**
+ * Solver utilisant l'heuristique NEH
+ */
 public class Neh extends Solver{
 
 	public Neh(Instance inst) {
-		super(inst);
-		this.nameOfMethod = "NEH";
+		super(inst, "NEH");
 	}
 	
 	public void solve(){
