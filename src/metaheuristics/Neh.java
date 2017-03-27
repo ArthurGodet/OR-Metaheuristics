@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import definition.Instance;
+import definition.Solution;
 
 public class Neh extends Solver{
 
@@ -14,43 +15,31 @@ public class Neh extends Solver{
 	}
 	
 	public void solve(){
-		int[] ljNEH = this.creerListeNEH();
-		for(int k = 0; k<ljNEH.length; k++)
-			ordonnancerJobNEH(ljNEH[k],k);
+		List<Job> ljNEH = this.creerListeNEH();
+		for(int k = 0; k < ljNEH.size(); k++)
+			ordonnancerJobNEH(ljNEH.get(k).getId(),k);
 	}
 	
-	private int[] creerListeNEH(){
-		int[] res = new int[this.getInstance().getNbJobs()];
+	private List<Job> creerListeNEH(){
 		List<Job> l = new ArrayList<Job>();
 		for(int id = 0; id<this.getInstance().getNbJobs(); id++)
 			l.add(new Job(this.getInstance(),id));
 		Collections.sort(l, Collections.reverseOrder());
-		for(int i = 0; i<res.length; i++)
-			res[i] = l.get(i).getId();
-		return res;
+		return l;
 	}
 	
 	private void ordonnancerJobNEH(int j, int k) { 
 		this.getSolution().setOrder(j,k);
 		this.getSolution().evaluate();
-		int[] bestList = this.getSolution().getOrder().clone();
-		int bestValue = this.getSolution().getCmax();
-		this.getSolution().retirerJob(k);
-		
+
 		// On cherche le meilleur emplacement pour le Job j dans l'Ordonnancement actuel
-		for(int i = 0; i<k; i++){
-			this.getSolution().insererJob(j,i);
-			this.getSolution().evaluate();
-			if(this.getSolution().getCmax()<bestValue){
-				bestList = this.getSolution().getOrder().clone();
-				bestValue = this.getSolution().getCmax();
-			}
-			this.getSolution().retirerJob(i);
+		Solution current = getSolution().clone();
+		for(int i = k; i>0; i--){
+			current.swap(i-1,i);
+			current.evaluate();
+			if(current.compareTo(this.getSolution()) <= 0)
+				setSolution(current.clone());
 		}
-		
-		// on retient la meilleure solution trouvee et on met a jour les dates de disponibilite
-		this.getSolution().setOrder(bestList); 
-		this.getSolution().evaluate();
 	}
 	
 	public class Job implements Comparable<Job>{

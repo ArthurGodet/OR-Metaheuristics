@@ -3,7 +3,7 @@ package definition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution implements Comparable<Solution>{
+public class Solution implements Comparable<Solution>, Cloneable{
 	private int[] order;
 	private int cmax;
 	private Instance instance;
@@ -56,6 +56,13 @@ public class Solution implements Comparable<Solution>{
 
 	public int compareTo(Solution s) {
 		return Integer.compare(this.getCmax(),s.getCmax());
+	}
+
+	public Solution clone() {
+		Solution c = new Solution(getInstance());
+		c.cmax = this.cmax;
+		c.order = this.order.clone();
+		return c;
 	}
 
 	public String toString(){
@@ -113,12 +120,12 @@ public class Solution implements Comparable<Solution>{
 	public List<Solution> generateNeighbors(Neighborhood nh){
 		List<Solution> neighbors = new ArrayList<Solution>();
 		switch(nh){
-			case SWAP :
-				neighbors = generateNeighborsSwap(); break;
-			case CHANGE :
-				neighbors = generateNeighborsChange(); break;
-			default :
-				neighbors = generateNeighborsShift(); break;
+		case SWAP :
+			neighbors = generateNeighborsSwap(); break;
+		case CHANGE :
+			neighbors = generateNeighborsChange(); break;
+		default :
+			neighbors = generateNeighborsShift(); break;
 		}
 		return neighbors;
 	}
