@@ -1,6 +1,7 @@
 package definition;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -294,11 +295,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		s.evaluate();
 		return s;
 	}
-	
+
 	public boolean equals(Solution s){
-		boolean res = true;
-		for(int i = 0; i<this.order.length; i++)
-			res = res && (this.order[i]==s.getJob(i));
-		return res;
+		return Arrays.equals(this.order, s.order);
 	}
 }
