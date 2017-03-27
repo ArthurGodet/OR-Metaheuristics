@@ -1,6 +1,7 @@
 package definition;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.order[pos] = job;
 	}
 
-	/** @return l'indice du job dans l'ordonnancement */
+	/** @return l'indice du job dans l'ordonnancement s'il y est présent, sinon -1 */
 	public int getIndex(int job){
 		for(int i = 0; i<this.order.length; i++)
 			if(this.order[i] == job)
@@ -103,10 +104,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 
 	/** @return true ssi le job est présent dans l'ordonnancement */
 	public boolean contains(int job){
-		for(int i = 0; i<this.order.length; i++)
-			if(this.order[i]==job)
-				return true;
-		return false;
+		return this.getIndex(job) != -1;
 	}
 
 	/** Echange les jobs aux indices pos1 et pos2 */
@@ -297,11 +295,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		s.evaluate();
 		return s;
 	}
-	
+
 	public boolean equals(Solution s){
-		boolean res = true;
-		for(int i = 0; i<this.order.length; i++)
-			res = res && (this.order[i]==s.getJob(i));
-		return res;
+		return Arrays.equals(this.order, s.order);
 	}
 }
