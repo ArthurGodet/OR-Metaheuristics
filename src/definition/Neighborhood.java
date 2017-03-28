@@ -6,18 +6,55 @@
  */
 package definition;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
- * The Enum Neighborhood.
+ * Classe de base pour explorer les voisinages de solutions.
  */
-public enum Neighborhood {
+public abstract class Neighborhood {
 	
-	/** The swap. */
-	SWAP,
-	
-	/** The change. */
-	CHANGE,
-	
-	/** The shift. */
-	SHIFT;
+	/**
+	 * Gets the random neighbor.
+	 *
+	 * @param sol the sol
+	 * @return un solution aléatoire dans le voisinage de sol
+	 */
+	public abstract Solution getRandomNeighbor(Solution sol);
+
+	/**
+	 * Gets the neighbors.
+	 *
+	 * @param sol the sol
+	 * @return un iterable sur les solutions (à cloner pour manipuler) dans le voisinage de sol
+	 */
+	public abstract Iterable<Solution> getNeighbors(Solution sol);
+
+	/**
+	 * Gets the best neighbor.
+	 *
+	 * @param sol the sol
+	 * @return une meilleure solution dans le voisinage de sol
+	 */
+	public Solution getBestNeighbor(Solution sol) {
+		Solution best = sol.clone();
+		for(Solution s : getNeighbors(sol))
+			if(s.compareTo(best) < 0)
+				best = s.clone();
+		return best;
+	}
+
+	/**
+	 * Gets the neighbors list.
+	 *
+	 * @param sol the sol
+	 * @return la liste des solutions dans le voisinage de sol
+	 */
+	public List<Solution> getNeighborsList(Solution sol) {
+		List<Solution> list = new ArrayList<Solution>();
+		for(Solution s : getNeighbors(sol))
+			list.add(s.clone());
+		return list;
+	}
 }
