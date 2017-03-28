@@ -19,9 +19,8 @@ public abstract class Neighborhood {
 	 * Gets the random neighbor.
 	 *
 	 * @param sol the sol
-	 * @return un solution aléatoire dans le voisinage de sol
 	 */
-	public abstract Solution getRandomNeighbor(Solution sol);
+	public abstract void assignRandomNeighbor(Solution sol);
 
 	/**
 	 * Gets the neighbors.
