@@ -14,8 +14,8 @@ Bonus :
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS
-[ ] une classe ANN
+[ ] une classe Recuit Simule
 [ ] une classe Fourmis
+[ ] une classe ANN
 [X] une classe Genetique
 [X] une classe Tabou
-[ ] une classe Recuit Simule
