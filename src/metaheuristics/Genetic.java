@@ -8,6 +8,7 @@ import definition.Crossover;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import util.Random;
 
 /**
  * Solver utilisant un algorithme génétique
@@ -40,8 +41,7 @@ public class Genetic extends Solver{
 
 	public Solution onePointCrossover(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
-
-		int coupure = 1 + (int)(Math.random()*(this.getInstance().getNbJobs()-1)); // entre 1 et nbJobs-1 inclus
+		int coupure = Random.randomInteger(1, this.getInstance().getNbJobs());
 
 		// ajoute les premiers jobs du parent1
 		for(int i=0; i<coupure; i++)
@@ -59,23 +59,17 @@ public class Genetic extends Solver{
 
 	public Solution twoPointCrossoverSepares(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
-
-		int coupureDebut=0;
-		int coupureFin=0;
-		do{
-			coupureDebut = 1 + (int)(Math.random()*this.getInstance().getNbJobs()-2); // entre 1 et nbJobs-2 inclus
-			coupureFin = 2 + (int)(Math.random()*this.getInstance().getNbJobs()-2); // entre 2 et nbJobs-1 inclus
-		}while(coupureDebut >= coupureFin);
+		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
 
 		// ajoute les premiers jobs du parent1
-		for(int i=0; i<coupureDebut; i++)
+		for(int i=0; i<coupure[0]; i++)
 			child.setOrder(parent1.getJob(i), i);
 		// ajoute les derniers jobs du parent1
-		for(int i=coupureFin; i<this.getInstance().getNbJobs(); i++)
+		for(int i=coupure[1]; i<this.getInstance().getNbJobs(); i++)
 			child.setOrder(parent1.getJob(i), i);
 
 		// ajoute les jobs restants dans le même ordre que dans parent2
-		int indexAInserer = coupureDebut;
+		int indexAInserer = coupure[0];
 		for(int i=0; i<this.getInstance().getNbJobs(); i++)
 			if(!child.contains(parent2.getJob(i)))
 				child.setOrder(parent2.getJob(i), indexAInserer++);
@@ -86,16 +80,10 @@ public class Genetic extends Solver{
 
 	public Solution twoPointCrossoverEnsemble(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
-
-		int coupureDebut = 0;
-		int coupureFin = 0;
-		do{
-			coupureDebut = 1 + (int)(Math.random()*this.getInstance().getNbJobs()-2); // entre 1 et nbJobs-2 inclus
-			coupureFin = 2 + (int)(Math.random()*this.getInstance().getNbJobs()-2); // entre 2 et nbJobs-1 inclus
-		}while(coupureDebut >= coupureFin);
+		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
 
 		// ajoute les jobs centraux du parent1
-		for(int i=coupureDebut; i<coupureFin; i++)
+		for(int i=coupure[0]; i<coupure[1]; i++)
 			child.setOrder(parent1.getJob(i), i);
 
 		// ajoute les jobs restants dans le même ordre que dans parent2
@@ -103,8 +91,8 @@ public class Genetic extends Solver{
 		for(int i=0; i<this.getInstance().getNbJobs(); i++){
 			if(!child.contains(parent2.getJob(i))){
 				child.setOrder(parent2.getJob(i), indexAInserer++);
-				if(indexAInserer == coupureDebut)
-					indexAInserer = coupureFin;
+				if(indexAInserer == coupure[0])
+					indexAInserer = coupure[1];
 			}
 		}
 
@@ -114,16 +102,10 @@ public class Genetic extends Solver{
 
 	public Solution positionBasedCrossover(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
+		int nbHerites = Random.randomInteger(1, this.getInstance().getNbJobs());
 
-		int nbHerites = 1 + (int)(Math.random()*(this.getInstance().getNbJobs()-1)); // entre 1 et nbJobs-1 inclus
-
-		List<Integer> indexHerites = new ArrayList<Integer>();
-		for(int i = 0; i < this.getInstance().getNbJobs(); i++)
-			indexHerites.add(i);
-		Collections.shuffle(indexHerites);
-
-		// ajoute les jobs aux index choisis depuis parent1
-		for(Integer i : indexHerites.subList(0, nbHerites))
+		// ajoute des jobs choisis aléatoirement depuis parent1
+		for(Integer i : Random.randomSample(0, this.getInstance().getNbJobs(), nbHerites))
 			child.setOrder(parent1.getJob(i),i);
 
 		// ajoute les jobs restants dans le même ordre que dans parent2
