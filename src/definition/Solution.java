@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import util.Random;
+
 /**
  * Représentation d'une solution du problème de flowshop de permutation
  */
@@ -285,11 +287,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 
 	/** Génère une solution aléatoire */
 	public static Solution generateSolution(Instance inst){
-		ArrayList<Integer> jobs = new ArrayList<Integer>();
-		for(int i = 0; i<inst.getNbJobs(); i++)
-			jobs.add(i);
-
-		Collections.shuffle(jobs);
+		List<Integer> jobs = Random.randomSample(0, inst.getNbJobs(), inst.getNbJobs());
 
 		Solution s = new Solution(inst);
 		for(int i = 0; i<inst.getNbJobs(); i++)
