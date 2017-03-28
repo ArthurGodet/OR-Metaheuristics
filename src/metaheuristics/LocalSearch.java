@@ -50,8 +50,7 @@ public class LocalSearch extends Solver{
 		// la solution lorsqu'une cuvette est atteinte, donc la boucle suivante est correcte.
 		do{
 			cmax = this.getSolution().getCmax();
-			this.setSolution(this.getSolution().generateBestNeighbor(this.neighbor));
+			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
 		}while(cmax>this.getSolution().getCmax());
 	}
-
 }
