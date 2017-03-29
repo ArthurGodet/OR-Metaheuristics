@@ -12,7 +12,7 @@ Bonus :
 [ ] Parallelisation des calculs
 [ ] Ajout d'un parametre de temps au solveur general #ITD
 [ ] Mettre en place des benchmarks
-[ ] Traduire tous les commentaires en anglais
+[ ] Traduire tous les commentaires en anglais  ---> Javadoc ne prend pas les accents français
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS
