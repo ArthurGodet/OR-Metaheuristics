@@ -13,6 +13,7 @@ Bonus :
 [ ] Ajout d'un parametre de temps au solveur general #ITD
 [ ] Mettre en place des benchmarks
 [ ] Traduire tous les commentaires en anglais  ---> Javadoc ne prend pas les accents français
+[ ] Remplacer les Enum par des Class autonomes
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS
@@ -22,3 +23,6 @@ Bonus :
 [ ] une classe ANN
 [X] une classe Genetique
 [X] une classe Tabou
+[ ] ajouter une licence GNU GPL/LPGL ou BSD ou MIT au projet (ATTENTION : ne pas oublier de rajouter le texte obligatoire a chaque fichier)
+[ ] faire un README aux petits oignons
+[ ] passer le GitHub en public
