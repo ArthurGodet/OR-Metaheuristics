@@ -11,10 +11,13 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 Bonus :
 [ ] Parallelisation des calculs
 [ ] Ajout d'un parametre de temps au solveur general #ITD
+[ ] Mettre en place des benchmarks
+[ ] Traduire tous les commentaires en anglais
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS
-[ ] une classe Recuit Simule
+[X] une classe Recuit Simule
+[ ] Tester/ameliorer les parametres du recuit simule
 [ ] une classe Fourmis
 [ ] une classe ANN
 [X] une classe Genetique
