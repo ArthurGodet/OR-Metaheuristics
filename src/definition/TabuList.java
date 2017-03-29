@@ -1,3 +1,9 @@
+/*
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 29/03/2017
+ */
 package definition;
 
 import java.util.Queue;
