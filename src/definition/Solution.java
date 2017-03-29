@@ -6,15 +6,26 @@ import java.util.List;
 
 import util.Random;
 
+// TODO: Auto-generated Javadoc
 /**
- * Représentation d'une solution du problème de flowshop de permutation
+ * Représentation d'une solution du problème de flowshop de permutation.
  */
 public class Solution implements Comparable<Solution>, Cloneable{
+	
+	/** The order. */
 	private int[] order;
+	
+	/** The cmax. */
 	private int cmax;
+	
+	/** The instance. */
 	private Instance instance;
 
-	/** Constructeur */
+	/**
+	 *  Constructeur.
+	 *
+	 * @param i the i
+	 */
 	public Solution(Instance i){
 		this.instance = i;
 		this.order = new int[i.getNbJobs()];
@@ -23,22 +34,41 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.cmax = Integer.MAX_VALUE;
 	}
 
-	/** @return le job d'indice pos dans l'ordonnancement */
+	/**
+	 * Gets the job.
+	 *
+	 * @param pos the pos
+	 * @return le job d'indice pos dans l'ordonnancement
+	 */
 	public int getJob(int pos){
 		return this.order[pos];
 	}
 
-	/** Assigne une copie de l'ordonnacement o */
+	/**
+	 *  Assigne une copie de l'ordonnacement o.
+	 *
+	 * @param o the new order
+	 */
 	public void setOrder(int[] o){
 		this.order = o.clone();
 	}
 
-	/** Assigne le job à l'indice pos dans l'ordonnancement */
+	/**
+	 *  Assigne le job à l'indice pos dans l'ordonnancement.
+	 *
+	 * @param job the job
+	 * @param pos the pos
+	 */
 	public void setOrder(int job, int pos){
 		this.order[pos] = job;
 	}
 
-	/** @return l'indice du job dans l'ordonnancement s'il y est présent, sinon -1 */
+	/**
+	 * Gets the index.
+	 *
+	 * @param job the job
+	 * @return l'indice du job dans l'ordonnancement s'il y est présent, sinon -1
+	 */
 	public int getIndex(int job){
 		for(int i = 0; i<this.order.length; i++)
 			if(this.order[i] == job)
@@ -46,17 +76,27 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return -1;
 	}
 
-	/** @return la durée totale de l'ordonnancement */
+	/**
+	 * Gets the cmax.
+	 *
+	 * @return la durée totale de l'ordonnancement
+	 */
 	public int getCmax() {
 		return cmax;
 	}
 
-	/** @return l'instance du problème */
+	/**
+	 * Gets the single instance of Solution.
+	 *
+	 * @return l'instance du problème
+	 */
 	public Instance getInstance(){
 		return this.instance;
 	}
 
-	/** recalcule la durée totale de l'ordonnancement */
+	/**
+	 *  recalcule la durée totale de l'ordonnancement.
+	 */
 	public void evaluate(){
 		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
 		for(int i = 0; i<this.order.length && this.order[i] != -1; i++){
@@ -68,10 +108,16 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.cmax = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	public int compareTo(Solution s){
 		return Integer.compare(this.getCmax(),s.getCmax());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	public Solution clone() {
 		Solution c = new Solution(getInstance());
@@ -80,6 +126,9 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return c;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		String s = "Cmax = " + this.cmax + "  <---  (";
@@ -90,26 +139,45 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return s;
 	}
 
-	/** Insère le job à l'indice pos dans l'ordonnancement */
+	/**
+	 *  Insère le job à l'indice pos dans l'ordonnancement.
+	 *
+	 * @param job the job
+	 * @param pos the pos
+	 */
 	public void insererJob(int job, int pos){
 		for(int k = this.order.length-1; k>pos; k--)
 			this.order[k] = this.order[k-1];
 		this.order[pos] = job;
 	}
 
-	/** Retire le job à l'indice pos dans l'ordonnancement */
+	/**
+	 *  Retire le job à l'indice pos dans l'ordonnancement.
+	 *
+	 * @param pos the pos
+	 */
 	public void retirerJob(int pos){
 		for(int k = pos; k<this.order.length-1; k++)
 			this.order[k] = this.order[k+1];
 		this.order[this.order.length-1] = -1;
 	}
 
-	/** @return true ssi le job est présent dans l'ordonnancement */
+	/**
+	 * Contains.
+	 *
+	 * @param job the job
+	 * @return true ssi le job est présent dans l'ordonnancement
+	 */
 	public boolean contains(int job){
 		return this.getIndex(job) != -1;
 	}
 
-	/** Echange les jobs aux indices pos1 et pos2 */
+	/**
+	 *  Echange les jobs aux indices pos1 et pos2.
+	 *
+	 * @param pos1 the pos 1
+	 * @param pos2 the pos 2
+	 */
 	public void swap(int pos1, int pos2){
 		int job = this.order[pos1];
 		this.order[pos1] = this.order[pos2];
@@ -118,8 +186,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 
 	/**
 	 * Effectue une permutation circulaire des jobs aux positions pos1, pos2, pos3.
-	 *
+	 * 
 	 * Le job précédemment en pos1 va en pos2, celui en pos2 va en pos3 et celui en pos3 va en pos1.
+	 *
+	 * @param pos1 the pos 1
+	 * @param pos2 the pos 2
+	 * @param pos3 the pos 3
 	 */
 	public void change(int pos1, int pos2, int pos3){
 		int job2 = this.order[pos2];
@@ -131,11 +203,14 @@ public class Solution implements Comparable<Solution>, Cloneable{
 
 	/**
 	 * Effectue un décalage vers la droite d'une chaîne de jobs.
-	 *
+	 * 
 	 * Le job en position posEnd va en posBegin,
 	 * celui en position posBegin va en posBegin+1,
 	 * ...,
 	 * celui en position jobEnd-1 va en jobEnd.
+	 *
+	 * @param posBegin the pos begin
+	 * @param posEnd the pos end
 	 */
 	public void rightShift(int posBegin, int posEnd){
 		int job = this.order[posEnd];
@@ -146,11 +221,14 @@ public class Solution implements Comparable<Solution>, Cloneable{
 
 	/**
 	 * Effectue un décalage vers la gauche d'une chaîne de jobs.
-	 *
+	 * 
 	 * Le job en position posBegin va en posEnd,
 	 * celui en position posEnd va en posEnd-1,
 	 * ...,
 	 * celui en position posBegin+1 va en posBegin.
+	 *
+	 * @param posBegin the pos begin
+	 * @param posEnd the pos end
 	 */
 	public void leftShift(int posBegin, int posEnd){
 		int job = this.order[posBegin];
@@ -159,7 +237,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.order[posEnd] = job;
 	}
 
-	/** @return le meilleur voisin pour le voisinage nh */
+	/**
+	 * Generate best neighbor.
+	 *
+	 * @param nh the nh
+	 * @return le meilleur voisin pour le voisinage nh
+	 */
 	public Solution generateBestNeighbor(Neighborhood nh){
 		Solution neighbor;
 		switch(nh){
@@ -173,7 +256,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return neighbor;
 	}
 
-	/** @return le meilleur voisin dans le voisinage des swaps */
+	/**
+	 * Generate best neighbor swap.
+	 *
+	 * @return le meilleur voisin dans le voisinage des swaps
+	 */
 	private Solution generateBestNeighborSwap(){
 		Solution currentNeighbor = this.clone();
 		Solution bestNeighbor = this.clone();
@@ -189,7 +276,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return bestNeighbor;
 	}
 
-	/** @return le meilleur voisin dans le voisinage des permutations circulaires de trois jobs */
+	/**
+	 * Generate best neighbor change.
+	 *
+	 * @return le meilleur voisin dans le voisinage des permutations circulaires de trois jobs
+	 */
 	private Solution generateBestNeighborChange(){
 		Solution currentNeighbor = this.clone();
 		Solution bestNeighbor = this.clone();
@@ -207,7 +298,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return bestNeighbor;
 	}
 
-	/** @return le meilleur voisin dans le voisinage des décalages à droite */
+	/**
+	 * Generate best neighbor shift.
+	 *
+	 * @return le meilleur voisin dans le voisinage des décalages à droite
+	 */
 	private Solution generateBestNeighborShift(){
 		Solution currentNeighbor = this.clone();
 		Solution bestNeighbor = this.clone();
@@ -223,7 +318,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return bestNeighbor;
 	}
 
-	/** @return le meilleur voisin pour le voisinage nh */
+	/**
+	 * Generate neighbors.
+	 *
+	 * @param nh the nh
+	 * @return le meilleur voisin pour le voisinage nh
+	 */
 	public List<Solution> generateNeighbors(Neighborhood nh){
 		List<Solution> neighbors;
 		switch(nh){
@@ -237,7 +337,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return neighbors;
 	}
 
-	/** @return la listes des voisins pour le voisinage des swaps */
+	/**
+	 * Generate neighbors swap.
+	 *
+	 * @return la listes des voisins pour le voisinage des swaps
+	 */
 	private List<Solution> generateNeighborsSwap(){
 		Solution currentNeighbor = this.clone();
 		List<Solution> neighbors = new ArrayList<Solution>();
@@ -252,7 +356,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return neighbors;
 	}
 
-	/** @return la liste des voisins pour le voisinage des permutations circulaires de trois jobs */
+	/**
+	 * Generate neighbors change.
+	 *
+	 * @return la liste des voisins pour le voisinage des permutations circulaires de trois jobs
+	 */
 	private List<Solution> generateNeighborsChange(){
 		Solution currentNeighbor = this.clone();
 		List<Solution> neighbors = new ArrayList<Solution>();
@@ -269,7 +377,11 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return neighbors;
 	}
 
-	/** @return la liste des voisins pour le voisinage des décalages à droite */
+	/**
+	 * Generate neighbors shift.
+	 *
+	 * @return la liste des voisins pour le voisinage des décalages à droite
+	 */
 	private List<Solution> generateNeighborsShift(){
 		Solution currentNeighbor = this.clone();
 		List<Solution> neighbors = new ArrayList<Solution>();
@@ -284,7 +396,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return neighbors;
 	}
 
-	/** Génère une solution aléatoire */
+	/**
+	 *  Génère une solution aléatoire.
+	 *
+	 * @param inst the inst
+	 * @return the solution
+	 */
 	public static Solution generateSolution(Instance inst){
 		List<Integer> jobs = Random.randomSample(0, inst.getNbJobs(), inst.getNbJobs());
 
@@ -296,6 +413,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		return s;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param s the s
+	 * @return true, if successful
+	 */
 	public boolean equals(Solution s){
 		return Arrays.equals(this.order, s.order);
 	}

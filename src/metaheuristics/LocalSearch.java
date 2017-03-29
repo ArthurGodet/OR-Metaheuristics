@@ -4,14 +4,18 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 
+// TODO: Auto-generated Javadoc
 /**
- * Solver par recherche de minimum local pour un certain voisinage
+ * Solver par recherche de minimum local pour un certain voisinage.
  */
 public class LocalSearch extends Solver{
+	
+	/** The neighbor. */
 	protected Neighborhood neighbor;
 	
 	/**
-	 * Constructeur
+	 * Constructeur.
+	 *
 	 * @param inst instance du problème
 	 * @param n voisinage à explorer
 	 * @param s solution de départ
@@ -22,10 +26,18 @@ public class LocalSearch extends Solver{
 		this.setSolution(s);
 	}
 	
+	/**
+	 * Sets the neighborhood.
+	 *
+	 * @param nh the new neighborhood
+	 */
 	public void setNeighborhood(Neighborhood nh){
 		this.neighbor = nh;
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve()
+	 */
 	public void solve() {
 		int cmax = this.getSolution().getCmax();
 		// la recherche dans le voisinage est faite de sorte à ne pas dégrader

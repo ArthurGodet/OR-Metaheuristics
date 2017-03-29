@@ -4,16 +4,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
 /**
- * Représentation d'un problème de flowshop de permutation
+ * Représentation d'un problème de flowshop de permutation.
  */
 public class Instance {
+	
+	/** The nb jobs. */
 	private int nbJobs;
+	
+	/** The nb machines. */
 	private int nbMachines;
+	
+	/** The durees operations. */
 	private int[][] dureesOperations;
 
 	/**
-	 * Construit un problème à partir d'un fichier
+	 * Construit un problème à partir d'un fichier.
+	 *
 	 * @param s nom du fichier
 	 */
 	public Instance(String s) {
@@ -48,17 +56,31 @@ public class Instance {
 		}
 	}
 
-	/** @return le nombre de jobs du problème */
+	/**
+	 * Gets the nb jobs.
+	 *
+	 * @return le nombre de jobs du problème
+	 */
 	public int getNbJobs() {
 		return nbJobs;
 	}
 
-	/** @return le nombre de machines du problème */
+	/**
+	 * Gets the nb machines.
+	 *
+	 * @return le nombre de machines du problème
+	 */
 	public int getNbMachines() {
 		return nbMachines;
 	}
 
-	/** @return la durée de traitement d'un job sur une machine */
+	/**
+	 * Gets the duree operation.
+	 *
+	 * @param job the job
+	 * @param machine the machine
+	 * @return la durée de traitement d'un job sur une machine
+	 */
 	public int getDureeOperation(int job, int machine){
 		return this.dureesOperations[job][machine];
 	}

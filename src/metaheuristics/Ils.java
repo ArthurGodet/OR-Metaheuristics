@@ -4,14 +4,29 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Ils.
+ */
 public class Ils extends Solver{
+	
+	/** The nb boucles. */
 	private int nbBoucles;
 	
+	/**
+	 * Instantiates a new ils.
+	 *
+	 * @param inst the inst
+	 * @param nbBoucles the nb boucles
+	 */
 	public Ils(Instance inst, int nbBoucles) {
 		super(inst,"ILS");
 		this.nbBoucles = nbBoucles;
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve()
+	 */
 	public void solve() {
 		int n = 0;
 		Solver solver = new Neh(this.getInstance());
@@ -34,6 +49,11 @@ public class Ils extends Solver{
 		}while(n<this.nbBoucles);
 	}
 	
+	/**
+	 * Large step.
+	 *
+	 * @param s the s
+	 */
 	// coupe la solution en 2 et inverse les deux parties
 	public void largeStep(Solution s){
 		int pos = (int)(Math.random()*this.getInstance().getNbJobs());

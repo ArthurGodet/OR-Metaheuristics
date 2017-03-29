@@ -8,15 +8,31 @@ import definition.Neighborhood;
 import definition.Solution;
 import definition.TabuList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TabuSearch.
+ */
 public class TabuSearch extends LocalSearch{
+	
+	/** The tabu list. */
 	private TabuList tabuList;
 	
+	/**
+	 * Instantiates a new tabu search.
+	 *
+	 * @param inst the inst
+	 * @param nh the nh
+	 * @param s the s
+	 */
 	public TabuSearch(Instance inst, Neighborhood nh, Solution s) {
 		super(inst, nh, s);
 		this.setName("Tabu Search");
 		this.tabuList = new TabuList(1<<16);
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.LocalSearch#solve()
+	 */
 	public void solve() {
 		tabuList = new TabuList(1<<16);
 		Solution currentSolution = this.getSolution();

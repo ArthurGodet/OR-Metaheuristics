@@ -4,14 +4,29 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Vns.
+ */
 public class Vns extends Solver{
+	
+	/** The nb boucles. */
 	private int nbBoucles;
 	
+	/**
+	 * Instantiates a new vns.
+	 *
+	 * @param inst the inst
+	 * @param n the n
+	 */
 	public Vns(Instance inst,int n) {
 		super(inst,"VNS");
 		this.nbBoucles = n;
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve()
+	 */
 	public void solve() {
 		Neighborhood[] tab = new Neighborhood[3];
 		tab[0] = Neighborhood.CHANGE;

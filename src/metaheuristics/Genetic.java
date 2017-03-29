@@ -10,19 +10,42 @@ import definition.Neighborhood;
 import definition.Solution;
 import util.Random;
 
+// TODO: Auto-generated Javadoc
 /**
- * Solver utilisant un algorithme génétique
+ * Solver utilisant un algorithme génétique.
  */
 public class Genetic extends Solver{
+	
+	/** The proba mutation. */
 	public static double PROBA_MUTATION = 0.001;
+	
+	/** The crossover ratio. */
 	public static double CROSSOVER_RATIO = 0.85;
+	
+	/** The population size. */
 	public static int POPULATION_SIZE = 100;
 
+	/** The proba mutation. */
 	protected double probaMutation;
+	
+	/** The crossover ratio. */
 	protected double crossoverRatio;
+	
+	/** The nh. */
 	protected Neighborhood nh;
+	
+	/** The cross. */
 	protected Crossover cross;
 
+	/**
+	 * Instantiates a new genetic.
+	 *
+	 * @param inst the inst
+	 * @param nh the nh
+	 * @param c the c
+	 * @param probaMutation the proba mutation
+	 * @param crossoverRatio the crossover ratio
+	 */
 	public Genetic(Instance inst, Neighborhood nh, Crossover c, double probaMutation, double crossoverRatio) {
 		super(inst, "Genetic");
 		this.probaMutation = probaMutation;
@@ -31,14 +54,33 @@ public class Genetic extends Solver{
 		this.cross = c;
 	}
 
+	/**
+	 * Instantiates a new genetic.
+	 *
+	 * @param inst the inst
+	 * @param nh the nh
+	 * @param c the c
+	 */
 	public Genetic(Instance inst, Neighborhood nh, Crossover c) {
 		this(inst, nh, c, PROBA_MUTATION, CROSSOVER_RATIO);
 	}
 	
+	/**
+	 * Instantiates a new genetic.
+	 *
+	 * @param inst the inst
+	 */
 	public Genetic(Instance inst){
 		this(inst, Neighborhood.SHIFT, Crossover.TWO_POINTS_CROSSOVER_SEPARES);
 	}
 
+	/**
+	 * One point crossover.
+	 *
+	 * @param parent1 the parent 1
+	 * @param parent2 the parent 2
+	 * @return the solution
+	 */
 	public Solution onePointCrossover(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
 		int coupure = Random.randomInteger(1, this.getInstance().getNbJobs());
@@ -57,6 +99,13 @@ public class Genetic extends Solver{
 		return child;
 	}
 
+	/**
+	 * Two point crossover separes.
+	 *
+	 * @param parent1 the parent 1
+	 * @param parent2 the parent 2
+	 * @return the solution
+	 */
 	public Solution twoPointCrossoverSepares(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
 		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
@@ -78,6 +127,13 @@ public class Genetic extends Solver{
 		return child;
 	}
 
+	/**
+	 * Two point crossover ensemble.
+	 *
+	 * @param parent1 the parent 1
+	 * @param parent2 the parent 2
+	 * @return the solution
+	 */
 	public Solution twoPointCrossoverEnsemble(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
 		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
@@ -100,6 +156,13 @@ public class Genetic extends Solver{
 		return child;
 	}
 
+	/**
+	 * Position based crossover.
+	 *
+	 * @param parent1 the parent 1
+	 * @param parent2 the parent 2
+	 * @return the solution
+	 */
 	public Solution positionBasedCrossover(Solution parent1, Solution parent2){
 		Solution child = new Solution(this.getInstance());
 		int nbHerites = Random.randomInteger(1, this.getInstance().getNbJobs());
@@ -122,6 +185,12 @@ public class Genetic extends Solver{
 		return child;
 	}
 
+	/**
+	 * Mutation.
+	 *
+	 * @param child the child
+	 * @return the solution
+	 */
 	public Solution mutation(Solution child){
 		int pos1=0;
 		int pos2=0;
@@ -159,6 +228,9 @@ public class Genetic extends Solver{
 		return child;
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve()
+	 */
 	public void solve() {
 		Neh neh = new Neh(this.getInstance());
 		neh.solve();
@@ -198,7 +270,10 @@ public class Genetic extends Solver{
 	}
 	
 	/**
-	 * Pick a solution from the population with a non-uniform probability
+	 * Pick a solution from the population with a non-uniform probability.
+	 *
+	 * @param popu the popu
+	 * @return the solution
 	 */
 	public Solution groupSelection(List<Solution> popu){
 		double pick = Math.random();

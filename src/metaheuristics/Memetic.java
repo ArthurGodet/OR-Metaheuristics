@@ -8,21 +8,49 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Memetic.
+ */
 public class Memetic extends Genetic{
 
+	/**
+	 * Instantiates a new memetic.
+	 *
+	 * @param inst the inst
+	 * @param nh the nh
+	 * @param c the c
+	 * @param probaMutation the proba mutation
+	 * @param crossoverRatio the crossover ratio
+	 */
 	public Memetic(Instance inst, Neighborhood nh, Crossover c, double probaMutation, double crossoverRatio) {
 		super(inst, nh, c, probaMutation, crossoverRatio);
 		this.setName("Memetic");
 	}
 
+	/**
+	 * Instantiates a new memetic.
+	 *
+	 * @param inst the inst
+	 * @param nh the nh
+	 * @param c the c
+	 */
 	public Memetic(Instance inst, Neighborhood nh, Crossover c) {
 		this(inst, nh, c, PROBA_MUTATION, CROSSOVER_RATIO);
 	}
 	
+	/**
+	 * Instantiates a new memetic.
+	 *
+	 * @param inst the inst
+	 */
 	public Memetic(Instance inst){
 		this(inst, Neighborhood.SHIFT, Crossover.TWO_POINTS_CROSSOVER_SEPARES);
 	}
 	
+	/* (non-Javadoc)
+	 * @see metaheuristics.Genetic#solve()
+	 */
 	public void solve(){
 		if(this.getSolution().getJob(0)==-1){
 			Neh neh = new Neh(this.getInstance());

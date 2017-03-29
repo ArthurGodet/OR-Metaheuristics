@@ -6,11 +6,22 @@ import metaheuristics.Ils;
 import metaheuristics.LocalSearch;
 import metaheuristics.Memetic;
 import metaheuristics.Neh;
+import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;
 import metaheuristics.TabuSearch;
 import metaheuristics.Vns;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Main.
+ */
 public class Main {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Instance instance = new Instance("instances/tai21.txt");
 		/*
@@ -37,8 +48,14 @@ public class Main {
 		System.out.println(solver);
 		//*/
 
-		//*
+		/*
 		Solver solver = new Vns(instance,1000);
+		solver.solve();
+		System.out.println(solver);
+		//*/
+
+		//*
+		Solver solver = new SimulatedAnnealing(instance, 25., 0.90, 1, 0.1, 1000);
 		solver.solve();
 		System.out.println(solver);
 		//*/
