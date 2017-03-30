@@ -20,6 +20,7 @@ Bonus :
 [X] une classe Recuit Simule
 [X] Tester/ameliorer les parametres du recuit simule
 [ ] une classe Fourmis
+[ ] Tester/amelioer les parametres des Fourmis
 [ ] une classe ANN
 [X] une classe Genetique
 [X] une classe Tabou

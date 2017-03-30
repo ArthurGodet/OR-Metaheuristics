@@ -107,7 +107,6 @@ public class SimulatedAnnealing extends Solver{
 			nit++;
 			if(s.compareTo(this.getSolution())<0){
 				this.setSolution(s.clone());
-				System.out.println(this.getSolution().getCmax());
 				count = 0;
 			}
 			else if((((double)(nbChange))/L)<this.minpercent)
