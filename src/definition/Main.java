@@ -16,6 +16,7 @@ import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;
 import metaheuristics.TabuSearch;
 import metaheuristics.Vns;
+import neighborhoods.Shift;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +35,7 @@ public class Main {
 		Solver solver = new Memetic(instance);
 		solver.solve();
 
-		Solver solver2 = new TabuSearch(instance,Neighborhood.SHIFT,solver.getSolution());
+		Solver solver2 = new TabuSearch(instance,new Shift(),solver.getSolution());
 		solver2.solve();
 
 		System.out.println(solver);
