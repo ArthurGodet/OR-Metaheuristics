@@ -7,6 +7,7 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -70,7 +71,9 @@ public class Random {
 	 * @return un couple aléatoire d'entiers (i,j) avec i < j entre from exclus et to exclus
 	 */
 	public static int[] randomTwoPoints(int from, int to) {
-		return randomCouple(from+1, to);
+		int[] result = randomCouple(from+1, to);
+		Arrays.sort(result);
+		return result;
 	}
 
 	/**
