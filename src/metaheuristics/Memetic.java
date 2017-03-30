@@ -13,6 +13,7 @@ import definition.Crossover;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Shift;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -51,7 +52,7 @@ public class Memetic extends Genetic{
 	 * @param inst the inst
 	 */
 	public Memetic(Instance inst){
-		this(inst, Neighborhood.SHIFT, Crossover.TWO_POINTS_CROSSOVER_SEPARES);
+		this(inst, new Shift(), Crossover.TWO_POINTS_CROSSOVER_SEPARES);
 	}
 	
 	/* (non-Javadoc)
