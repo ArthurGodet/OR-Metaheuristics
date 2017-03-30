@@ -12,6 +12,7 @@ import java.util.List;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Shift;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -79,11 +80,12 @@ public class SimulatedAnnealing extends Solver{
 		while(count<5 && nit<this.nbLoops){
 			Solution t = new Solution(this.getInstance());
 			boolean change = true;
+			Neighborhood neighborhood = new Shift();
 			List<Solution> neighbors = new ArrayList<Solution>();
 			int nbChange = -1;
 			for(int i = 0; i<L; i++){
 				if(change){
-					neighbors = s.generateNeighbors(Neighborhood.SHIFT);
+					neighbors = neighborhood.getNeighborsList(s);
 					change = false;
 				}
 				if(!neighbors.isEmpty())
@@ -99,7 +101,7 @@ public class SimulatedAnnealing extends Solver{
 				}
 			}
 
-			LocalSearch ls = new LocalSearch(this.getInstance(),Neighborhood.SHIFT, s);
+			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(), s);
 			ls.solve();
 			s = ls.getSolution().clone();
 
