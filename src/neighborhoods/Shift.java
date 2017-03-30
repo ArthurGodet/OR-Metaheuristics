@@ -53,19 +53,13 @@ public class Shift extends Neighborhood {
 		 */
 		@Override
 		public Solution next() {
-			// restaurer la solution de départ sauf la première fois
-			if(j != 0)
-				sol.leftShift(i, j);
-
-			// calcul des indices suivants
 			j++;
 			if(j == sol.getInstance().getNbJobs()) {
+				sol.leftShift(i, j-1);
 				i++;
 				j = i+1;
 			}
-
-			// calcul du voisin
-			sol.rightShift(i, j);
+			sol.swap(i, j);
 			sol.evaluate();
 
 			return sol;
