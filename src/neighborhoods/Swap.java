@@ -53,8 +53,9 @@ public class Swap extends Neighborhood {
 		 */
 		@Override
 		public Solution next() {
-			// restaurer la solution de départ
-			sol.swap(i, j);
+			// restaurer la solution de départ sauf la première fois
+			if(j != 0)
+				sol.swap(i, j);
 
 			// calcul des indices suivants
 			j++;
