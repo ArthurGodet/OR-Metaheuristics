@@ -61,8 +61,14 @@ public class Main {
 		//*/
 
 		//*
-		Solver solver = new SimulatedAnnealing(instance, 25., 0.90, 1, 0.1, 1000);
-		solver.solve();
+		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1, 10000);
+		Solution s = Solution.generateSolution(instance);
+		for(int i = 0; i<20; i++){ // intérêt d'avoir un paramètre de temps dans notre solver !!!
+			solver.solve();
+			if(solver.getSolution().compareTo(s)<0)
+				s = solver.getSolution().clone();
+		}
+		solver.setSolution(s);
 		System.out.println(solver);
 		//*/
 	}

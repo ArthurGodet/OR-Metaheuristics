@@ -18,22 +18,22 @@ import definition.Solution;
  * The Class SimulatedAnnealing.
  */
 public class SimulatedAnnealing extends Solver{
-	
+
 	/** The start temp. */
 	private double startTemp;
-	
+
 	/** The sizefactor. */
 	private int sizefactor;
-	
+
 	/** The tempfactor. */
 	private double tempfactor;
-	
+
 	/** The nb loops. */
 	private int nbLoops; // better with a time limit here !
-	
+
 	/** The minpercent. */
 	private double minpercent;
-	
+
 	/**
 	 * Instantiates a new simulated annealing.
 	 *
@@ -58,20 +58,24 @@ public class SimulatedAnnealing extends Solver{
 	 */
 	public void solve() {
 		// Initialiser avec une solution
-		//Solver solver = new Neh(this.getInstance());
-		//solver.solve();
-		//Solution s = solver.getSolution();
-		Solution s = Solution.generateSolution(this.getInstance());
-		this.setSolution(s);
-		//this.setSolution(solver.getSolution());
-		
+		Solution s = new Solution(this.getInstance());
+		if(this.getSolution().getJob(0)==-1){
+			Solver solver = new Neh(this.getInstance());
+			solver.solve();
+			s = solver.getSolution();
+			this.setSolution(s);
+		}
+		else{
+			s = this.getSolution().clone();
+		}
+
 		// Initialisation des variables
 		double temp = this.startTemp;
-		int L = this.sizefactor*this.getInstance().getNbJobs()*(this.getInstance().getNbMachines()-1);
 		int nit = 0;
-		int count = 0;
-		
+
 		// Application de l'algorithme
+		int count = 0;
+		int L = this.sizefactor*this.getInstance().getNbJobs()*(this.getInstance().getNbMachines()-1);
 		while(count<5 && nit<this.nbLoops){
 			Solution t = new Solution(this.getInstance());
 			boolean change = true;
@@ -84,18 +88,26 @@ public class SimulatedAnnealing extends Solver{
 				}
 				if(!neighbors.isEmpty())
 					t = neighbors.remove((int)(neighbors.size()*Math.random()));
-				if(t.getCmax()-s.getCmax() <= 0 || Math.random()<= Math.exp(((double)(t.getCmax()-s.getCmax()))/temp)){
+				else{
+					s = t.clone();
+					change = true;
+				}
+				if(t.getCmax()-s.getCmax() <= 0 || Math.random()<= Math.exp(-((double)(t.getCmax()-s.getCmax()))/temp)){
 					s = t.clone();
 					change = true;
 					nbChange++;
 				}
 			}
-			
+
+			LocalSearch ls = new LocalSearch(this.getInstance(),Neighborhood.SHIFT, s);
+			ls.solve();
+			s = ls.getSolution().clone();
+
 			temp *= this.tempfactor;
 			nit++;
-			System.out.println(this.getSolution().getCmax());
 			if(s.compareTo(this.getSolution())<0){
 				this.setSolution(s.clone());
+				System.out.println(this.getSolution().getCmax());
 				count = 0;
 			}
 			else if((((double)(nbChange))/L)<this.minpercent)
