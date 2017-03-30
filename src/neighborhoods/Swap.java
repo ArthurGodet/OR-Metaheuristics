@@ -72,6 +72,16 @@ public class Swap extends Neighborhood {
 	}
 
 	/* (non-Javadoc)
+	 * @see definition.Neighborhood#assignRandomNeighbor(definition.Solution)
+	 */
+	@Override
+	public void assignRandomNeighbor(Solution sol) {
+		int[] couple = Random.randomCouple(0, sol.getInstance().getNbJobs());
+		sol.swap(couple[0], couple[1]);
+		sol.evaluate();
+	}
+
+	/* (non-Javadoc)
 	 * @see definition.Neighborhood#getNeighbors(definition.Solution)
 	 */
 	@Override
@@ -83,15 +93,5 @@ public class Swap extends Neighborhood {
 				return new SwapIterator(s);
 			}
 		};
-	}
-
-	/* (non-Javadoc)
-	 * @see definition.Neighborhood#assignRandomNeighbor(definition.Solution)
-	 */
-	@Override
-	public void assignRandomNeighbor(Solution sol) {
-		int[] couple = Random.randomCouple(0, sol.getInstance().getNbJobs());
-		sol.swap(couple[0], couple[1]);
-		sol.evaluate();
 	}
 }
