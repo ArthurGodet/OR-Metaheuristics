@@ -64,7 +64,7 @@ public class Main {
 		// startTemp = 25.0
 		// tempfactor = 0.99 (doit être proche de 1)
 		// sizefactor = 1 (n'apporte pas grand chose)
-		// minpercent doit être petit !
+		// minpercent = 0.1 (doit être petit)
 		// nbLoops peut être grand (10 000 : OK)
 		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1, 10000);
 		//*
