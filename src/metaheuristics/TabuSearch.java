@@ -42,7 +42,7 @@ public class TabuSearch extends LocalSearch{
 	public void solve() {
 		tabuList = new TabuList(1<<16);
 		Solution currentSolution = this.getSolution();
-		List<Solution> neighbors = this.getSolution().generateNeighbors(this.neighbor);
+		List<Solution> neighbors = this.neighbor.getNeighborsList(currentSolution);
 		
 		do{
 			tabuList.add(currentSolution.clone());
@@ -50,7 +50,7 @@ public class TabuSearch extends LocalSearch{
 			currentSolution = neighbors.get(0);
 			if(currentSolution.compareTo(this.getSolution())<0)
 				this.setSolution(currentSolution.clone());
-			neighbors = currentSolution.generateNeighbors(this.neighbor);
+			neighbors = this.neighbor.getNeighborsList(currentSolution);
 			for(int i = 0; i<neighbors.size(); i++){
 				if(tabuList.contains(neighbors.get(i))){
 					neighbors.remove(neighbors.get(i));
