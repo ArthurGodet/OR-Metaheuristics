@@ -14,7 +14,7 @@ import java.util.List;
  * Classe de base pour explorer les voisinages de solutions.
  */
 public abstract class Neighborhood {
-	
+
 	/**
 	 * Gets the random neighbor.
 	 *
