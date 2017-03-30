@@ -13,6 +13,7 @@ import java.util.List;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Shift;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,7 +48,7 @@ public class Grasp extends Solver{
 				s.setOrder(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
 			
-			LocalSearch ls = new LocalSearch(this.getInstance(),Neighborhood.SHIFT,s);
+			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s);
 			ls.solve();
 			if(n == 0)
 				this.setSolution(ls.getSolution());
