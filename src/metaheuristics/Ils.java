@@ -9,6 +9,7 @@ package metaheuristics;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Shift;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,7 +38,7 @@ public class Ils extends Solver{
 		int n = 0;
 		Solver solver = new Neh(this.getInstance());
 		solver.solve();
-		LocalSearch ls = new LocalSearch(this.getInstance(),Neighborhood.SHIFT,solver.getSolution());
+		LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),solver.getSolution());
 		ls.solve();
 		Solution s = ls.getSolution();
 		this.setSolution(s.clone());
