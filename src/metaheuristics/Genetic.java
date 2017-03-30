@@ -14,6 +14,7 @@ import definition.Crossover;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Shift;
 import util.Random;
 
 // TODO: Auto-generated Javadoc
@@ -77,7 +78,7 @@ public class Genetic extends Solver{
 	 * @param inst the inst
 	 */
 	public Genetic(Instance inst){
-		this(inst, Neighborhood.SHIFT, Crossover.TWO_POINTS_CROSSOVER_SEPARES);
+		this(inst, new Shift(), Crossover.TWO_POINTS_CROSSOVER_SEPARES);
 	}
 
 	/**
@@ -198,39 +199,8 @@ public class Genetic extends Solver{
 	 * @return the solution
 	 */
 	public Solution mutation(Solution child){
-		int pos1=0;
-		int pos2=0;
-		int pos3=0;
-		double rand = Math.random();
-		if(rand<this.probaMutation){
-			switch(this.nh){
-			case SWAP :
-				do{
-					pos1 = (int)(Math.random()*child.getInstance().getNbJobs());
-					pos2 = (int)(Math.random()*child.getInstance().getNbJobs());
-				}while(pos1 == pos2);
-				child.swap(pos1, pos2); break;
-			case CHANGE :
-				do{
-					pos1 = (int)(Math.random()*child.getInstance().getNbJobs());
-					pos2 = (int)(Math.random()*child.getInstance().getNbJobs());
-				}while (pos1 == pos2);
-
-				do{
-					pos3 = (int)(Math.random()*child.getInstance().getNbJobs());
-				}while(pos3==pos1 || pos3==pos2);
-				child.change(pos1, pos2, pos3); break;
-
-			default :
-				do{
-					pos1 = (int)(Math.random()*child.getInstance().getNbJobs());
-					pos2 = (int)(Math.random()*child.getInstance().getNbJobs());
-				}while(pos1 == pos2);
-
-				child.rightShift(Math.min(pos1,pos2),Math.max(pos1,pos2)); break;
-			}
-			child.evaluate();
-		}
+		if(Math.random()<this.probaMutation)
+			nh.assignRandomNeighbor(child);
 		return child;
 	}
 
