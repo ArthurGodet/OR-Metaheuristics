@@ -9,6 +9,9 @@ package metaheuristics;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import neighborhoods.Change;
+import neighborhoods.Shift;
+import neighborhoods.Swap;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,9 +38,9 @@ public class Vns extends Solver{
 	 */
 	public void solve() {
 		Neighborhood[] tab = new Neighborhood[3];
-		tab[0] = Neighborhood.CHANGE;
-		tab[1] = Neighborhood.SHIFT;
-		tab[2] = Neighborhood.SWAP;
+		tab[0] = new Change();
+		tab[1] = new Shift();
+		tab[2] = new Swap();
 		
 		Solver solver = new Neh(this.getInstance());
 		solver.solve();
