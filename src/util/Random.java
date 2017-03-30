@@ -32,15 +32,34 @@ public class Random {
 	 *
 	 * @param from the from
 	 * @param to the to
-	 * @return un couple aléatoire d'entiers (i,j) avec i < j entre from inclus et to exclus
+	 * @return un couple aléatoire d'entiers distincts entre from inclus et to exclus
 	 */
 	public static int[] randomCouple(int from, int to) {
 		int i = randomInteger(from, to);
 		int j = randomInteger(from, to-1);
 		if(i <= j)
-			return new int[]{i, j+1};
-		else
-			return new int[]{j, i};
+			j++;
+		return new int[]{i, j};
+	}
+
+	/**
+	 * Random triplet.
+	 *
+	 * @param from the from
+	 * @param to the to
+	 * @return un triplet aléatoire d'entiers distincts entre from inclus et to exclus
+	 */
+	public static int[] randomTriplet(int from, int to) {
+		int i = randomInteger(from, to);
+		int j = randomInteger(from, to-1);
+		int k = randomInteger(from, to-2);
+		if(i <= j)
+			j++;
+		if(Math.min(i, j) <= k)
+			k++;
+		if(Math.max(i, j) <= k)
+			k++;
+		return new int[]{i, j, k};
 	}
 
 	/**
