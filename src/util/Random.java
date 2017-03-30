@@ -33,14 +33,17 @@ public class Random {
 	 *
 	 * @param from the from
 	 * @param to the to
-	 * @return un couple aléatoire d'entiers distincts entre from inclus et to exclus
+	 * @return un couple aléatoire d'entiers strictement croissant entre from inclus et to exclus
 	 */
 	public static int[] randomCouple(int from, int to) {
 		int i = randomInteger(from, to);
 		int j = randomInteger(from, to-1);
 		if(i <= j)
 			j++;
-		return new int[]{i, j};
+
+		int[] couple = new int[]{i, j};
+		Arrays.sort(couple);
+		return couple;
 	}
 
 	/**
@@ -48,7 +51,7 @@ public class Random {
 	 *
 	 * @param from the from
 	 * @param to the to
-	 * @return un triplet aléatoire d'entiers distincts entre from inclus et to exclus
+	 * @return un triplet aléatoire d'entiers strictement croissant entre from inclus et to exclus
 	 */
 	public static int[] randomTriplet(int from, int to) {
 		int i = randomInteger(from, to);
@@ -60,7 +63,10 @@ public class Random {
 			k++;
 		if(Math.max(i, j) <= k)
 			k++;
-		return new int[]{i, j, k};
+
+		int[] triplet = new int[]{i, j, k};
+		Arrays.sort(triplet);
+		return triplet;
 	}
 
 	/**
@@ -68,12 +74,10 @@ public class Random {
 	 *
 	 * @param from the from
 	 * @param to the to
-	 * @return un couple aléatoire d'entiers (i,j) avec i < j entre from exclus et to exclus
+	 * @return un couple aléatoire d'entiers strictement croissant entre from exclus et to exclus
 	 */
 	public static int[] randomTwoPoints(int from, int to) {
-		int[] result = randomCouple(from+1, to);
-		Arrays.sort(result);
-		return result;
+		return randomCouple(from+1, to);
 	}
 
 	/**
