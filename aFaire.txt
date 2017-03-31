@@ -21,6 +21,8 @@ Bonus :
 [X] Tester/ameliorer les parametres du recuit simule
 [ ] une classe Fourmis
 [ ] Tester/amelioer les parametres des Fourmis
+[ ] une classe Abeilles
+[ ] Tester/amelioer les parametres des Abeilles
 [ ] une classe ANN
 [X] une classe Genetique
 [X] une classe Tabou
