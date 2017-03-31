@@ -44,7 +44,6 @@ public class Change extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#hasNext()
 		 */
-		@Override
 		public boolean hasNext() {
 			int n = sol.getInstance().getNbJobs();
 			return i != n-3 || j != n-2 || k != n-1;
@@ -53,7 +52,6 @@ public class Change extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#next()
 		 */
-		@Override
 		public Solution next() {
 			// restaurer la solution de départ sauf la première fois
 			if(k != 1)
@@ -95,7 +93,6 @@ public class Change extends Neighborhood {
 	public Iterable<Solution> getNeighbors(Solution sol) {
 		final Solution s = sol;
 		return new Iterable<Solution>() {
-			@Override
 			public Iterator<Solution> iterator() {
 				return new ChangeIterator(s);
 			}

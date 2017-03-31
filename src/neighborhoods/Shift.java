@@ -43,7 +43,6 @@ public class Shift extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#hasNext()
 		 */
-		@Override
 		public boolean hasNext() {
 			return i != sol.getInstance().getNbJobs()-2 || j != sol.getInstance().getNbJobs()-1;
 		}
@@ -51,7 +50,6 @@ public class Shift extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#next()
 		 */
-		@Override
 		public Solution next() {
 			j++;
 			if(j == sol.getInstance().getNbJobs()) {
@@ -84,7 +82,6 @@ public class Shift extends Neighborhood {
 	public Iterable<Solution> getNeighbors(Solution sol) {
 		final Solution s = sol;
 		return new Iterable<Solution>() {
-			@Override
 			public Iterator<Solution> iterator() {
 				return new ShiftIterator(s);
 			}

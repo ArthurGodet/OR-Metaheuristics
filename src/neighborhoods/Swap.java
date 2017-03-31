@@ -43,7 +43,6 @@ public class Swap extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#hasNext()
 		 */
-		@Override
 		public boolean hasNext() {
 			return i != sol.getInstance().getNbJobs()-2 || j != sol.getInstance().getNbJobs()-1;
 		}
@@ -51,7 +50,6 @@ public class Swap extends Neighborhood {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#next()
 		 */
-		@Override
 		public Solution next() {
 			// restaurer la solution de départ sauf la première fois
 			if(j != 0)
@@ -89,7 +87,6 @@ public class Swap extends Neighborhood {
 	public Iterable<Solution> getNeighbors(Solution sol) {
 		final Solution s = sol;
 		return new Iterable<Solution>() {
-			@Override
 			public Iterator<Solution> iterator() {
 				return new SwapIterator(s);
 			}
