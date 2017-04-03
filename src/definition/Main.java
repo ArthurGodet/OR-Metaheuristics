@@ -6,6 +6,7 @@
  */
 package definition;
 
+import metaheuristics.AntColonyOptimization;
 import metaheuristics.Genetic;
 import metaheuristics.Grasp;
 import metaheuristics.Ils;
@@ -61,14 +62,13 @@ public class Main {
 		System.out.println(solver);
 		//*/
 
-		//*
+		/*
 		// startTemp = 25.0
 		// tempfactor = 0.99 (doit être proche de 1)
 		// sizefactor = 1 (n'apporte pas grand chose)
 		// minpercent = 0.1 (doit être petit)
 		// nbLoops peut être grand (10 000 : OK)
 		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1, 10000);
-		//*
 		Solution s = Solution.generateSolution(instance);
 		for(int i = 0; i<20; i++){ // intérêt d'avoir un paramètre de temps dans notre solver !!!
 			solver.solve();
@@ -76,8 +76,12 @@ public class Main {
 				s = solver.getSolution().clone();
 		}
 		solver.setSolution(s);
+		System.out.println(solver);
 		//*/
-		//solver.solve();
+		
+		//*
+		Solver solver = new AntColonyOptimization(instance,500); // environ 1 minute par millier de boucles
+		solver.solve();
 		System.out.println(solver);
 		//*/
 	}

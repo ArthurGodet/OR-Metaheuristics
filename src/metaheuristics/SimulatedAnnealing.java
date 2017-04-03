@@ -19,7 +19,11 @@ import neighborhoods.Shift;
  * The Class SimulatedAnnealing.
  */
 public class SimulatedAnnealing extends Solver{
-
+	public static double START_TEMP = 25.0;
+	public static double TEMPFACTOR = 0.99;  // doit être proche de 1
+	public static int SIZEFACTOR = 1;  // n'apporte pas grand chose
+	public static double MIN_PERCENT = 0.1; // doit être petit
+	
 	/** The start temp. */
 	private double startTemp;
 
@@ -52,6 +56,10 @@ public class SimulatedAnnealing extends Solver{
 		this.sizefactor = sizefactor;
 		this.minpercent = minpercent;
 		this.nbLoops = nbLoops;
+	}
+	
+	public SimulatedAnnealing(Instance inst, int nbLoops) {
+		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT,nbLoops);
 	}
 
 	/* (non-Javadoc)

@@ -19,8 +19,8 @@ Bonus :
 [X] une classe VNS
 [X] une classe Recuit Simule
 [X] Tester/ameliorer les parametres du recuit simule
-[ ] une classe Fourmis
-[ ] Tester/amelioer les parametres des Fourmis
+[X] une classe Fourmis
+[X] Tester/amelioer les parametres des Fourmis ---> analyse statistique du role des parametres
 [ ] une classe Abeilles
 [ ] Tester/amelioer les parametres des Abeilles
 [ ] une classe ANN
