@@ -7,6 +7,7 @@
 package definition;
 
 import metaheuristics.AntColonyOptimization;
+import metaheuristics.BeesAlgorithm;
 import metaheuristics.Genetic;
 import metaheuristics.Grasp;
 import metaheuristics.Ils;
@@ -24,7 +25,7 @@ import neighborhoods.Shift;
  * The Class Main.
  */
 public class Main {
-	
+
 	/**
 	 * The main method.
 	 *
@@ -78,9 +79,15 @@ public class Main {
 		solver.setSolution(s);
 		System.out.println(solver);
 		//*/
-		
-		//*
+
+		/*
 		Solver solver = new AntColonyOptimization(instance,500); // environ 1 minute par millier de boucles
+		solver.solve();
+		System.out.println(solver);
+		//*/
+
+		//*
+		Solver solver = new BeesAlgorithm(instance,100);
 		solver.solve();
 		System.out.println(solver);
 		//*/

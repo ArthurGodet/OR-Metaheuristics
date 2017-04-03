@@ -14,15 +14,15 @@ Bonus :
 [ ] Mettre en place des benchmarks
 [ ] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
 [ ] Remplacer les Enum par des Class autonomes
+[ ] Mettre en place tous les commentaires nécessaires
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS
 [X] une classe Recuit Simule
 [X] Tester/ameliorer les parametres du recuit simule
 [X] une classe Fourmis
-[X] Tester/amelioer les parametres des Fourmis ---> analyse statistique du role des parametres
-[ ] une classe Abeilles
-[ ] Tester/amelioer les parametres des Abeilles
+[ ] Analyse statistique du role des parametres sur plusieurs instances
+[X] une classe Abeilles
 [ ] une classe ANN
 [X] une classe Genetique
 [X] une classe Tabou
