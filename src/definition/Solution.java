@@ -151,7 +151,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 * @param job the job
 	 * @param pos the pos
 	 */
-	public void insererJob(int job, int pos){
+	public void insertJob(int job, int pos){
 		for(int k = this.order.length-1; k>pos; k--)
 			this.order[k] = this.order[k-1];
 		this.order[pos] = job;
@@ -162,7 +162,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 *
 	 * @param pos the pos
 	 */
-	public void retirerJob(int pos){
+	public void removeJob(int pos){
 		for(int k = pos; k<this.order.length-1; k++)
 			this.order[k] = this.order[k+1];
 		this.order[this.order.length-1] = -1;
