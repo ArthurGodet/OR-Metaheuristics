@@ -18,7 +18,9 @@ import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;
 import metaheuristics.TabuSearch;
 import metaheuristics.Vns;
+import neighborhoods.Change;
 import neighborhoods.Shift;
+import neighborhoods.Swap;
 
 // TODO: Auto-generated Javadoc
 /**
