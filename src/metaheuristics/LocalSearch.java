@@ -9,6 +9,7 @@ package metaheuristics;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,15 +43,15 @@ public class LocalSearch extends Solver{
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		int cmax = this.getSolution().getCmax();
 		// la recherche dans le voisinage est faite de sorte à ne pas dégrader
 		// la solution lorsqu'une cuvette est atteinte, donc la boucle suivante est correcte.
 		do{
 			cmax = this.getSolution().getCmax();
 			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
-		}while(cmax>this.getSolution().getCmax());
+		}while(cmax>this.getSolution().getCmax() && !timer.isFinished());
 	}
 }

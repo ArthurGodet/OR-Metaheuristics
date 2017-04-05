@@ -8,6 +8,7 @@ package metaheuristics;
 
 import definition.Instance;
 import definition.Solution;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -94,8 +95,16 @@ public abstract class Solver {
 
 	/**
 	 * Run the solver.
+	 * @param timer the timer
 	 */
-	public abstract void solve();
+	public abstract void solve(Timer timer);
+
+	/**
+	 * Run the solver.
+	 */
+	public void solve() {
+		solve(new Timer(Long.MAX_VALUE));
+	}
 	
 	/**
 	 * Return a String with the name of the solver and its solution.

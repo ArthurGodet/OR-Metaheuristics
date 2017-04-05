@@ -14,6 +14,7 @@ import java.util.List;
 import definition.Instance;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -101,14 +102,15 @@ public class AntColonyOptimization extends Solver {
 	
 	/**
 	 * Solve.
+	 *
+	 * @param timer the timer
 	 */
-	public void solve(){
+	public void solve(Timer timer){
 
 		this.initialisation();
 		int n = 0;
 		// Loop for improvements of the solution.
-		// Keep 2 s free for tabuSearch
-		while(n<this.nbLoops){
+		while(n<this.nbLoops && !timer.isFinished()){
 			for(int k = 0; k<this.nbAnts; k++){
 				this.ants[k] = new Solution(this.getInstance());
 				int firstJob = (int)(Math.random()*this.getInstance().getNbJobs());

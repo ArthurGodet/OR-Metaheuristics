@@ -15,6 +15,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -59,7 +60,7 @@ public class Memetic extends Genetic{
 	/* (non-Javadoc)
 	 * @see metaheuristics.Genetic#solve()
 	 */
-	public void solve(){
+	public void solve(Timer timer){
 		if(this.getSolution().getJob(0)==-1){
 			Neh neh = new Neh(this.getInstance());
 			neh.solve();
@@ -76,7 +77,7 @@ public class Memetic extends Genetic{
 		Collections.sort(population); // trie la population par ordre croissant de Cmax
 		
 		// Application de l'algorithme génétique
-		while(population.get(0).getCmax() != population.get((int)(population.size()*0.95)).getCmax()){
+		while(population.get(0).getCmax() != population.get((int)(population.size()*0.95)).getCmax() && !timer.isFinished()){
 			ArrayList<Solution> newGeneration = new ArrayList<Solution>();
 			newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
 			for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){

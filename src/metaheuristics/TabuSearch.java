@@ -13,6 +13,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import definition.TabuList;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,7 +40,7 @@ public class TabuSearch extends LocalSearch{
 	/* (non-Javadoc)
 	 * @see metaheuristics.LocalSearch#solve()
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		tabuList = new TabuList(1<<16);
 		Solution currentSolution = this.getSolution();
 		List<Solution> neighbors = this.neighbor.getNeighborsList(currentSolution);
@@ -57,6 +58,6 @@ public class TabuSearch extends LocalSearch{
 					i--;
 				}
 			}
-		}while(neighbors.size() != 0);
+		}while(neighbors.size() != 0 && !timer.isFinished());
 	}
 }

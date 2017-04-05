@@ -12,6 +12,7 @@ import definition.Solution;
 import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,9 +35,9 @@ public class Vns extends Solver{
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		Neighborhood[] tab = new Neighborhood[3];
 		tab[0] = new Change();
 		tab[1] = new Shift();
@@ -62,7 +63,7 @@ public class Vns extends Solver{
 			
 			k++;
 			n++;
-		}while(n<this.nbBoucles);
+		}while(n<this.nbBoucles && !timer.isFinished());
 		
 		this.setSolution(s.clone());
 	}

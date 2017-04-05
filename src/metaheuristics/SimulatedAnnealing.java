@@ -13,6 +13,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -58,14 +59,20 @@ public class SimulatedAnnealing extends Solver{
 		this.nbLoops = nbLoops;
 	}
 	
+	/**
+	 * Instantiates a new simulated annealing.
+	 *
+	 * @param inst the inst
+	 * @param nbLoops the nb loops
+	 */
 	public SimulatedAnnealing(Instance inst, int nbLoops) {
 		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT,nbLoops);
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		// Initialiser avec une solution
 		Solution s = new Solution(this.getInstance());
 		if(this.getSolution().getJob(0)==-1){
@@ -85,7 +92,7 @@ public class SimulatedAnnealing extends Solver{
 		// Application de l'algorithme
 		int count = 0;
 		int L = this.sizefactor*this.getInstance().getNbJobs()*(this.getInstance().getNbMachines()-1);
-		while(count<5 && nit<this.nbLoops){
+		while(count<5 && nit<this.nbLoops && !timer.isFinished()){
 			Solution t = new Solution(this.getInstance());
 			boolean change = true;
 			Neighborhood neighborhood = new Shift();

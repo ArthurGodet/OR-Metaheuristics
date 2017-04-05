@@ -10,6 +10,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,9 +33,9 @@ public class Ils extends Solver{
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		int n = 0;
 		Solver solver = new Neh(this.getInstance());
 		solver.solve();
@@ -53,7 +54,7 @@ public class Ils extends Solver{
 				this.setSolution(s.clone());
 			
 			n++;
-		}while(n<this.nbBoucles);
+		}while(n<this.nbBoucles && !timer.isFinished());
 	}
 	
 	/**

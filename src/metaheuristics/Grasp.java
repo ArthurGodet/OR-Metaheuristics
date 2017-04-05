@@ -14,6 +14,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,9 +38,9 @@ public class Grasp extends Solver{
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve() {
+	public void solve(Timer timer) {
 		int n = 0;
 		do{
 			Solution s = new Solution(this.getInstance());
@@ -55,7 +56,7 @@ public class Grasp extends Solver{
 			else if(ls.getSolution().compareTo(this.getSolution())<0)
 				this.setSolution(ls.getSolution().clone());
 			n++;
-		}while(n<this.nbBoucles);
+		}while(n<this.nbBoucles && !timer.isFinished());
 	}
 
 	/**

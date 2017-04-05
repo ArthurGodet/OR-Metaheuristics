@@ -12,6 +12,7 @@ import java.util.List;
 
 import definition.Instance;
 import definition.Solution;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,9 +30,9 @@ public class Neh extends Solver{
 	}
 	
 	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve()
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
-	public void solve(){
+	public void solve(Timer timer){
 		List<Job> ljNEH = this.creerListeNEH();
 		for(int k = 0; k < ljNEH.size(); k++)
 			ordonnancerJobNEH(ljNEH.get(k).getId(),k);

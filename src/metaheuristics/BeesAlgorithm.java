@@ -9,6 +9,7 @@ import definition.Solution;
 import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
+import util.Timer;
 
 public class BeesAlgorithm extends Solver{
 	public static int COLONY_SIZE = 50;
@@ -32,14 +33,14 @@ public class BeesAlgorithm extends Solver{
 	}
 
 	@Override
-	public void solve() {
+	public void solve(Timer timer) {
 		this.initialisation();
 		Change change = new Change();
 		Shift shift = new Shift();
 		Swap swap = new Swap();
 		Solution s;
 		Arrays.sort(this.bees);
-		for(int k = 0; k<this.nbLoops; k++){
+		for(int k = 0; k<this.nbLoops && !timer.isFinished(); k++){
 			for(int i = 0; i<this.colonySize; i++){
 				if(i<this.nbForagers){
 					// Select the best neighbor wherever the neighborhood
