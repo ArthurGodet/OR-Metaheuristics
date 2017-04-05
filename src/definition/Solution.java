@@ -259,6 +259,19 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	}
 
 	/**
+	 * Copy jobs with position between from and to.
+	 * The solution should be empty in the given range when using this method.
+	 *
+	 * @param other the other
+	 * @param from the from
+	 * @param to the to
+	 */
+	public void copyRange(Solution other, int from, int to) {
+		for(int i = from; i < to; i++)
+			this.setOrder(other.getJob(i), i);
+	}
+
+	/**
 	 *  Génère une solution aléatoire.
 	 *
 	 * @param inst the inst
