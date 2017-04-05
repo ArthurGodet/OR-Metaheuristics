@@ -9,6 +9,7 @@ package metaheuristics;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import crossovers.TwoPointOut;
 import definition.Crossover;
 import definition.Instance;
 import definition.Neighborhood;
@@ -52,7 +53,7 @@ public class Memetic extends Genetic{
 	 * @param inst the inst
 	 */
 	public Memetic(Instance inst){
-		this(inst, new Shift(), Crossover.TWO_POINTS_CROSSOVER_SEPARES);
+		this(inst, new Shift(), new TwoPointOut());
 	}
 	
 	/* (non-Javadoc)
@@ -81,13 +82,7 @@ public class Memetic extends Genetic{
 			for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
 				Solution parent1 = this.groupSelection(population);
 				Solution parent2 = this.groupSelection(population);
-				
-				switch(this.cross){
-				case ONE_POINT_CROSSOVER : newGeneration.add(this.mutation(this.onePointCrossover(parent1, parent2))); break;
-				case TWO_POINTS_CROSSOVER_ENSEMBLE: newGeneration.add(this.mutation(this.twoPointCrossoverEnsemble(parent1, parent2))); break;
-				case TWO_POINTS_CROSSOVER_SEPARES: newGeneration.add(this.mutation(this.twoPointCrossoverSepares(parent1, parent2))); break;
-				default : newGeneration.add(this.mutation(this.positionBasedCrossover(parent1, parent2))); break;
-				}
+				newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
 			}
 			
 			LocalSearch ls = new LocalSearch(this.getInstance(),this.nh,this.getSolution());

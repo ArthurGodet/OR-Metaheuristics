@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import crossovers.TwoPointOut;
 import definition.Crossover;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
-import util.Random;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -78,118 +78,7 @@ public class Genetic extends Solver{
 	 * @param inst the inst
 	 */
 	public Genetic(Instance inst){
-		this(inst, new Shift(), Crossover.TWO_POINTS_CROSSOVER_SEPARES);
-	}
-
-	/**
-	 * One point crossover.
-	 *
-	 * @param parent1 the parent 1
-	 * @param parent2 the parent 2
-	 * @return the solution
-	 */
-	public Solution onePointCrossover(Solution parent1, Solution parent2){
-		Solution child = new Solution(this.getInstance());
-		int coupure = Random.randomInteger(1, this.getInstance().getNbJobs());
-
-		// ajoute les premiers jobs du parent1
-		for(int i=0; i<coupure; i++)
-			child.setOrder(parent1.getJob(i), i);
-
-		// ajoute les jobs restants dans le même ordre que dans parent2
-		int indexAInserer = coupure;
-		for(int i=0; i<this.getInstance().getNbJobs(); i++)
-			if(!child.contains(parent2.getJob(i)))
-				child.setOrder(parent2.getJob(i), indexAInserer++);
-
-		child.evaluate();
-		return child;
-	}
-
-	/**
-	 * Two point crossover separes.
-	 *
-	 * @param parent1 the parent 1
-	 * @param parent2 the parent 2
-	 * @return the solution
-	 */
-	public Solution twoPointCrossoverSepares(Solution parent1, Solution parent2){
-		Solution child = new Solution(this.getInstance());
-		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
-
-		// ajoute les premiers jobs du parent1
-		for(int i=0; i<coupure[0]; i++)
-			child.setOrder(parent1.getJob(i), i);
-		// ajoute les derniers jobs du parent1
-		for(int i=coupure[1]; i<this.getInstance().getNbJobs(); i++)
-			child.setOrder(parent1.getJob(i), i);
-
-		// ajoute les jobs restants dans le même ordre que dans parent2
-		int indexAInserer = coupure[0];
-		for(int i=0; i<this.getInstance().getNbJobs(); i++)
-			if(!child.contains(parent2.getJob(i)))
-				child.setOrder(parent2.getJob(i), indexAInserer++);
-
-		child.evaluate();
-		return child;
-	}
-
-	/**
-	 * Two point crossover ensemble.
-	 *
-	 * @param parent1 the parent 1
-	 * @param parent2 the parent 2
-	 * @return the solution
-	 */
-	public Solution twoPointCrossoverEnsemble(Solution parent1, Solution parent2){
-		Solution child = new Solution(this.getInstance());
-		int[] coupure = Random.randomTwoPoints(0, this.getInstance().getNbJobs());
-
-		// ajoute les jobs centraux du parent1
-		for(int i=coupure[0]; i<coupure[1]; i++)
-			child.setOrder(parent1.getJob(i), i);
-
-		// ajoute les jobs restants dans le même ordre que dans parent2
-		int indexAInserer = 0;
-		for(int i=0; i<this.getInstance().getNbJobs(); i++){
-			if(!child.contains(parent2.getJob(i))){
-				child.setOrder(parent2.getJob(i), indexAInserer++);
-				if(indexAInserer == coupure[0])
-					indexAInserer = coupure[1];
-			}
-		}
-
-		child.evaluate();
-		return child;
-	}
-
-	/**
-	 * Position based crossover.
-	 *
-	 * @param parent1 the parent 1
-	 * @param parent2 the parent 2
-	 * @return the solution
-	 */
-	public Solution positionBasedCrossover(Solution parent1, Solution parent2){
-		Solution child = new Solution(this.getInstance());
-		int nbHerites = Random.randomInteger(1, this.getInstance().getNbJobs());
-
-		// ajoute des jobs choisis aléatoirement depuis parent1
-		for(Integer i : Random.randomSample(0, this.getInstance().getNbJobs(), nbHerites))
-			child.setOrder(parent1.getJob(i),i);
-
-		// ajoute les jobs restants dans le même ordre que dans parent2
-		int indexAInserer = 0;
-		for(int i=0; i<this.getInstance().getNbJobs(); i++){
-			if(!child.contains(parent2.getJob(i))){
-				while(child.getJob(indexAInserer)!=-1)
-					indexAInserer++;
-				child.setOrder(parent2.getJob(i), indexAInserer);
-			}
-		}
-
-		child.evaluate();
-		return child;
+		this(inst, new Shift(), new TwoPointOut());
 	}
 
 	/**
@@ -228,13 +117,7 @@ public class Genetic extends Solver{
 			for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
 				Solution parent1 = this.groupSelection(population);
 				Solution parent2 = this.groupSelection(population);
-				
-				switch(this.cross){
-				case ONE_POINT_CROSSOVER : newGeneration.add(this.mutation(this.onePointCrossover(parent1, parent2))); break;
-				case TWO_POINTS_CROSSOVER_ENSEMBLE: newGeneration.add(this.mutation(this.twoPointCrossoverEnsemble(parent1, parent2))); break;
-				case TWO_POINTS_CROSSOVER_SEPARES: newGeneration.add(this.mutation(this.twoPointCrossoverSepares(parent1, parent2))); break;
-				default : newGeneration.add(this.mutation(this.positionBasedCrossover(parent1, parent2))); break;
-				}
+				newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
 			}
 			
 			Collections.sort(newGeneration); // trie la nouvelle population par ordre croissant de Cmax
