@@ -8,40 +8,34 @@ package metaheuristics;
 
 import definition.Instance;
 import definition.Solution;
-import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
  * Classe de base des Solvers.
  */
 public abstract class Solver {
-
+	
 	/** The solution. */
 	private Solution solution;
-
+	
 	/** The instance. */
 	private Instance instance;
-
+	
 	/** The name. */
 	protected String name;
-
-	/**  The timer. */
-	protected Timer timer;
 
 	/**
 	 * Instantiates a new solver.
 	 *
 	 * @param inst the inst
 	 * @param name the name
-	 * @param t the t
 	 */
-	public Solver(Instance inst, String name, Timer t){
+	public Solver(Instance inst, String name){
 		this.instance = inst;
 		this.solution = new Solution(this.instance);
 		this.name = name;
-		this.timer = t;
 	}
-
+	
 	/**
 	 * Gets the name.
 	 *
@@ -50,7 +44,7 @@ public abstract class Solver {
 	public String getName(){
 		return this.name;
 	}
-
+	
 	/**
 	 * Sets a new name for the Solver.
 	 *
@@ -102,7 +96,7 @@ public abstract class Solver {
 	 * Run the solver.
 	 */
 	public abstract void solve();
-
+	
 	/**
 	 * Return a String with the name of the solver and its solution.
 	 *
