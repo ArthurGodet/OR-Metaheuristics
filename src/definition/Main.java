@@ -21,6 +21,7 @@ import metaheuristics.Vns;
 import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -35,9 +36,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Instance instance = new Instance("instances/tai21.txt");
+		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
-		solver.solve();
+		solver.solve(timer);
 
 		Solver solver2 = new TabuSearch(instance,new Shift(),solver.getSolution());
 		solver2.solve();
@@ -49,19 +51,19 @@ public class Main {
 
 		/*
 		Solver solver = new Grasp(instance,1000);
-		solver.solve();
+		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
 		/*
 		Solver solver = new Ils(instance,10000);
-		solver.solve();
+		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
 		/*
 		Solver solver = new Vns(instance,1000);
-		solver.solve();
+		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
@@ -73,8 +75,8 @@ public class Main {
 		// nbLoops peut être grand (10 000 : OK)
 		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1, 10000);
 		Solution s = Solution.generateSolution(instance);
-		for(int i = 0; i<20; i++){ // intérêt d'avoir un paramètre de temps dans notre solver !!!
-			solver.solve();
+		while(!timer.isFinished()){
+			solver.solve(timer);
 			if(solver.getSolution().compareTo(s)<0)
 				s = solver.getSolution().clone();
 		}
@@ -84,14 +86,16 @@ public class Main {
 
 		/*
 		Solver solver = new AntColonyOptimization(instance,500); // environ 1 minute par millier de boucles
-		solver.solve();
+		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
 		//*
-		Solver solver = new BeesAlgorithm(instance,100);
-		solver.solve();
+		Solver solver = new BeesAlgorithm(instance,1000);
+		solver.solve(timer);
 		System.out.println(solver);
 		//*/
+
+		System.out.println(timer.getElapsedTime()+" ms");
 	}
 }
