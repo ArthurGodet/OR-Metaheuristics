@@ -19,7 +19,6 @@ public class TwoPointIn implements Crossover {
 	/* (non-Javadoc)
 	 * @see definition.Crossover#crossover(definition.Solution, definition.Solution)
 	 */
-	@Override
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
 		int[] coupure = Random.randomTwoPoints(0, child.getInstance().getNbJobs());
