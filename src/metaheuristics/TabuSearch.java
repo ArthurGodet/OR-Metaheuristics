@@ -13,6 +13,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import definition.TabuList;
+import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,9 +30,10 @@ public class TabuSearch extends LocalSearch{
 	 * @param inst the inst
 	 * @param nh the nh
 	 * @param s the s
+	 * @param t the t
 	 */
-	public TabuSearch(Instance inst, Neighborhood nh, Solution s) {
-		super(inst, nh, s);
+	public TabuSearch(Instance inst, Neighborhood nh, Solution s, Timer t) {
+		super(inst, nh, s, t);
 		this.setName("Tabu Search");
 		this.tabuList = new TabuList(1<<16);
 	}
@@ -57,6 +59,6 @@ public class TabuSearch extends LocalSearch{
 					i--;
 				}
 			}
-		}while(neighbors.size() != 0);
+		}while(neighbors.size() != 0 && !timer.isFinished());
 	}
 }
