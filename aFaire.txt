@@ -10,10 +10,10 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 
 Bonus :
 [ ] Parallelisation des calculs
-[ ] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
+[X] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
 [ ] Mettre en place des benchmarks
 [X] une classe GRASP
-[X] une classe ILS
+[J] une classe ILS : refaire la méthode largeStep à coup de swaps
 [X] une classe VNS
 [X] une classe Recuit Simule
 [X] Tester/ameliorer les parametres du recuit simule
