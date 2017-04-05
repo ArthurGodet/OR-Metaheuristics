@@ -14,7 +14,6 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
-import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,11 +29,10 @@ public class Grasp extends Solver{
 	 *
 	 * @param inst the inst
 	 * @param nbBoucles the nb boucles
-	 * @param t the t
 	 */
 	// Greedy Randomize Adaptive Search Procedure
-	public Grasp(Instance inst, int nbBoucles, Timer t) {
-		super(inst,"GRASP",t);
+	public Grasp(Instance inst, int nbBoucles) {
+		super(inst,"GRASP");
 		this.nbBoucles = nbBoucles;
 	}
 
@@ -50,14 +48,14 @@ public class Grasp extends Solver{
 				s.setOrder(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
 			
-			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s,timer);
+			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s);
 			ls.solve();
 			if(n == 0)
 				this.setSolution(ls.getSolution());
 			else if(ls.getSolution().compareTo(this.getSolution())<0)
 				this.setSolution(ls.getSolution().clone());
 			n++;
-		}while(n<this.nbBoucles && !timer.isFinished());
+		}while(n<this.nbBoucles);
 	}
 
 	/**

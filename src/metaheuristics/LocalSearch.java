@@ -9,7 +9,6 @@ package metaheuristics;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
-import util.Timer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,10 +25,9 @@ public class LocalSearch extends Solver{
 	 * @param inst instance du problème
 	 * @param n voisinage à explorer
 	 * @param s solution de départ
-	 * @param t the t
 	 */
-	public LocalSearch(Instance inst, Neighborhood n, Solution s, Timer t) {
-		super(inst,"Local Search",t);
+	public LocalSearch(Instance inst, Neighborhood n, Solution s) {
+		super(inst,"Local Search");
 		this.neighbor = n;
 		this.setSolution(s);
 	}
@@ -53,6 +51,6 @@ public class LocalSearch extends Solver{
 		do{
 			cmax = this.getSolution().getCmax();
 			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
-		}while(cmax>this.getSolution().getCmax() && !timer.isFinished());
+		}while(cmax>this.getSolution().getCmax());
 	}
 }
