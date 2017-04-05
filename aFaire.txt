@@ -10,7 +10,7 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 
 Bonus :
 [ ] Parallelisation des calculs
-[ ] Ajout d'un parametre de temps au solveur general en utilisant la classe Clock #ITD
+[ ] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
 [ ] Mettre en place des benchmarks
 [X] une classe GRASP
 [X] une classe ILS
@@ -23,7 +23,7 @@ Bonus :
 [ ] une classe ANN
 [X] une classe Genetique
 [ ] Remplacer les Enum par des Class autonomes
-[X] une classe Tabou
+[J] une classe Tabou : à améliorer (pas besoin de trier ni de stocker tous les voisins)
 
 Une fois que tout le reste est fait :
 [ ] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
