@@ -244,6 +244,21 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	}
 
 	/**
+	 * Ajoute les jobs inconnus de l'autre solutions dans le même ordre.
+	 *
+	 * @param other the other solution
+	 */
+	public void merge(Solution other) {
+		int insertion = 0;
+		for(int i=0; i<other.getInstance().getNbJobs(); i++)
+			if(!this.contains(other.getJob(i))) {
+				while(this.getJob(insertion) != -1)
+					insertion++;
+				this.setOrder(other.getJob(i), insertion);
+			}
+	}
+
+	/**
 	 *  Génère une solution aléatoire.
 	 *
 	 * @param inst the inst
