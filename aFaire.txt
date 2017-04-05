@@ -22,7 +22,7 @@ Bonus :
 [X] une classe Abeilles
 [ ] une classe ANN
 [X] une classe Genetique
-[ ] Remplacer les Enum par des Class autonomes
+[X] Remplacer les Enum par des Class autonomes
 [J] une classe Tabou : à améliorer (pas besoin de trier ni de stocker tous les voisins)
 
 Une fois que tout le reste est fait :
