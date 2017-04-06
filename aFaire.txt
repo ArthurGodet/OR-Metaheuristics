@@ -11,7 +11,6 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 Bonus :
 [ ] Parallelisation des calculs
 [X] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
-[ ] Ne plus limiter le nombre de boucles des algos et seulement limiter le temps ?
 [ ] Mettre en place des benchmarks
 [X] une classe GRASP
 [J] une classe ILS : refaire la méthode largeStep à coup de swaps
