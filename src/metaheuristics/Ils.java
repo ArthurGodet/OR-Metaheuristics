@@ -10,6 +10,7 @@ import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
+import util.Random;
 import util.Timer;
 
 // TODO: Auto-generated Javadoc
@@ -32,7 +33,6 @@ public class Ils extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
-		int n = 0;
 		Solver solver = new Neh(this.getInstance());
 		solver.solve();
 		LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),solver.getSolution());
@@ -48,8 +48,6 @@ public class Ils extends Solver{
 			
 			if(s.compareTo(this.getSolution())<0)
 				this.setSolution(s.clone());
-			
-			n++;
 		}while(!timer.isFinished());
 	}
 	
@@ -60,19 +58,11 @@ public class Ils extends Solver{
 	 */
 	// coupe la solution en 2 et inverse les deux parties
 	public void largeStep(Solution s){
-		int pos = (int)(Math.random()*this.getInstance().getNbJobs());
-		int[] schedule = new int[this.getInstance().getNbJobs()];
-		int k = 0;
-		for(int i = pos; i<schedule.length; i++){
-			schedule[k] = s.getJob(i);
-			k++;
-		}
-		for(int i = 0; i<pos; i++){
-			schedule[k] = s.getJob(i);
-			k++;
-		}
-		s.setOrder(schedule);
+		int n = this.getInstance().getNbJobs();
+		int pos = Random.randomInteger(1, n-1);
+		s.reverse(0, pos);
+		s.reverse(pos, n);
+		s.reverse(0, n);
 		s.evaluate();
 	}
-
 }
