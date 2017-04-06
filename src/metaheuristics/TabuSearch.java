@@ -20,10 +20,10 @@ import util.Timer;
  * The Class TabuSearch.
  */
 public class TabuSearch extends LocalSearch{
-	
+
 	/** The tabu list. */
 	private TabuList tabuList;
-	
+
 	/**
 	 * Instantiates a new tabu search.
 	 *
@@ -43,21 +43,22 @@ public class TabuSearch extends LocalSearch{
 	public void solve(Timer timer) {
 		tabuList = new TabuList(1<<16);
 		Solution currentSolution = this.getSolution();
-		List<Solution> neighbors = this.neighbor.getNeighborsList(currentSolution);
-		
-		do{
+
+		while(!timer.isFinished()) {
 			tabuList.add(currentSolution.clone());
-			Collections.sort(neighbors);
-			currentSolution = neighbors.get(0);
+
+			Solution nextSolution = null;
+			for(Solution sol : neighbor.getNeighbors(currentSolution))
+				if(!tabuList.contains(sol) && (nextSolution == null || sol.compareTo(nextSolution) < 0))
+					nextSolution = sol.clone();
+
+			if(nextSolution == null)
+				break;
+			else
+				currentSolution = nextSolution;
+
 			if(currentSolution.compareTo(this.getSolution())<0)
 				this.setSolution(currentSolution.clone());
-			neighbors = this.neighbor.getNeighborsList(currentSolution);
-			for(int i = 0; i<neighbors.size(); i++){
-				if(tabuList.contains(neighbors.get(i))){
-					neighbors.remove(neighbors.get(i));
-					i--;
-				}
-			}
-		}while(neighbors.size() != 0 && !timer.isFinished());
+		}
 	}
 }

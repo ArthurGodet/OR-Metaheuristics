@@ -23,7 +23,7 @@ Bonus :
 [ ] une classe ANN
 [X] une classe Genetique
 [X] Remplacer les Enum par des Class autonomes
-[J] une classe Tabou : à améliorer (pas besoin de trier ni de stocker tous les voisins)
+[X] une classe Tabou
 
 Une fois que tout le reste est fait :
 [ ] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français

@@ -42,7 +42,7 @@ public class Main {
 		solver.solve(timer);
 
 		Solver solver2 = new TabuSearch(instance,new Shift(),solver.getSolution());
-		solver2.solve();
+		solver2.solve(new Timer(10000));
 
 		System.out.println(solver);
 		System.out.println("--------");
