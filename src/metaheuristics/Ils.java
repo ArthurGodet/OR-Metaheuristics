@@ -18,18 +18,14 @@ import util.Timer;
  */
 public class Ils extends Solver{
 	
-	/** The nb boucles. */
-	private int nbBoucles;
-	
 	/**
 	 * Instantiates a new ils.
 	 *
 	 * @param inst the inst
 	 * @param nbBoucles the nb boucles
 	 */
-	public Ils(Instance inst, int nbBoucles) {
+	public Ils(Instance inst) {
 		super(inst,"ILS");
-		this.nbBoucles = nbBoucles;
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +50,7 @@ public class Ils extends Solver{
 				this.setSolution(s.clone());
 			
 			n++;
-		}while(n<this.nbBoucles && !timer.isFinished());
+		}while(!timer.isFinished());
 	}
 	
 	/**

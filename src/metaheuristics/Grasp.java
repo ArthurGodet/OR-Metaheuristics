@@ -22,9 +22,6 @@ import util.Timer;
  */
 public class Grasp extends Solver{
 	
-	/** The nb boucles. */
-	private int nbBoucles;
-	
 	/**
 	 * Instantiates a new grasp.
 	 *
@@ -32,9 +29,8 @@ public class Grasp extends Solver{
 	 * @param nbBoucles the nb boucles
 	 */
 	// Greedy Randomize Adaptive Search Procedure
-	public Grasp(Instance inst, int nbBoucles) {
+	public Grasp(Instance inst) {
 		super(inst,"GRASP");
-		this.nbBoucles = nbBoucles;
 	}
 
 	/* (non-Javadoc)
@@ -56,7 +52,7 @@ public class Grasp extends Solver{
 			else if(ls.getSolution().compareTo(this.getSolution())<0)
 				this.setSolution(ls.getSolution().clone());
 			n++;
-		}while(n<this.nbBoucles && !timer.isFinished());
+		}while(!timer.isFinished());
 	}
 
 	/**

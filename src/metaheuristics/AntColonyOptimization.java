@@ -46,9 +46,6 @@ public class AntColonyOptimization extends Solver {
 	/** The ants. */
 	private Solution[] ants;
 	
-	/** The nb loops. */
-	private int nbLoops;
-	
 	/** The nb ants. */
 	private int nbAnts;
 	
@@ -73,8 +70,8 @@ public class AntColonyOptimization extends Solver {
 	 * @param inst the inst
 	 * @param nbLoops the nb loops
 	 */
-	public AntColonyOptimization(Instance inst, int nbLoops) {
-		this(inst,nbLoops,NB_ANTS,ALPHA,RHO,BETA,THO_MIN,THO_MAX);
+	public AntColonyOptimization(Instance inst) {
+		this(inst,NB_ANTS,ALPHA,RHO,BETA,THO_MIN,THO_MAX);
 	}
 	
 	/**
@@ -89,9 +86,8 @@ public class AntColonyOptimization extends Solver {
 	 * @param thoMin the tho min
 	 * @param thoMax the tho max
 	 */
-	public AntColonyOptimization(Instance inst, int nbLoops, int nbAnts, double alpha, double rho, double beta, double thoMin, double thoMax) {
+	public AntColonyOptimization(Instance inst,int nbAnts, double alpha, double rho, double beta, double thoMin, double thoMax) {
 		super(inst, "Ant Colony Optimization");
-		this.nbLoops = nbLoops;
 		this.nbAnts = nbAnts;
 		this.alpha = alpha;
 		this.rho = rho;
@@ -108,9 +104,8 @@ public class AntColonyOptimization extends Solver {
 	public void solve(Timer timer){
 
 		this.initialisation();
-		int n = 0;
 		// Loop for improvements of the solution.
-		while(n<this.nbLoops && !timer.isFinished()){
+		while(!timer.isFinished()){
 			for(int k = 0; k<this.nbAnts; k++){
 				this.ants[k] = new Solution(this.getInstance());
 				int firstJob = (int)(Math.random()*this.getInstance().getNbJobs());
@@ -126,7 +121,6 @@ public class AntColonyOptimization extends Solver {
 				}
 			}
 			updatePheromoneTrails();
-			n++;
 		}
 	}
 	

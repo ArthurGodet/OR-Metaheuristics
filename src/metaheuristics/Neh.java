@@ -38,6 +38,12 @@ public class Neh extends Solver{
 			ordonnancerJobNEH(ljNEH.get(k).getId(),k);
 	}
 	
+	public void solve(){
+		List<Job> ljNEH = this.creerListeNEH();
+		for(int k = 0; k < ljNEH.size(); k++)
+			ordonnancerJobNEH(ljNEH.get(k).getId(),k);
+	}
+	
 	/**
 	 * Creer liste NEH.
 	 *

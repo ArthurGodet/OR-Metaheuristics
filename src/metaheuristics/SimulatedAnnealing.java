@@ -76,9 +76,9 @@ public class SimulatedAnnealing extends Solver{
 		// Initialiser avec une solution
 		Solution s = new Solution(this.getInstance());
 		if(this.getSolution().getJob(0)==-1){
-			Solver solver = new Neh(this.getInstance());
-			solver.solve();
-			s = solver.getSolution();
+			Neh neh = new Neh(this.getInstance());
+			neh.solve();
+			s = neh.getSolution();
 			this.setSolution(s);
 		}
 		else{

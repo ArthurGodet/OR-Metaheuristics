@@ -20,18 +20,14 @@ import util.Timer;
  */
 public class Vns extends Solver{
 	
-	/** The nb boucles. */
-	private int nbBoucles;
-	
 	/**
 	 * Instantiates a new vns.
 	 *
 	 * @param inst the inst
 	 * @param n the n
 	 */
-	public Vns(Instance inst,int n) {
+	public Vns(Instance inst) {
 		super(inst,"VNS");
-		this.nbBoucles = n;
 	}
 
 	/* (non-Javadoc)
@@ -43,10 +39,10 @@ public class Vns extends Solver{
 		tab[1] = new Shift();
 		tab[2] = new Swap();
 		
-		Solver solver = new Neh(this.getInstance());
-		solver.solve();
-		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],solver.getSolution());
-		Solution s = solver.getSolution();
+		Neh neh = new Neh(this.getInstance());
+		neh.solve();
+		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],neh.getSolution());
+		Solution s = neh.getSolution();
 		
 		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !
 		int n = 0;
@@ -63,7 +59,7 @@ public class Vns extends Solver{
 			
 			k++;
 			n++;
-		}while(n<this.nbBoucles && !timer.isFinished());
+		}while(!timer.isFinished());
 		
 		this.setSolution(s.clone());
 	}

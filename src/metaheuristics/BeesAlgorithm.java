@@ -15,21 +15,19 @@ public class BeesAlgorithm extends Solver{
 	public static int COLONY_SIZE = 50;
 	public static int NB_FORAGERS = 20; // < COLONY_SIZE/2
 	
-	private int nbLoops;
 	private int colonySize;
 	private int nbForagers;
 	private Solution[] bees;
 	private ArrayList<Solution> abandonnedSites;
 	
-	public BeesAlgorithm(Instance inst, int colonySize, int nbForagers, int nbLoops) {
+	public BeesAlgorithm(Instance inst, int colonySize, int nbForagers) {
 		super(inst,"Bees algorithm");
 		this.colonySize = colonySize;
 		this.nbForagers = nbForagers;
-		this.nbLoops = nbLoops;
 	}
 	
-	public BeesAlgorithm(Instance inst, int nbLoops){
-		this(inst,COLONY_SIZE,NB_FORAGERS,nbLoops);
+	public BeesAlgorithm(Instance inst){
+		this(inst,COLONY_SIZE,NB_FORAGERS);
 	}
 
 	@Override
@@ -40,7 +38,7 @@ public class BeesAlgorithm extends Solver{
 		Swap swap = new Swap();
 		Solution s;
 		Arrays.sort(this.bees);
-		for(int k = 0; k<this.nbLoops && !timer.isFinished(); k++){
+		while(!timer.isFinished()){
 			for(int i = 0; i<this.colonySize; i++){
 				if(i<this.nbForagers){
 					// Select the best neighbor wherever the neighborhood
@@ -85,14 +83,6 @@ public class BeesAlgorithm extends Solver{
 		for(int i = 0; i<this.colonySize; i++){
 			this.bees[i] = Solution.generateSolution(this.getInstance());
 		}
-	}
-
-	public int getNbLoops() {
-		return nbLoops;
-	}
-
-	public void setNbLoops(int nbLoops) {
-		this.nbLoops = nbLoops;
 	}
 
 	public int getColonySize() {
