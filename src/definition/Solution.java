@@ -244,6 +244,17 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	}
 
 	/**
+	 * Reverse jobs with position between from inclusive and to exclusive.
+	 *
+	 * @param from the from
+	 * @param to the to
+	 */
+	public void reverse(int from, int to) {
+		for(int i = from; i < to+from-i-1; i++)
+			swap(i, to+from-i-1);
+	}
+
+	/**
 	 * Ajoute les jobs inconnus de l'autre solutions dans le même ordre.
 	 *
 	 * @param other the other solution
