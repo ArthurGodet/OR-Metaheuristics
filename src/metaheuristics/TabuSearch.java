@@ -38,7 +38,7 @@ public class TabuSearch extends LocalSearch{
 	}
 
 	/* (non-Javadoc)
-	 * @see metaheuristics.LocalSearch#solve()
+	 * @see metaheuristics.LocalSearch#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
 		tabuList = new TabuList(1<<16);
