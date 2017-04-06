@@ -58,7 +58,7 @@ public class Memetic extends Genetic{
 	}
 	
 	/* (non-Javadoc)
-	 * @see metaheuristics.Genetic#solve()
+	 * @see metaheuristics.Genetic#solve(util.Timer)
 	 */
 	public void solve(Timer timer){
 		if(this.getSolution().getJob(0)==-1){
