@@ -50,19 +50,19 @@ public class Main {
 		//*/
 
 		/*
-		Solver solver = new Grasp(instance,1000);
+		Solver solver = new Grasp(instance);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
 		/*
-		Solver solver = new Ils(instance,10000);
+		Solver solver = new Ils(instance);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
 		/*
-		Solver solver = new Vns(instance,1000);
+		Solver solver = new Vns(instance);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
@@ -72,8 +72,7 @@ public class Main {
 		// tempfactor = 0.99 (doit être proche de 1)
 		// sizefactor = 1 (n'apporte pas grand chose)
 		// minpercent = 0.1 (doit être petit)
-		// nbLoops peut être grand (10 000 : OK)
-		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1, 10000);
+		Solver solver = new SimulatedAnnealing(instance, 25., 0.99, 1, 0.1);
 		Solution s = Solution.generateSolution(instance);
 		while(!timer.isFinished()){
 			solver.solve(timer);
@@ -91,7 +90,7 @@ public class Main {
 		//*/
 
 		//*
-		Solver solver = new BeesAlgorithm(instance,1000);
+		Solver solver = new BeesAlgorithm(instance);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
