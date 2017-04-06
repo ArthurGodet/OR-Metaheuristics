@@ -54,17 +54,4 @@ public class LocalSearch extends Solver{
 			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
 		}while(cmax>this.getSolution().getCmax() && !timer.isFinished());
 	}
-	
-	/* (non-Javadoc)
-	 * @see metaheuristics.Solver#solve(util.Timer)
-	 */
-	public void solve() {
-		int cmax = this.getSolution().getCmax();
-		// la recherche dans le voisinage est faite de sorte à ne pas dégrader
-		// la solution lorsqu'une cuvette est atteinte, donc la boucle suivante est correcte.
-		do{
-			cmax = this.getSolution().getCmax();
-			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
-		}while(cmax>this.getSolution().getCmax());
-	}
 }
