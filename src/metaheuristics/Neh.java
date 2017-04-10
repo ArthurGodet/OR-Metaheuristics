@@ -37,6 +37,19 @@ public class Neh extends Solver{
 		for(int k = 0; k < ljNEH.size(); k++)
 			ordonnancerJobNEH(ljNEH.get(k).getId(),k);
 	}
+
+	/**
+	 * Solve.
+	 *
+	 * @param instance the instance
+	 * @param timer the timer
+	 * @return the solution
+	 */
+	public static Solution solve(Instance instance) {
+		Neh neh = new Neh(instance);
+		neh.solve();
+		return neh.getSolution();
+	}
 	
 	/**
 	 * Creer liste NEH.
