@@ -16,7 +16,6 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AntColonyOptimization.
  */
@@ -46,7 +45,7 @@ public class AntColonyOptimization extends Solver {
 	/** The ants. */
 	private Solution[] ants;
 	
-	/** The nb ants. */
+	/** The number of ants. */
 	private int nbAnts;
 	
 	/** The alpha. */
@@ -68,7 +67,7 @@ public class AntColonyOptimization extends Solver {
 	 * Instantiates a new ant colony optimization.
 	 *
 	 * @param inst the inst
-	 * @param nbLoops the nb loops
+	 * @param nbLoops the number of loops
 	 */
 	public AntColonyOptimization(Instance inst) {
 		this(inst,NB_ANTS,ALPHA,RHO,BETA,THO_MIN,THO_MAX);
@@ -125,7 +124,7 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Initialize member variables.
+	 * Initialize the pheromone trail.
 	 */
 	public void initialisation(){
 		this.ants = new Solution[this.nbAnts];
@@ -139,7 +138,7 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Generate a list of item indexes that can be added after item j.
+	 * Generate the candidates corresponding to the job selected.
 	 *
 	 * @param jobSelected the job selected
 	 * @return the list
@@ -153,10 +152,10 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Return an array of probabilities for each candidate based on pheromone.
+	 * Return the probabilities associated to each candidate.
 	 *
 	 * @param candidates the candidates
-	 * @param pos the pos
+	 * @param pos the position
 	 * @param k the k
 	 * @return the double[]
 	 */
@@ -319,36 +318,36 @@ public class AntColonyOptimization extends Solver {
 	}
 
 	/**
-	 * Gets the tho min.
+	 * Gets the THO MIN.
 	 *
-	 * @return the tho min
+	 * @return THO MIN
 	 */
 	public double getThoMin() {
 		return thoMin;
 	}
 
 	/**
-	 * Sets the tho min.
+	 * Sets the THO MIN.
 	 *
-	 * @param thoMin the new tho min
+	 * @param THO MIN the new THO MIN
 	 */
 	public void setThoMin(double thoMin) {
 		this.thoMin = thoMin;
 	}
 
 	/**
-	 * Gets the tho max.
+	 * Gets the THO MAX.
 	 *
-	 * @return the tho max
+	 * @return THO MAX
 	 */
 	public double getThoMax() {
 		return thoMax;
 	}
 
 	/**
-	 * Sets the tho max.
+	 * Sets the THO MAX.
 	 *
-	 * @param thoMax the new tho max
+	 * @param THO MAX the new THO MAX
 	 */
 	public void setThoMax(double thoMax) {
 		this.thoMax = thoMax;
