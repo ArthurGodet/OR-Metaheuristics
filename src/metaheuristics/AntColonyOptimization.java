@@ -135,9 +135,7 @@ public class AntColonyOptimization extends Solver {
 			for(int j = 0; j<this.getInstance().getNbJobs(); j++)
 				this.pheromoneTrails[i][j] = this.thoMax;
 		
-		Neh neh = new Neh(this.getInstance());
-		neh.solve();
-		this.setSolution(neh.getSolution().clone());
+		this.setSolution(Neh.solve(this.getInstance()));
 	}
 	
 	/**

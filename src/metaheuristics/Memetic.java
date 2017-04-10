@@ -61,13 +61,9 @@ public class Memetic extends Genetic{
 	 * @see metaheuristics.Genetic#solve(util.Timer)
 	 */
 	public void solve(Timer timer){
-		if(this.getSolution().getJob(0)==-1){
-			Neh neh = new Neh(this.getInstance());
-			neh.solve();
-			this.setSolution(neh.getSolution());
-			System.out.println(neh);
-			System.out.println("--------");
-		}
+		if(this.getSolution().getJob(0)==-1)
+			this.setSolution(Neh.solve(this.getInstance()));
+
 		// Génération de la population initiale
 		ArrayList<Solution> population = new ArrayList<Solution>();
 		population.add(this.getSolution());

@@ -39,10 +39,8 @@ public class Vns extends Solver{
 		tab[1] = new Shift();
 		tab[2] = new Swap();
 		
-		Neh neh = new Neh(this.getInstance());
-		neh.solve();
-		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],neh.getSolution());
-		Solution s = neh.getSolution();
+		Solution s = Neh.solve(this.getInstance());
+		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],s);
 		
 		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !
 		int n = 0;

@@ -33,9 +33,7 @@ public class Ils extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
-		Solver solver = new Neh(this.getInstance());
-		solver.solve();
-		LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),solver.getSolution());
+		LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),Neh.solve(this.getInstance()));
 		ls.solve();
 		Solution s = ls.getSolution();
 		this.setSolution(s.clone());

@@ -98,11 +98,8 @@ public class Genetic extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
-		Neh neh = new Neh(this.getInstance());
-		neh.solve();
-		this.setSolution(neh.getSolution());
-		System.out.println(neh);
-		System.out.println("--------");
+		this.setSolution(Neh.solve(this.getInstance()));
+
 		// Génération de la population initiale
 		ArrayList<Solution> population = new ArrayList<Solution>();
 		population.add(neh.getSolution());
