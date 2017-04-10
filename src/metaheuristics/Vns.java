@@ -43,7 +43,6 @@ public class Vns extends Solver{
 		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],s);
 		
 		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !
-		int n = 0;
 		do{
 			//*
 			if(k==3)
@@ -56,7 +55,6 @@ public class Vns extends Solver{
 			s = ls.getSolution();
 			
 			k++;
-			n++;
 		}while(!timer.isFinished());
 		
 		this.setSolution(s.clone());
