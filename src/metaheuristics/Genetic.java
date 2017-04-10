@@ -102,7 +102,7 @@ public class Genetic extends Solver{
 
 		// Génération de la population initiale
 		ArrayList<Solution> population = new ArrayList<Solution>();
-		population.add(neh.getSolution());
+		population.add(this.getSolution());
 		for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
 			population.add(Solution.generateSolution(this.getInstance()));
 
