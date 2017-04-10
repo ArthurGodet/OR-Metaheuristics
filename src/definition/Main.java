@@ -84,7 +84,8 @@ public class Main {
 		//*/
 
 		/*
-		Solver solver = new AntColonyOptimization(instance,500); // environ 1 minute par millier de boucles
+		AntColonyOptimization solver = new AntColonyOptimization(instance);
+		solver.setNbAnts(500);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
