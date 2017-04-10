@@ -41,11 +41,8 @@ public class Vns extends Solver{
 		
 		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !
 		do{
-			//*
 			if(k==3)
 				k=0;
-			//*/
-			//k = (int)(Math.random()*tab.length);
 			
 			ls.setNeighborhood(tab[k]);
 			ls.solve();
