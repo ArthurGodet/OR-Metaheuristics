@@ -24,6 +24,9 @@ public class Instance {
 	
 	/** The durees operations. */
 	private int[][] dureesOperations;
+	
+	/** The name of the instance. */
+	private String name;
 
 	/**
 	 * Construit un problème à partir d'un fichier.
@@ -31,6 +34,7 @@ public class Instance {
 	 * @param s nom du fichier
 	 */
 	public Instance(String s) {
+		this.name = s;
 		try {
 			Scanner scanner = new Scanner(new FileReader(s));
 
@@ -89,5 +93,14 @@ public class Instance {
 	 */
 	public int getDureeOperation(int job, int machine){
 		return this.dureesOperations[job][machine];
+	}
+	
+	/**
+	 * Gets the name of the Instance.
+	 *
+	 * @return the name of the Instance
+	 */
+	public String getName(){
+		return this.name;
 	}
 }

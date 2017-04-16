@@ -11,7 +11,7 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 Bonus :
 [ ] Parallelisation des calculs
 [X] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
-[ ] Mettre en place des benchmarks
+[X] Mettre en place des benchmarks
 [X] une classe GRASP
 [X] une classe ILS
 [X] une classe VNS

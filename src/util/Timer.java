@@ -54,4 +54,11 @@ public class Timer {
 	public boolean isFinished() {
 		return getRemainingTime() <= 0;
 	}
+	
+	/**
+	 * Resets the starting point.
+	 */
+	public void reset() {
+		this.startingPoint = System.currentTimeMillis();
+	}
 }

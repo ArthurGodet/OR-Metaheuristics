@@ -34,9 +34,6 @@ public class SimulatedAnnealing extends Solver{
 	/** The tempfactor. */
 	private double tempfactor;
 
-	/** The nb loops. */
-	private int nbLoops; // better with a time limit here !
-
 	/** The minpercent. */
 	private double minpercent;
 
@@ -50,13 +47,12 @@ public class SimulatedAnnealing extends Solver{
 	 * @param minpercent the minpercent
 	 * @param nbLoops the nb loops
 	 */
-	public SimulatedAnnealing(Instance inst, double startTemp, double tempfactor, int sizefactor, double minpercent, int nbLoops) {
+	public SimulatedAnnealing(Instance inst, double startTemp, double tempfactor, int sizefactor, double minpercent) {
 		super(inst,"Simulated Annealing");
 		this.startTemp = startTemp;
 		this.tempfactor = tempfactor;
 		this.sizefactor = sizefactor;
 		this.minpercent = minpercent;
-		this.nbLoops = nbLoops;
 	}
 	
 	/**
@@ -65,8 +61,8 @@ public class SimulatedAnnealing extends Solver{
 	 * @param inst the inst
 	 * @param nbLoops the nb loops
 	 */
-	public SimulatedAnnealing(Instance inst, int nbLoops) {
-		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT,nbLoops);
+	public SimulatedAnnealing(Instance inst) {
+		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT);
 	}
 
 	/* (non-Javadoc)
@@ -85,12 +81,11 @@ public class SimulatedAnnealing extends Solver{
 
 		// Initialisation des variables
 		double temp = this.startTemp;
-		int nit = 0;
 
 		// Application de l'algorithme
 		int count = 0;
 		int L = this.sizefactor*this.getInstance().getNbJobs()*(this.getInstance().getNbMachines()-1);
-		while(count<5 && nit<this.nbLoops && !timer.isFinished()){
+		while(count<5 && !timer.isFinished()){
 			Solution t = new Solution(this.getInstance());
 			boolean change = true;
 			Neighborhood neighborhood = new Shift();
@@ -119,7 +114,6 @@ public class SimulatedAnnealing extends Solver{
 			s = ls.getSolution().clone();
 
 			temp *= this.tempfactor;
-			nit++;
 			if(s.compareTo(this.getSolution())<0){
 				this.setSolution(s.clone());
 				count = 0;

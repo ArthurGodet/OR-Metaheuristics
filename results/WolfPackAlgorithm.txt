@@ -1,0 +1,10 @@
+instances/tai01.txt
+Wolf Pack Algorithm
+Cmax = 1278  <---  (3 17 9 15 1 6 13 11 14 19 5 4 2 18 7 8 16 10 20 12)
+Wolf Pack Algorithm
+Cmax = 1278  <---  (9 15 14 11 2 13 4 3 17 6 1 19 5 18 7 8 16 10 20 12)
+Wolf Pack Algorithm
+Cmax = 1278  <---  (3 17 15 9 6 13 7 11 8 1 19 2 4 5 18 16 14 10 20 12)
+Wolf Pack Algorithm
+Cmax = 1278  <---  (3 17 15 6 5 4 9 18 19 8 7 11 14 13 16 1 2 10 20 12)
+-----------

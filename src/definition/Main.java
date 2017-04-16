@@ -6,8 +6,11 @@
  */
 package definition;
 
+import java.io.IOException;
+
 import metaheuristics.AntColonyOptimization;
 import metaheuristics.BeesAlgorithm;
+import metaheuristics.Benchmark;
 import metaheuristics.Genetic;
 import metaheuristics.Grasp;
 import metaheuristics.Ils;
@@ -18,6 +21,7 @@ import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;
 import metaheuristics.TabuSearch;
 import metaheuristics.Vns;
+import metaheuristics.WolfPackAlgorithm;
 import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
@@ -90,12 +94,50 @@ public class Main {
 		System.out.println(solver);
 		//*/
 
-		//*
+		/*
 		Solver solver = new BeesAlgorithm(instance);
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
 
-		System.out.println(timer.getElapsedTime()+" ms");
+		/*
+		Solver solver = new WolfPackAlgorithm(instance);
+		solver.solve(timer);
+		System.out.println(solver);
+		//*/
+		
+		//*
+		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
+		Solver[][] solvers = new Solver[instances.length][];
+		for(int i = 0; i<instances.length; i++){
+			instance = instances[i];
+			solvers[i] = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
+		}
+		
+		Solver solver;
+		try {
+			for(int i = 0; i<instances.length; i++){
+				for(int j = 0; j<solvers[i].length; j++){
+					solver = solvers[i][j];
+					if(solver instanceof TabuSearch){
+						Neh neh = new Neh(instances[i]);
+						neh.solve();
+						solver.setSolution(neh.getSolution());
+					}
+					Benchmark.presentation(solver,solver.getInstance().getName());
+					for(int k = 0; k<4; k++){
+						solver.solve(timer);
+						Benchmark.writeResults(solver);
+						timer.reset();
+					}
+					Benchmark.EndPresentation(solver);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//*/
+
+		//System.out.println(timer.getElapsedTime()+" ms");
 	}
 }

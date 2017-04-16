@@ -139,7 +139,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	public String toString(){
 		String s = "Cmax = " + this.cmax + "  <---  (";
 		for(int i = 0; i<this.order.length; i++){
-			s += this.order[i] + (i == this.order.length-1 ? "": " ");
+			s += (this.order[i]+1) + (i == this.order.length-1 ? "": " ");
 		}
 		s += ")";
 		return s;

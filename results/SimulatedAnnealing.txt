@@ -1,0 +1,10 @@
+instances/tai01.txt
+Simulated Annealing
+Cmax = 1278  <---  (9 15 17 14 19 8 6 3 1 16 5 18 4 2 7 11 13 10 20 12)
+Simulated Annealing
+Cmax = 1278  <---  (9 15 17 14 19 8 6 3 1 16 5 18 4 2 7 11 13 10 20 12)
+Simulated Annealing
+Cmax = 1278  <---  (9 15 17 14 19 8 6 3 1 16 5 18 4 2 7 11 13 10 20 12)
+Simulated Annealing
+Cmax = 1278  <---  (9 15 17 14 19 8 6 3 1 16 5 18 4 2 7 11 13 10 20 12)
+-----------
