@@ -6,8 +6,7 @@ import java.io.IOException;
 public class Benchmark {
 	public static void writeResults(Solver solver) throws IOException{
 		FileWriter fw = new FileWriter("results/"+solver.getName()+".txt",true);
-		//fw.write(solver.getSolution().getCmax() + "\n");
-		fw.write(solver + "\n");
+		fw.write(solver.getSolution().getCmax() + "\n");
 		fw.close();
 	}
 	
