@@ -118,6 +118,7 @@ public class AntColonyOptimization extends Solver {
 					candidates.remove(candidateSelected);
 					pos++;
 				}
+				ants[k].evaluate();
 			}
 			updatePheromoneTrails();
 		}
