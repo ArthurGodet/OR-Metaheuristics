@@ -2,10 +2,9 @@
 
 import os
 
-def summarize(inputFile, outputFile):
+def fillTable(table, inputFile):
     readName = True
     name = ""
-    table = {}
     for line in inputFile:
         if readName:
             name = line.strip()
@@ -17,6 +16,7 @@ def summarize(inputFile, outputFile):
             table.setdefault(name, [])
             table[name].append(cmax)
 
+def writeTable(table, outputFile):
     names = list(sorted(table.keys()))
     height = max(map(len, table.values()))
     outputFile.write(';'.join(names)+'\n')
@@ -24,6 +24,12 @@ def summarize(inputFile, outputFile):
         outputFile.write(';'.join(map(str, (table[names[i]][h] if h < len(table[names[i]]) else '' for i in range(len(names)))))+'\n')
 
 if __name__ == '__main__':
-    for filename in os.listdir("results"):
-        with open("results/"+filename, "r") as inputFile, open("summary/"+filename, "w") as outputFile:
-            summarize(inputFile, outputFile)
+    folders = os.listdir("results")
+    solvers = os.listdir("results/"+folders[0])
+    for solver in solvers:
+        table = {}
+        for folder in folders:
+            with open("results/"+folder+"/"+solver, "r") as inputFile:
+                fillTable(table, inputFile)
+        with open("summary/"+solver, "w") as outputFile:
+            writeTable(table, outputFile)
