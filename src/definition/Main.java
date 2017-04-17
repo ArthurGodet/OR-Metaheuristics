@@ -17,6 +17,7 @@ import metaheuristics.Ils;
 import metaheuristics.LocalSearch;
 import metaheuristics.Memetic;
 import metaheuristics.Neh;
+import metaheuristics.Parallel;
 import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;
 import metaheuristics.TabuSearch;
@@ -108,33 +109,16 @@ public class Main {
 		
 		//*
 		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
-		Solver[][] solvers = new Solver[instances.length][];
-		for(int i = 0; i<instances.length; i++){
-			instance = instances[i];
-			solvers[i] = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
-		}
+		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
 		
-		Solver solver;
-		try {
-			for(int i = 0; i<instances.length; i++){
-				for(int j = 0; j<solvers[i].length; j++){
-					solver = solvers[i][j];
-					if(solver instanceof TabuSearch){
-						Neh neh = new Neh(instances[i]);
-						neh.solve();
-						solver.setSolution(neh.getSolution());
-					}
-					Benchmark.presentation(solver,solver.getInstance().getName());
-					for(int k = 0; k<4; k++){
-						solver.solve(timer);
-						Benchmark.writeResults(solver);
-						timer.reset();
-					}
-					Benchmark.EndPresentation(solver);
-				}
+		Parallel parallel = new Parallel(instances[0]);
+		for(int i = 0; i<instances.length; i++){
+			parallel.setInstance(instances[i]);
+			for(int k = 0; k<solvers.length; k++){
+				parallel.setSolver(solvers[k]);
+				timer.reset();
+				parallel.solve(timer);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		//*/
 

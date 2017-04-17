@@ -73,7 +73,7 @@ public class Parallel extends Solver {
 		}
 		
 		try {
-			Benchmark.presentation(this.solver,this.solver.getInstance().getName());
+			Benchmark.presentation(this.solver,this.getInstance().getName());
 			for(int k = 0; k<NUM_THREADS; k++){
 				Benchmark.writeResults(solvers[k]);
 			}
