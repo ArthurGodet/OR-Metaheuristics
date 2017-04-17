@@ -61,4 +61,13 @@ public class Timer {
 	public void reset() {
 		this.startingPoint = System.currentTimeMillis();
 	}
+	
+	/**
+	 * Returns the time given to this Timer.
+	 *
+	 * @return the time given to this Timer.
+	 */
+	public long getTimeGiven() {
+		return this.timeGiven;
+	}
 }
