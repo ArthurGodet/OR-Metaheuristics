@@ -24,6 +24,8 @@ Bonus :
 [X] une classe Genetique
 [X] Remplacer les Enum par des Class autonomes
 [X] une classe Tabou
+[ ] Analyse statistique des voisinages et croisements génétiques dans le Memetic
+[ ] Ajouter un Tabou à la fin de chaque algo en essayant les différents voisinages ???
 
 Une fois que tout le reste est fait :
 [ ] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
