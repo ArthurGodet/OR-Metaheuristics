@@ -1,7 +1,9 @@
-package metaheuristics;
+package definition;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
+import metaheuristics.Solver;
 
 public class Benchmark {
 	public static void writeResults(Solver solver) throws IOException{
