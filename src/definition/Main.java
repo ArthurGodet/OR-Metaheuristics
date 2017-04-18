@@ -134,8 +134,26 @@ public class Main {
 		//*/
 
 		//*
-		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
-		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
+		Instance[] instances = new Instance[]{
+			new Instance("instances/tai01.txt"),
+			new Instance("instances/tai11.txt"),
+			new Instance("instances/tai21.txt"),
+			new Instance("instances/tai31.txt"),
+			new Instance("instances/tai41.txt"),
+			new Instance("instances/tai51.txt")
+		};
+		Solver[] solvers = new Solver[]{
+			new AntColonyOptimization(instance),
+			new BeesAlgorithm(instance),
+			new Genetic(instance),
+			new Grasp(instance),
+			new Ils(instance),
+			new Memetic(instance),
+			new SimulatedAnnealing(instance),
+			new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),
+			new Vns(instance),
+			new WolfPackAlgorithm(instance)
+		};
 
 		Parallel parallel = new Parallel(instances[0]);
 		for(int i = 0; i<instances.length; i++){
