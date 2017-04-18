@@ -77,11 +77,9 @@ public class Parallel extends Solver {
 		}
 		/*
 		try {
-			Benchmark.presentation(this.solver,this.getInstance().getName());
 			for(int i = 0; i<NUM_THREADS; i++){
 				Benchmark.writeResults(solvers[i]);
 			}
-			Benchmark.EndPresentation(solver);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
