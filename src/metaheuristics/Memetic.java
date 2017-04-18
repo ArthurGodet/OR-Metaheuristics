@@ -65,7 +65,7 @@ public class Memetic extends Genetic{
 
 		// Génération de la population initiale
 		ArrayList<Solution> population = new ArrayList<Solution>();
-		population.add(this.getSolution());
+		population.add(this.getSolution().clone());
 		for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
 			population.add(Solution.generateSolution(this.getInstance()));
 
