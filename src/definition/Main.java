@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import metaheuristics.AntColonyOptimization;
 import metaheuristics.BeesAlgorithm;
-import metaheuristics.Benchmark;
 import metaheuristics.Genetic;
 import metaheuristics.Grasp;
 import metaheuristics.Ils;
@@ -107,7 +106,7 @@ public class Main {
 		System.out.println(solver);
 		//*/
 
-		//*
+		/*
 		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
 		Solver[][] solvers = new Solver[instances.length][];
 		for(int i = 0; i<instances.length; i++){
@@ -134,7 +133,7 @@ public class Main {
 		}
 		//*/
 
-		/*
+		//*
 		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
 		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
 
