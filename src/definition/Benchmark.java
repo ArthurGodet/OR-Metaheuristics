@@ -17,10 +17,4 @@ public class Benchmark {
 		fw.write(instance+"\n");
 		fw.close();
 	}
-	
-	public static void EndPresentation(Solver solver) throws IOException{
-		FileWriter fw = new FileWriter("results/"+System.getProperty("user.name")+"/"+solver.getName()+".txt",true);
-		fw.write("-----------"+"\n");
-		fw.close();
-	}
 }
