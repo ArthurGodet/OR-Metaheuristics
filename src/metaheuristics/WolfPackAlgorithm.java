@@ -31,7 +31,7 @@ public class WolfPackAlgorithm extends Solver{
 	private void initialisation(){
 		this.wolves = new Solution[this.packSize];
 		for(int i = 0; i<this.packSize; i++)
-			this.wolves[i] = Solution.generateSolution(this.getInstance());
+			this.wolves[i] = this.localHunt(Solution.generateSolution(this.getInstance()));
 	}
 	
 	private Solution localHunt(Solution s){
@@ -66,7 +66,7 @@ public class WolfPackAlgorithm extends Solver{
 		}
 		// We complete in a random hunt
 		int b = 0;
-		while(sol.getJob(b)!=-1)b++;
+		while(b<this.getInstance().getNbJobs() && sol.getJob(b)!=-1)b++;
 		while(!pos.isEmpty()){
 			sol.setOrder(pos.remove((int)(pos.size()*Math.random())),b);
 			while(b<this.getInstance().getNbJobs() && sol.getJob(b)!=-1)b++;
