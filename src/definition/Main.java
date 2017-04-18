@@ -39,7 +39,7 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		Instance instance = new Instance("instances/tai41.txt");
+		Instance instance = new Instance("instances/tai51.txt");
 		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
@@ -135,17 +135,28 @@ public class Main {
 
 		//*
 		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
-		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
+		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new Vns(instance),new WolfPackAlgorithm(instance)};
 
-		Parallel parallel = new Parallel(instances[0]);
-		for(int i = 0; i<instances.length; i++){
-			parallel.setInstance(instances[i]);
-			for(int k = 0; k<solvers.length; k++){
-				parallel.setSolver(solvers[k]);
-				timer.reset();
-				parallel.solve(timer);
+		Parallel parallel = new Parallel(instances[5]);
+		//*
+		try{
+			for(int i = 0; i<instances.length; i++){
+				parallel.setInstance(instances[i]);
+				System.out.println(instances[i].getName());
+				for(int k = 0; k<solvers.length; k++){
+					parallel.setSolver(solvers[k]);
+					System.out.println(solvers[k].getName());
+					Benchmark.presentation(solvers[k],instances[i].getName());
+					timer.reset();
+					parallel.solve(timer);
+				}
 			}
 		}
+		catch(IOException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//*/
 		//*/
 
 		//System.out.println(timer.getElapsedTime()+" ms");

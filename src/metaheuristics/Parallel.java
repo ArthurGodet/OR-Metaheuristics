@@ -18,34 +18,35 @@ import util.Timer;
 public class Parallel extends Solver {
 	private static final int NUM_THREADS = 4;
 	private Solver solver;
-	
+
 	public Parallel(Instance instance){
 		super(instance,"Calculs parallèles");
 	}
-	
+
 	public void setSolver(Solver solver){
 		this.solver = solver;
 	}
-	
+
 	private class RunnableSolver implements Runnable {
-		
+
 		private Solver solver;
 		private Timer timer;
-		
+
 		public RunnableSolver(Solver solver, Timer timer) {
 			this.solver = solver;
 			this.timer = timer;
 		}
-		
+
 		public void run() {
 			try {
 				this.solver.solve(this.timer);
+				Benchmark.writeResults(this.solver);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param time Time allowed (in milliseconds) to solve the problem.
@@ -56,15 +57,17 @@ public class Parallel extends Solver {
 	 */
 	public void solve(Timer timer){
 		Solver[] solvers = this.prepareSolvers();
-		
+
 		Timer[] timers = new Timer[NUM_THREADS];
 		for(int i = 0; i<NUM_THREADS; i++)
 			timers[i] = new Timer(timer.getTimeGiven());
-		
+
+
 		ExecutorService exe = Executors.newFixedThreadPool(NUM_THREADS);
-		for(int i = 0; i < NUM_THREADS; i++)
+		for(int i = 0; i < NUM_THREADS; i++){
 			exe.execute(new RunnableSolver(solvers[i],timers[i]));
-		
+		}
+
 		exe.shutdown();
 		try {
 			exe.awaitTermination(timer.getRemainingTime()+500, TimeUnit.MILLISECONDS);
@@ -72,19 +75,20 @@ public class Parallel extends Solver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		/*
 		try {
 			Benchmark.presentation(this.solver,this.getInstance().getName());
-			for(int k = 0; k<NUM_THREADS; k++){
-				Benchmark.writeResults(solvers[k]);
+			for(int i = 0; i<NUM_THREADS; i++){
+				Benchmark.writeResults(solvers[i]);
 			}
 			Benchmark.EndPresentation(solver);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//*/
 	}
-	
+
 	private Solver[] prepareSolvers(){
 		Solver[] solvers = new Solver[NUM_THREADS];
 		for(int i = 0; i<NUM_THREADS; i++){
