@@ -150,8 +150,6 @@ public class Main {
 			new Ils(instance),
 			new Memetic(instance),
 			new SimulatedAnnealing(instance),
-			new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),
-			new Vns(instance),
 			new WolfPackAlgorithm(instance)
 		};
 		Parallel parallel = new Parallel(instances[5]);
