@@ -100,28 +100,30 @@ public class Genetic extends Solver{
 	public void solve(Timer timer) {
 		this.setSolution(Neh.solve(this.getInstance()));
 
-		// Génération de la population initiale
-		ArrayList<Solution> population = new ArrayList<Solution>();
-		population.add(this.getSolution());
-		for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
-			population.add(Solution.generateSolution(this.getInstance()));
+		while(!timer.isFinished()){
+			// Génération de la population initiale
+			ArrayList<Solution> population = new ArrayList<Solution>();
+			population.add(this.getSolution());
+			for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
+				population.add(Solution.generateSolution(this.getInstance()));
 
-		Collections.sort(population); // trie la population par ordre croissant de Cmax
-		
-		// Application de l'algorithme génétique
-		while(population.get(0).getCmax() != population.get((int)(population.size()*0.95)).getCmax() && !timer.isFinished()){
-			ArrayList<Solution> newGeneration = new ArrayList<Solution>();
-			newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
-			for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
-				Solution parent1 = this.groupSelection(population);
-				Solution parent2 = this.groupSelection(population);
-				newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
-			}
+			Collections.sort(population); // trie la population par ordre croissant de Cmax
 			
-			Collections.sort(newGeneration); // trie la nouvelle population par ordre croissant de Cmax
-			population = newGeneration;
-			if(this.getSolution().getCmax() > population.get(0).getCmax()){
-				this.setSolution(population.get(0).clone());
+			// Application de l'algorithme génétique
+			while(population.get(0).getCmax() != population.get((int)(population.size()*0.95)).getCmax() && !timer.isFinished()){
+				ArrayList<Solution> newGeneration = new ArrayList<Solution>();
+				newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
+				for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
+					Solution parent1 = this.groupSelection(population);
+					Solution parent2 = this.groupSelection(population);
+					newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
+				}
+				
+				Collections.sort(newGeneration); // trie la nouvelle population par ordre croissant de Cmax
+				population = newGeneration;
+				if(this.getSolution().getCmax() > population.get(0).getCmax()){
+					this.setSolution(population.get(0).clone());
+				}
 			}
 		}
 	}
