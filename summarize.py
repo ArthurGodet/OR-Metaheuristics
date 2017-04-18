@@ -3,18 +3,14 @@
 import os
 
 def fillTable(table, inputFile):
-    readName = True
     name = ""
     for line in inputFile:
-        if readName:
-            name = line.strip()
-            readName = False
-        elif line[0] == '-':
-            readName = True
-        else:
+        if line[0].isdigit():
             cmax = int(line)
             table.setdefault(name, [])
             table[name].append(cmax)
+        elif line[0] != '-':
+            name = line.strip()
 
 def writeTable(table, outputFile):
     names = list(sorted(table.keys()))
