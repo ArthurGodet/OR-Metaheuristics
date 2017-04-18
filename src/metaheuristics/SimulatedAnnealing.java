@@ -69,6 +69,7 @@ public class SimulatedAnnealing extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()).clone());
 		// Initialiser avec une solution
 		Solution s = Neh.solve(this.getInstance());
 

@@ -81,7 +81,8 @@ public class WolfPackAlgorithm extends Solver{
 		this.setSolution(Neh.solve(this.getInstance()));
 		this.initialisation();
 		Arrays.sort(this.wolves);
-		this.setSolution(this.wolves[0].clone());
+		if(this.getSolution().compareTo(this.wolves[0])<0)
+			this.wolves[0] = this.getSolution().clone();
 		while(!timer.isFinished()){
 			// Pack's hunt
 			for(int i = 1; i<this.packSize-1; i++){

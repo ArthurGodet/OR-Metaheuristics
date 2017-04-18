@@ -138,12 +138,14 @@ public class Main {
 		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
 
 		Parallel parallel = new Parallel(instances[0]);
-		for(int i = 0; i<instances.length; i++){
-			parallel.setInstance(instances[i]);
-			for(int k = 0; k<solvers.length; k++){
-				parallel.setSolver(solvers[k]);
-				timer.reset();
-				parallel.solve(timer);
+		for(int m = 0; m<5; m++){
+			for(int i = 0; i<instances.length; i++){
+				parallel.setInstance(instances[i]);
+				for(int k = 0; k<solvers.length; k++){
+					parallel.setSolver(solvers[k]);
+					timer.reset();
+					parallel.solve(timer);
+				}
 			}
 		}
 		//*/
