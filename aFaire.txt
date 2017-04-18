@@ -9,7 +9,7 @@ Structures des algos : <------- ATTENTION, chaque classe algorithmique doit heri
 [X] une classe Memetique
 
 Bonus :
-[ ] Parallelisation des calculs
+[X] Parallelisation des calculs
 [X] Ajout d'un parametre de temps au solveur general en utilisant la classe Timer #ITD
 [X] Mettre en place des benchmarks
 [X] une classe GRASP

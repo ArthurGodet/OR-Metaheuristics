@@ -70,14 +70,7 @@ public class SimulatedAnnealing extends Solver{
 	 */
 	public void solve(Timer timer) {
 		// Initialiser avec une solution
-		Solution s = new Solution(this.getInstance());
-		if(this.getSolution().getJob(0)==-1){
-			s = Neh.solve(this.getInstance());
-			this.setSolution(s);
-		}
-		else{
-			s = this.getSolution().clone();
-		}
+		Solution s = Neh.solve(this.getInstance());
 
 		// Initialisation des variables
 		double temp = this.startTemp;

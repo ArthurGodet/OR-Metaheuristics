@@ -34,6 +34,7 @@ public class Vns extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()));
 		Neighborhood[] tab = new Neighborhood[] {new Change(), new Shift(), new Swap()};
 		
 		Solution s = Neh.solve(this.getInstance());

@@ -37,6 +37,7 @@ public class Grasp extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()));
 		int n = 0;
 		do{
 			Solution s = new Solution(this.getInstance());
@@ -47,9 +48,7 @@ public class Grasp extends Solver{
 			
 			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s);
 			ls.solve();
-			if(n == 0)
-				this.setSolution(ls.getSolution());
-			else if(ls.getSolution().compareTo(this.getSolution())<0)
+			if(ls.getSolution().compareTo(this.getSolution())<0)
 				this.setSolution(ls.getSolution().clone());
 			n++;
 		}while(!timer.isFinished());

@@ -40,7 +40,7 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		Instance instance = new Instance("instances/tai21.txt");
+		Instance instance = new Instance("instances/tai41.txt");
 		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
@@ -106,11 +106,38 @@ public class Main {
 		solver.solve(timer);
 		System.out.println(solver);
 		//*/
-		
+
 		//*
 		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
+		Solver[][] solvers = new Solver[instances.length][];
+		for(int i = 0; i<instances.length; i++){
+			instance = instances[i];
+			solvers[i] = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
+		}
+
+		try{
+			for(int i = 0; i<instances.length; i++){
+				for(int j = 0; j<solvers[0].length; j++){
+					Benchmark.presentation(solvers[i][j],instances[i].getName());
+					for(int k = 0; k<4; k++){
+						timer.reset();
+						solvers[i][j].solve(timer);
+						Benchmark.writeResults(solvers[i][j]);
+					}
+					Benchmark.EndPresentation(solvers[i][j]);
+				}
+			}
+		}
+		catch(IOException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//*/
+
+		/*
+		Instance[] instances = new Instance[]{new Instance("instances/tai01.txt"),new Instance("instances/tai11.txt"),new Instance("instances/tai21.txt"),new Instance("instances/tai31.txt"),new Instance("instances/tai41.txt"),new Instance("instances/tai51.txt")};
 		Solver[] solvers = new Solver[]{new AntColonyOptimization(instance),new BeesAlgorithm(instance),new Genetic(instance),new Grasp(instance),new Ils(instance),new Memetic(instance),new SimulatedAnnealing(instance),new TabuSearch(instance,new Shift(),Solution.generateSolution(instance)),new Vns(instance),new WolfPackAlgorithm(instance)};
-		
+
 		Parallel parallel = new Parallel(instances[0]);
 		for(int i = 0; i<instances.length; i++){
 			parallel.setInstance(instances[i]);

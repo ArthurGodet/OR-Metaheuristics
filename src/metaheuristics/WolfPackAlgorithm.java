@@ -78,6 +78,7 @@ public class WolfPackAlgorithm extends Solver{
 
 	@Override
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()));
 		this.initialisation();
 		Arrays.sort(this.wolves);
 		this.setSolution(this.wolves[0].clone());

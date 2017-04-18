@@ -41,6 +41,7 @@ public class TabuSearch extends LocalSearch{
 	 * @see metaheuristics.LocalSearch#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()));
 		tabuList = new TabuList(1<<16);
 		Solution currentSolution = this.getSolution();
 

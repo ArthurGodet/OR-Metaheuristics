@@ -93,11 +93,8 @@ public class Parallel extends Solver {
 				solvers[i] = new BeesAlgorithm(this.getInstance());
 			else if(this.solver instanceof Vns)
 				solvers[i] = new Vns(this.getInstance());
-			else if(this.solver instanceof TabuSearch){
-				Neh neh = new Neh(this.getInstance());
-				neh.solve();
-				solvers[i] = new TabuSearch(this.getInstance(),new Shift(),neh.getSolution());
-			}
+			else if(this.solver instanceof TabuSearch)
+				solvers[i] = new TabuSearch(this.getInstance(),new Shift(),Neh.solve(this.getInstance()));
 			else if(this.solver instanceof SimulatedAnnealing)
 				solvers[i] = new SimulatedAnnealing(this.getInstance());
 			else if(this.solver instanceof Memetic)

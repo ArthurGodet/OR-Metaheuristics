@@ -101,7 +101,6 @@ public class AntColonyOptimization extends Solver {
 	 * @param timer the timer
 	 */
 	public void solve(Timer timer){
-
 		this.initialisation();
 		// Loop for improvements of the solution.
 		while(!timer.isFinished()){

@@ -32,6 +32,7 @@ public class BeesAlgorithm extends Solver{
 
 	@Override
 	public void solve(Timer timer) {
+		this.setSolution(Neh.solve(this.getInstance()));
 		this.initialisation();
 		Change change = new Change();
 		Shift shift = new Shift();
