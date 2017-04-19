@@ -83,8 +83,7 @@ public class WolfPackAlgorithm extends Solver{
 			// Best hunter's local hunt
 			this.wolves[0] = this.communicate(this.communicationRate*2);
 			// Lonely wolf's hunt
-			this.wolves[this.packSize-1] = Solution.generateSolution(this.getInstance());
-			this.localHunt(this.wolves[this.packSize-1]);
+			this.wolves[this.packSize-1] = this.localHunt(Solution.generateSolution(this.getInstance()));
 			
 			// Change in leadership
 			Arrays.sort(this.wolves);
