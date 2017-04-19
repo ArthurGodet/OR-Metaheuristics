@@ -39,7 +39,7 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		Instance instance = new Instance("instances/tai21.txt");
+		Instance instance = new Instance("instances/tai51.txt");
 		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
@@ -115,16 +115,18 @@ public class Main {
 		}
 
 		try{
-			for(int i = 0; i<instances.length; i++){
-				for(int j = 0; j<solvers[0].length; j++){
+			//for(int i = 0; i<instances.length; i++){
+				//for(int j = 0; j<solvers[0].length; j++){
+					int i = 5;
+					int j = solvers[0].length-1;
 					Benchmark.presentation(solvers[i][j],instances[i].getName());
 					for(int k = 0; k<4; k++){
 						timer.reset();
 						solvers[i][j].solve(timer);
 						Benchmark.writeResults(solvers[i][j]);
 					}
-				}
-			}
+				//}
+			//}
 		}
 		catch(IOException e){
 			// TODO Auto-generated catch block
