@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import definition.Instance;
+import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Change;
 import neighborhoods.Shift;
@@ -35,24 +36,16 @@ public class WolfPackAlgorithm extends Solver{
 	}
 	
 	private Solution localHunt(Solution s){
-		Change change = new Change();
-		Shift shift = new Shift();
-		Swap swap = new Swap();
-		Solution t = new Solution(this.getInstance());
-		LocalSearch ls = new LocalSearch(this.getInstance(),shift,s.clone());
-		ls.solve();
-		t = ls.getSolution().clone();
-		ls.setSolution(s.clone());
-		ls.setNeighborhood(change);
-		ls.solve();
-		if(ls.getSolution().compareTo(t)<0)
-			t = ls.getSolution().clone();
-		ls.setSolution(s.clone());
-		ls.setNeighborhood(swap);
-		ls.solve();
-		if(ls.getSolution().compareTo(t)<0)
-			t = ls.getSolution().clone();
-		return t.clone();
+		Solution minSol = new Solution(this.getInstance());
+		LocalSearch ls = new LocalSearch(this.getInstance(), null, s.clone());
+		for(Neighborhood n : new Neighborhood[]{new Shift(), new Change(), new Swap()}) {
+			ls.setSolution(s.clone());
+			ls.setNeighborhood(n);
+			ls.solve();
+			if(ls.getSolution().compareTo(minSol) < 0)
+				minSol = ls.getSolution().clone();
+		}
+		return minSol;
 	}
 	
 	private Solution communicate(double rate){
