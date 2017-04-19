@@ -95,4 +95,15 @@ public class Random {
 		Collections.shuffle(l);
 		return l.subList(0, k);
 	}
+
+	/**
+	 * Random shuffle.
+	 *
+	 * @param from the from
+	 * @param to the to
+	 * @return the list
+	 */
+	public static List<Integer> randomShuffle(int from, int to) {
+		return randomSample(from, to, to-from);
+	}
 }

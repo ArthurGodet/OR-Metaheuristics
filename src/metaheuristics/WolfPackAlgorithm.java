@@ -1,7 +1,7 @@
 package metaheuristics;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import definition.Instance;
 import definition.Neighborhood;
@@ -9,6 +9,7 @@ import definition.Solution;
 import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
+import util.Random;
 import util.Timer;
 
 public class WolfPackAlgorithm extends Solver{
@@ -50,23 +51,21 @@ public class WolfPackAlgorithm extends Solver{
 	
 	private Solution communicate(double rate){
 		Solution sol = new Solution(this.getInstance());
-		ArrayList<Integer> pos = this.pos();
-		int n = (int)(((double)this.getInstance().getNbJobs())*rate);
+		List<Integer> jobs = Random.randomShuffle(0, this.getInstance().getNbJobs());
+		int n = (int)(this.getInstance().getNbJobs()*rate);
 		// We keep information from the best hunter
-		for(int i = 0; i<=n; i++){
-			int a = pos.remove((int)(pos.size()*Math.random()));
-			sol.setOrder(a,this.wolves[0].getIndex(a));
-		}
+		for(int i = 0; i < n; i++)
+			sol.setOrder(jobs.get(i), this.wolves[0].getIndex(jobs.get(i)));
 		// We complete in a random hunt
-		int b = 0;
-		while(b<this.getInstance().getNbJobs() && sol.getJob(b)!=-1)b++;
-		while(!pos.isEmpty()){
-			sol.setOrder(pos.remove((int)(pos.size()*Math.random())),b);
-			while(b<this.getInstance().getNbJobs() && sol.getJob(b)!=-1)b++;
+		int insert = sol.getIndex(-1);
+		for(int i = n; i < this.getInstance().getNbJobs(); i++){
+			sol.setOrder(jobs.get(i), insert);
+			while(insert < this.getInstance().getNbJobs() && sol.getJob(insert) != -1)
+				insert++;
 		}
 		sol.evaluate();
 		sol = this.localHunt(sol);
-		return sol.clone();
+		return sol;
 	}
 
 	@Override
@@ -109,13 +108,6 @@ public class WolfPackAlgorithm extends Solver{
 
 	public void setWolves(Solution[] wolves) {
 		this.wolves = wolves;
-	}
-	
-	private ArrayList<Integer> pos(){
-		ArrayList<Integer> p = new ArrayList<Integer>();
-		for(int k = 0; k<this.getInstance().getNbJobs(); k++)
-			p.add(k);
-		return p;
 	}
 
 	public double getCommunicationRate() {
