@@ -70,7 +70,7 @@ public class Parallel extends Solver {
 
 		exe.shutdown();
 		try {
-			exe.awaitTermination(timer.getRemainingTime()+500, TimeUnit.MILLISECONDS);
+			exe.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

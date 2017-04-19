@@ -38,14 +38,19 @@ public class WolfPackAlgorithm extends Solver{
 	
 	private Solution localHunt(Solution s){
 		Solution minSol = new Solution(this.getInstance());
-		LocalSearch ls = new LocalSearch(this.getInstance(), null, s.clone());
-		for(Neighborhood n : new Neighborhood[]{new Shift(), new Change(), new Swap()}) {
+		LocalSearch ls = new LocalSearch(this.getInstance(), new Shift(), s.clone());
+		//*
+		Neighborhood[] nh = new Neighborhood[]{new Shift(), new Swap()};
+		for(Neighborhood n : nh) {
 			ls.setSolution(s.clone());
 			ls.setNeighborhood(n);
 			ls.solve();
 			if(ls.getSolution().compareTo(minSol) < 0)
 				minSol = ls.getSolution().clone();
 		}
+		//*/
+		ls.solve();
+		minSol = ls.getSolution();
 		return minSol;
 	}
 	
