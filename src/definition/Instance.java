@@ -51,11 +51,11 @@ public class Instance {
 			int machine = 0;
 			while (scanner.hasNextInt()) {
 				this.dureesOperations[job][machine] = scanner.nextInt();
-				if (machine < nbMachines - 1)
-					machine++;
-				else {
+				if (job < nbJobs - 1)
 					job++;
-					machine = 0;
+				else {
+					machine++;
+					job = 0;
 				}
 			}
 			scanner.close();
