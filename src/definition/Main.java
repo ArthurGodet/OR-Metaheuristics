@@ -136,12 +136,30 @@ public class Main {
 
 		//*
 		Instance[] instances = new Instance[]{
-				new Instance("instances/tai01.txt"),
-				new Instance("instances/tai11.txt"),
-				new Instance("instances/tai21.txt"),
-				new Instance("instances/tai31.txt"),
-				new Instance("instances/tai41.txt"),
-				new Instance("instances/tai51.txt")
+				//new Instance("instances/tai01.txt"),
+				new Instance("instances/tai02.txt"),
+				new Instance("instances/tai03.txt"),
+				new Instance("instances/tai04.txt"),
+				new Instance("instances/tai05.txt"),
+				new Instance("instances/tai06.txt"),
+				new Instance("instances/tai07.txt"),
+				new Instance("instances/tai08.txt"),
+				new Instance("instances/tai09.txt"),
+				new Instance("instances/tai10.txt"),
+				//new Instance("instances/tai11.txt"),
+				new Instance("instances/tai12.txt"),
+				new Instance("instances/tai13.txt"),
+				new Instance("instances/tai14.txt"),
+				new Instance("instances/tai15.txt"),
+				new Instance("instances/tai16.txt"),
+				new Instance("instances/tai17.txt"),
+				new Instance("instances/tai18.txt"),
+				new Instance("instances/tai19.txt"),
+				new Instance("instances/tai20.txt"),
+				//new Instance("instances/tai21.txt"),
+				//new Instance("instances/tai31.txt"),
+				//new Instance("instances/tai41.txt"),
+				//new Instance("instances/tai51.txt")
 		};
 		Solver[] solvers = new Solver[]{
 				new AntColonyOptimization(instance),

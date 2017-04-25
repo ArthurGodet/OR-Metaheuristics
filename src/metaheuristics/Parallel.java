@@ -16,11 +16,18 @@ import util.Timer;
  *
  */
 public class Parallel extends Solver {
-	private static final int NUM_THREADS = 4;
+	public static final int NUM_THREADS = 4;
+	
+	private int numThreads;
 	private Solver solver;
 
 	public Parallel(Instance instance){
+		this(instance,NUM_THREADS);
+	}
+	
+	public Parallel(Instance instance,int numThreads){
 		super(instance,"Calculs parallèles");
+		this.numThreads = numThreads;
 	}
 
 	public void setSolver(Solver solver){
@@ -58,13 +65,13 @@ public class Parallel extends Solver {
 	public void solve(Timer timer){
 		Solver[] solvers = this.prepareSolvers();
 
-		Timer[] timers = new Timer[NUM_THREADS];
-		for(int i = 0; i<NUM_THREADS; i++)
+		Timer[] timers = new Timer[this.numThreads];
+		for(int i = 0; i<this.numThreads; i++)
 			timers[i] = new Timer(timer.getTimeGiven());
 
 
-		ExecutorService exe = Executors.newFixedThreadPool(NUM_THREADS);
-		for(int i = 0; i < NUM_THREADS; i++){
+		ExecutorService exe = Executors.newFixedThreadPool(this.numThreads);
+		for(int i = 0; i < this.numThreads; i++){
 			exe.execute(new RunnableSolver(solvers[i],timers[i]));
 		}
 
@@ -88,8 +95,8 @@ public class Parallel extends Solver {
 	}
 
 	private Solver[] prepareSolvers(){
-		Solver[] solvers = new Solver[NUM_THREADS];
-		for(int i = 0; i<NUM_THREADS; i++){
+		Solver[] solvers = new Solver[this.numThreads];
+		for(int i = 0; i<this.numThreads; i++){
 			if(this.solver instanceof AntColonyOptimization)
 				solvers[i] = new AntColonyOptimization(this.getInstance());
 			else if(this.solver instanceof BeesAlgorithm)
