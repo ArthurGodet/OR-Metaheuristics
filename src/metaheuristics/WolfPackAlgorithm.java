@@ -1,3 +1,9 @@
+/*
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 29/03/2017
+ */
 package metaheuristics;
 
 import java.util.Arrays;
@@ -12,30 +18,64 @@ import neighborhoods.Swap;
 import util.Random;
 import util.Timer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WolfPackAlgorithm.
+ */
 public class WolfPackAlgorithm extends Solver{
+	
+	/** The pack size. */
 	public static int PACK_SIZE = 10;
+	
+	/** The communication rate. */
 	public static double COMMUNICATION_RATE = 0.4; // < 0.5
 	
+	/** The pack size. */
 	private int packSize;
+	
+	/** The wolves. */
 	private Solution[] wolves;
+	
+	/** The communication rate. */
 	private double communicationRate;
 
+	/**
+	 * Instantiates a new wolf pack algorithm.
+	 *
+	 * @param inst the inst
+	 * @param packSize the pack size
+	 * @param communicationRate the communication rate
+	 */
 	public WolfPackAlgorithm(Instance inst, int packSize, double communicationRate) {
 		super(inst,"Wolf Pack Algorithm");
 		this.packSize = packSize;
 		this.communicationRate = communicationRate;
 	}
 	
+	/**
+	 * Instantiates a new wolf pack algorithm.
+	 *
+	 * @param inst the inst
+	 */
 	public WolfPackAlgorithm(Instance inst) {
 		this(inst,PACK_SIZE,COMMUNICATION_RATE);
 	}
 	
+	/**
+	 * Initialisation.
+	 */
 	private void initialisation(){
 		this.wolves = new Solution[this.packSize];
 		for(int i = 0; i<this.packSize; i++)
 			this.wolves[i] = this.localHunt(Solution.generateSolution(this.getInstance()));
 	}
 	
+	/**
+	 * Local hunt.
+	 *
+	 * @param s the s
+	 * @return the solution
+	 */
 	private Solution localHunt(Solution s){
 		Solution minSol = new Solution(this.getInstance());
 		LocalSearch ls = new LocalSearch(this.getInstance(), new Shift(), s.clone());
@@ -54,6 +94,12 @@ public class WolfPackAlgorithm extends Solver{
 		return minSol;
 	}
 	
+	/**
+	 * Communicate.
+	 *
+	 * @param rate the rate
+	 * @return the solution
+	 */
 	private Solution communicate(double rate){
 		Solution sol = new Solution(this.getInstance());
 		List<Integer> jobs = Random.randomShuffle(0, this.getInstance().getNbJobs());
@@ -73,6 +119,9 @@ public class WolfPackAlgorithm extends Solver{
 		return sol;
 	}
 
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve(util.Timer)
+	 */
 	@Override
 	public void solve(Timer timer) {
 		this.setSolution(Neh.solve(this.getInstance()));
@@ -98,26 +147,56 @@ public class WolfPackAlgorithm extends Solver{
 		}
 	}
 
+	/**
+	 * Gets the pack size.
+	 *
+	 * @return the pack size
+	 */
 	public int getPackSize() {
 		return packSize;
 	}
 
+	/**
+	 * Sets the pack size.
+	 *
+	 * @param packSize the new pack size
+	 */
 	public void setPackSize(int packSize) {
 		this.packSize = packSize;
 	}
 
+	/**
+	 * Gets the wolves.
+	 *
+	 * @return the wolves
+	 */
 	public Solution[] getWolves() {
 		return wolves;
 	}
 
+	/**
+	 * Sets the wolves.
+	 *
+	 * @param wolves the new wolves
+	 */
 	public void setWolves(Solution[] wolves) {
 		this.wolves = wolves;
 	}
 
+	/**
+	 * Gets the communication rate.
+	 *
+	 * @return the communication rate
+	 */
 	public double getCommunicationRate() {
 		return communicationRate;
 	}
 
+	/**
+	 * Sets the communication rate.
+	 *
+	 * @param communicationRate the new communication rate
+	 */
 	public void setCommunicationRate(double communicationRate) {
 		this.communicationRate = communicationRate;
 	}

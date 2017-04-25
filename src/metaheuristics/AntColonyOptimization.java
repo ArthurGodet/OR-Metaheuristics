@@ -16,6 +16,7 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AntColonyOptimization.
  */
@@ -67,7 +68,6 @@ public class AntColonyOptimization extends Solver {
 	 * Instantiates a new ant colony optimization.
 	 *
 	 * @param inst the inst
-	 * @param nbLoops the number of loops
 	 */
 	public AntColonyOptimization(Instance inst) {
 		this(inst,NB_ANTS,ALPHA,RHO,BETA,THO_MIN,THO_MAX);
@@ -77,7 +77,6 @@ public class AntColonyOptimization extends Solver {
 	 * Instantiates a new ant colony optimization.
 	 *
 	 * @param inst the inst
-	 * @param nbLoops the nb loops
 	 * @param nbAnts the nb ants
 	 * @param alpha the alpha
 	 * @param rho the rho
@@ -329,7 +328,7 @@ public class AntColonyOptimization extends Solver {
 	/**
 	 * Sets the THO MIN.
 	 *
-	 * @param THO MIN the new THO MIN
+	 * @param thoMin the new tho min
 	 */
 	public void setThoMin(double thoMin) {
 		this.thoMin = thoMin;
@@ -347,7 +346,7 @@ public class AntColonyOptimization extends Solver {
 	/**
 	 * Sets the THO MAX.
 	 *
-	 * @param THO MAX the new THO MAX
+	 * @param thoMax the new tho max
 	 */
 	public void setThoMax(double thoMax) {
 		this.thoMax = thoMax;

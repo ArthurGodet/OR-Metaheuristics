@@ -23,7 +23,6 @@ public class Ils extends Solver{
 	 * Instantiates a new ils.
 	 *
 	 * @param inst the inst
-	 * @param nbBoucles the nb boucles
 	 */
 	public Ils(Instance inst) {
 		super(inst,"ILS");

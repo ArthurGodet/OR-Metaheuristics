@@ -20,9 +20,17 @@ import util.Timer;
  * The Class SimulatedAnnealing.
  */
 public class SimulatedAnnealing extends Solver{
+	
+	/** The start temp. */
 	public static double START_TEMP = 25.0;
+	
+	/** The tempfactor. */
 	public static double TEMPFACTOR = 0.99;  // doit être proche de 1
+	
+	/** The sizefactor. */
 	public static int SIZEFACTOR = 1;  // n'apporte pas grand chose
+	
+	/** The min percent. */
 	public static double MIN_PERCENT = 0.1; // doit être petit
 	
 	/** The start temp. */
@@ -45,7 +53,6 @@ public class SimulatedAnnealing extends Solver{
 	 * @param tempfactor the tempfactor
 	 * @param sizefactor the sizefactor
 	 * @param minpercent the minpercent
-	 * @param nbLoops the nb loops
 	 */
 	public SimulatedAnnealing(Instance inst, double startTemp, double tempfactor, int sizefactor, double minpercent) {
 		super(inst,"Simulated Annealing");
@@ -59,7 +66,6 @@ public class SimulatedAnnealing extends Solver{
 	 * Instantiates a new simulated annealing.
 	 *
 	 * @param inst the inst
-	 * @param nbLoops the nb loops
 	 */
 	public SimulatedAnnealing(Instance inst) {
 		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT);

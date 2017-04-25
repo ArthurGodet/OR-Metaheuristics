@@ -42,7 +42,6 @@ public class Neh extends Solver{
 	 * Solve.
 	 *
 	 * @param instance the instance
-	 * @param timer the timer
 	 * @return the solution
 	 */
 	public static Solution solve(Instance instance) {

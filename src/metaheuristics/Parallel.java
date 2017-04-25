@@ -1,3 +1,9 @@
+/*
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 29/03/2017
+ */
 package metaheuristics;
 
 import java.io.IOException;
@@ -11,39 +17,75 @@ import definition.Instance;
 import neighborhoods.Shift;
 import util.Timer;
 
+// TODO: Auto-generated Javadoc
 /**
- * Solver running 4 solvers in parallel
- *
+ * Solver running 4 solvers in parallel.
  */
 public class Parallel extends Solver {
+	
+	/** The Constant NUM_THREADS. */
 	public static final int NUM_THREADS = 4;
 	
+	/** The num threads. */
 	private int numThreads;
+	
+	/** The solver. */
 	private Solver solver;
 
+	/**
+	 * Instantiates a new parallel.
+	 *
+	 * @param instance the instance
+	 */
 	public Parallel(Instance instance){
 		this(instance,NUM_THREADS);
 	}
 	
+	/**
+	 * Instantiates a new parallel.
+	 *
+	 * @param instance the instance
+	 * @param numThreads the num threads
+	 */
 	public Parallel(Instance instance,int numThreads){
 		super(instance,"Calculs parallèles");
 		this.numThreads = numThreads;
 	}
 
+	/**
+	 * Sets the solver.
+	 *
+	 * @param solver the new solver
+	 */
 	public void setSolver(Solver solver){
 		this.solver = solver;
 	}
 
+	/**
+	 * The Class RunnableSolver.
+	 */
 	private class RunnableSolver implements Runnable {
 
+		/** The solver. */
 		private Solver solver;
+		
+		/** The timer. */
 		private Timer timer;
 
+		/**
+		 * Instantiates a new runnable solver.
+		 *
+		 * @param solver the solver
+		 * @param timer the timer
+		 */
 		public RunnableSolver(Solver solver, Timer timer) {
 			this.solver = solver;
 			this.timer = timer;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		public void run() {
 			try {
 				this.solver.solve(this.timer);
@@ -55,12 +97,9 @@ public class Parallel extends Solver {
 	}
 
 	/**
-	 * 
-	 * @param time Time allowed (in milliseconds) to solve the problem.
-	 * @param out Output stream
-	 * @throws Exception
-	 *             May return some error, in particular if some vertices index
-	 *             are wrong.
+	 * Solve.
+	 *
+	 * @param timer the timer
 	 */
 	public void solve(Timer timer){
 		Solver[] solvers = this.prepareSolvers();
@@ -94,6 +133,11 @@ public class Parallel extends Solver {
 		//*/
 	}
 
+	/**
+	 * Prepare solvers.
+	 *
+	 * @return the solver[]
+	 */
 	private Solver[] prepareSolvers(){
 		Solver[] solvers = new Solver[this.numThreads];
 		for(int i = 0; i<this.numThreads; i++){

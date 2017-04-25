@@ -24,7 +24,6 @@ public class Vns extends Solver{
 	 * Instantiates a new vns.
 	 *
 	 * @param inst the inst
-	 * @param n the n
 	 */
 	public Vns(Instance inst) {
 		super(inst,"VNS");

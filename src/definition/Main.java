@@ -157,9 +157,45 @@ public class Main {
 				new Instance("instances/tai19.txt"),
 				new Instance("instances/tai20.txt"),
 				//new Instance("instances/tai21.txt"),
+				new Instance("instances/tai22.txt"),
+				new Instance("instances/tai23.txt"),
+				new Instance("instances/tai24.txt"),
+				new Instance("instances/tai25.txt"),
+				new Instance("instances/tai26.txt"),
+				new Instance("instances/tai27.txt"),
+				new Instance("instances/tai28.txt"),
+				new Instance("instances/tai29.txt"),
+				new Instance("instances/tai30.txt"),
 				//new Instance("instances/tai31.txt"),
+				new Instance("instances/tai32.txt"),
+				new Instance("instances/tai33.txt"),
+				new Instance("instances/tai34.txt"),
+				new Instance("instances/tai35.txt"),
+				new Instance("instances/tai36.txt"),
+				new Instance("instances/tai37.txt"),
+				new Instance("instances/tai38.txt"),
+				new Instance("instances/tai39.txt"),
+				new Instance("instances/tai40.txt"),
 				//new Instance("instances/tai41.txt"),
+				new Instance("instances/tai42.txt"),
+				new Instance("instances/tai43.txt"),
+				new Instance("instances/tai44.txt"),
+				new Instance("instances/tai45.txt"),
+				new Instance("instances/tai46.txt"),
+				new Instance("instances/tai47.txt"),
+				new Instance("instances/tai48.txt"),
+				new Instance("instances/tai49.txt"),
+				new Instance("instances/tai50.txt"),
 				//new Instance("instances/tai51.txt")
+				new Instance("instances/tai52.txt"),
+				new Instance("instances/tai53.txt"),
+				new Instance("instances/tai54.txt"),
+				new Instance("instances/tai55.txt"),
+				new Instance("instances/tai56.txt"),
+				new Instance("instances/tai57.txt"),
+				new Instance("instances/tai58.txt"),
+				new Instance("instances/tai59.txt"),
+				new Instance("instances/tai60.txt")
 		};
 		Solver[] solvers = new Solver[]{
 				new AntColonyOptimization(instance),
@@ -171,7 +207,7 @@ public class Main {
 				new SimulatedAnnealing(instance),
 				new WolfPackAlgorithm(instance)
 		};
-		Parallel parallel = new Parallel(instances[0]);
+		Parallel parallel = new Parallel(instances[0],2);
 		//*
 		try{
 			int nbFois = 1;

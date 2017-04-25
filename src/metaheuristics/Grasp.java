@@ -26,7 +26,6 @@ public class Grasp extends Solver{
 	 * Instantiates a new grasp.
 	 *
 	 * @param inst the inst
-	 * @param nbBoucles the nb boucles
 	 */
 	// Greedy Randomize Adaptive Search Procedure
 	public Grasp(Instance inst) {

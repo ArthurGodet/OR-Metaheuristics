@@ -2,7 +2,7 @@
  * @author Arthur Godet
  * @author Joachim Hotonnier
  * @author Marie Deur
- * @since 30/03/2017
+ * @since 29/03/2017
  */
 package util;
 
