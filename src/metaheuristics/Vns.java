@@ -45,7 +45,7 @@ public class Vns extends Solver{
 				k=0;
 			
 			ls.setNeighborhood(tab[k]);
-			ls.solve();
+			ls.solve(timer);
 			s = ls.getSolution();
 			
 			k++;

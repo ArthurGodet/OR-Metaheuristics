@@ -13,9 +13,9 @@ def fillTable(table, inputFile):
             name = line.strip()
 
 def writeTable(table, outputFile):
-    names = list(sorted(table.keys()))
+    names = list(sorted(table.keys(), key=lambda n:int(n[len('instances/tai'):-4])))
     height = max(map(len, table.values()))
-    outputFile.write(';'.join(names)+'\n')
+    outputFile.write(';'.join(map(lambda n: n[len('instances/'):-4], names))+'\n')
     for h in range(height):
         outputFile.write(';'.join(map(str, (table[names[i]][h] if h < len(table[names[i]]) else '' for i in range(len(names)))))+'\n')
 
