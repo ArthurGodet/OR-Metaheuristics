@@ -1219,3 +1219,14 @@ instances/tai21.txt
 instances/tai22.txt
 2101
 instances/tai31.txt
+2724
+instances/tai32.txt
+2838
+instances/tai41.txt
+3063
+instances/tai42.txt
+2970
+instances/tai51.txt
+4023
+instances/tai52.txt
+3846

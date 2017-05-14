@@ -1221,7 +1221,7 @@ instances/tai22.txt
 instances/tai31.txt
 2724
 instances/tai32.txt
-2834
+2843
 instances/tai41.txt
 3040
 instances/tai42.txt

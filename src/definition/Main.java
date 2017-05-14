@@ -40,7 +40,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Instance instance = new Instance("instances/tai51.txt");
-		Timer timer = new Timer(600000);
+		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
 		solver.solve(timer);
@@ -154,16 +154,16 @@ public class Main {
 			instances[i] = new Instance(String.format("instances/tai%02d.txt", instanceIndex[i]));
 
 		Solver[] solvers = new Solver[]{
-				/*new AntColonyOptimization(instance),
-				new BeesAlgorithm(instance),*/
-				//new Genetic(instance),
+				new AntColonyOptimization(instance),
+				new BeesAlgorithm(instance),
+				new Genetic(instance),
 				new Grasp(instance),
-				/*new Ils(instance),
+				new Ils(instance),
 				new Memetic(instance),
 				new SimulatedAnnealing(instance),
 				new TabuSearch(instance, new Shift(), new Solution(instance)),
 				new Vns(instance),
-				new WolfPackAlgorithm(instance)*/
+				new WolfPackAlgorithm(instance)
 		};
 		Parallel parallel = new Parallel(instances[0],1);
 		//*
