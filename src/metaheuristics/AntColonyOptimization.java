@@ -105,7 +105,7 @@ public class AntColonyOptimization extends Solver {
 		while(!timer.isFinished()){
 			for(int k = 0; k<this.nbAnts; k++){
 				this.ants[k] = new Solution(this.getInstance());
-				int firstJob = (int)(Math.random()*this.getInstance().getNbJobs());
+				int firstJob = (int)(Math.random()*this.getInstance().getSize());
 				this.ants[k].insertJob(firstJob,0);
 				List<Integer> candidates = generateCandidates(firstJob);
 				int pos = 1;
@@ -128,9 +128,9 @@ public class AntColonyOptimization extends Solver {
 	public void initialisation(){
 		this.ants = new Solution[this.nbAnts];
 		
-		this.pheromoneTrails = new double[this.getInstance().getNbJobs()][this.getInstance().getNbJobs()];
-		for(int i = 0; i<this.getInstance().getNbJobs(); i++)
-			for(int j = 0; j<this.getInstance().getNbJobs(); j++)
+		this.pheromoneTrails = new double[this.getInstance().getSize()][this.getInstance().getSize()];
+		for(int i = 0; i<this.getInstance().getSize(); i++)
+			for(int j = 0; j<this.getInstance().getSize(); j++)
 				this.pheromoneTrails[i][j] = this.thoMax;
 		
 		this.setSolution(Neh.solve(this.getInstance()));
@@ -144,7 +144,7 @@ public class AntColonyOptimization extends Solver {
 	 */
 	public List<Integer> generateCandidates(int jobSelected){
 		List<Integer> candidates = new ArrayList<Integer>();
-		for(int j = 0; j<this.getInstance().getNbJobs(); j++)
+		for(int j = 0; j<this.getInstance().getSize(); j++)
 			if(j != jobSelected)
 				candidates.add(j);
 		return candidates;
@@ -231,8 +231,8 @@ public class AntColonyOptimization extends Solver {
 		if(ants[ants.length-1].compareTo(this.getSolution())<0){
 			this.setSolution(ants[ants.length-1].clone());
 		}
-		for(int i = 0; i<this.getInstance().getNbJobs(); i++){
-			for(int j = 0; j<this.getInstance().getNbJobs(); j++){
+		for(int i = 0; i<this.getInstance().getSize(); i++){
+			for(int j = 0; j<this.getInstance().getSize(); j++){
 				this.pheromoneTrails[i][j] *= (1-this.rho);
 				if(ants[ants.length-1].contains(i)&&ants[ants.length-1].getIndex(i)==j)
 					this.pheromoneTrails[i][j] += this.rho/((double)(ants[ants.length-1].getScore()));

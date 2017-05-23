@@ -44,7 +44,7 @@ public class Shift extends Neighborhood {
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			return i != sol.getInstance().getNbJobs()-2 || j != sol.getInstance().getNbJobs()-1;
+			return i != sol.getInstance().getSize()-2 || j != sol.getInstance().getSize()-1;
 		}
 
 		/* (non-Javadoc)
@@ -52,7 +52,7 @@ public class Shift extends Neighborhood {
 		 */
 		public Solution next() {
 			j++;
-			if(j == sol.getInstance().getNbJobs()) {
+			if(j == sol.getInstance().getSize()) {
 				sol.leftShift(i, j-1);
 				i++;
 				j = i+1;
@@ -70,7 +70,7 @@ public class Shift extends Neighborhood {
 	 */
 	@Override
 	public void assignRandomNeighbor(Solution sol) {
-		int[] couple = Random.randomCouple(0, sol.getInstance().getNbJobs());
+		int[] couple = Random.randomCouple(0, sol.getInstance().getSize());
 		sol.rightShift(couple[0], couple[1]);
 		sol.evaluate();
 	}

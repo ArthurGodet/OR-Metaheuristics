@@ -21,10 +21,10 @@ public class TwoPointOut implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int[] coupure = Random.randomTwoPoints(0, child.getInstance().getNbJobs());
+		int[] coupure = Random.randomTwoPoints(0, child.getInstance().getSize());
 
 		child.copyRange(parent1, 0, coupure[0]);
-		child.copyRange(parent1, coupure[1], child.getInstance().getNbJobs());
+		child.copyRange(parent1, coupure[1], child.getInstance().getSize());
 		child.merge(parent2);
 
 		child.evaluate();

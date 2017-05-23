@@ -14,86 +14,14 @@ import java.util.Scanner;
 /**
  * Représentation d'un problème de flowshop de permutation.
  */
-public class Instance {
-	
-	/** The nb jobs. */
-	private int nbJobs;
-	
-	/** The nb machines. */
-	private int nbMachines;
-	
-	/** The durees operations. */
-	private int[][] dureesOperations;
-	
+public abstract class Instance {
 	/** The name of the instance. */
 	private String name;
+	/** The name of the problem. */
+	private String problem;
+	
+	public abstract int getSize();
 
-	/**
-	 * Construit un problème à partir d'un fichier.
-	 *
-	 * @param s nom du fichier
-	 */
-	public Instance(String s) {
-		this.name = s;
-		try {
-			Scanner scanner = new Scanner(new FileReader(s));
-
-			// lecture du nombre de jobs
-			if (scanner.hasNextInt())
-				this.nbJobs = scanner.nextInt();
-
-			// lecture du nombre de machines
-			if (scanner.hasNextInt())
-				this.nbMachines = scanner.nextInt();
-
-			this.dureesOperations = new int[this.nbJobs][this.nbMachines];
-			int job = 0;
-			int machine = 0;
-			while (scanner.hasNextInt()) {
-				this.dureesOperations[job][machine] = scanner.nextInt();
-				if (job < nbJobs - 1)
-					job++;
-				else {
-					machine++;
-					job = 0;
-				}
-			}
-			scanner.close();
-		}
-		catch (IOException e) {
-			System.err.println("Erreur : " + e.getMessage()) ;
-			System.exit(2) ;
-		}
-	}
-
-	/**
-	 * Gets the nb jobs.
-	 *
-	 * @return le nombre de jobs du problème
-	 */
-	public int getNbJobs() {
-		return nbJobs;
-	}
-
-	/**
-	 * Gets the nb machines.
-	 *
-	 * @return le nombre de machines du problème
-	 */
-	public int getNbMachines() {
-		return nbMachines;
-	}
-
-	/**
-	 * Gets the duree operation.
-	 *
-	 * @param job the job
-	 * @param machine the machine
-	 * @return la durée de traitement d'un job sur une machine
-	 */
-	public int getDureeOperation(int job, int machine){
-		return this.dureesOperations[job][machine];
-	}
 	
 	/**
 	 * Gets the name of the Instance.
@@ -102,5 +30,14 @@ public class Instance {
 	 */
 	public String getName(){
 		return this.name;
+	}
+	
+	/**
+	 * Gets the name of the problem.
+	 *
+	 * @return the name of the problem
+	 */
+	public String getProblemName(){
+		return this.problem;
 	}
 }

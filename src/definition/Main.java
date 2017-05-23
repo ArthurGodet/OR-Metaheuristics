@@ -39,7 +39,7 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		Instance instance = new Instance("instances/tai51.txt");
+		Instance instance = new InstanceFlowshop("instances/tai51.txt");
 		Timer timer = new Timer(15000);
 		/*
 		Solver solver = new Memetic(instance);
@@ -151,7 +151,7 @@ public class Main {
 		};
 		Instance[] instances = new Instance[instanceIndex.length];
 		for(int i = 0; i < instanceIndex.length; i++)
-			instances[i] = new Instance(String.format("instances/tai%02d.txt", instanceIndex[i]));
+			instances[i] = new InstanceFlowshop(String.format("instances/tai%02d.txt", instanceIndex[i]));
 
 		Solver[] solvers = new Solver[]{
 				new AntColonyOptimization(instance),

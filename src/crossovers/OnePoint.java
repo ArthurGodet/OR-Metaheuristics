@@ -21,7 +21,7 @@ public class OnePoint implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int coupure = Random.randomInteger(1, child.getInstance().getNbJobs());
+		int coupure = Random.randomInteger(1, child.getInstance().getSize());
 
 		child.copyRange(parent1, 0, coupure);
 		child.merge(parent2);

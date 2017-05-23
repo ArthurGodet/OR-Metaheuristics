@@ -21,7 +21,7 @@ public class TwoPointIn implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int[] coupure = Random.randomTwoPoints(0, child.getInstance().getNbJobs());
+		int[] coupure = Random.randomTwoPoints(0, child.getInstance().getSize());
 
 		child.copyRange(parent1, coupure[0], coupure[1]);
 		child.merge(parent2);

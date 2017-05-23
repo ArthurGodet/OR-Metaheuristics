@@ -55,7 +55,7 @@ public class Ils extends Solver{
 	 */
 	// coupe la solution en 2 et inverse les deux parties
 	public void largeStep(Solution s){
-		int n = this.getInstance().getNbJobs();
+		int n = this.getInstance().getSize();
 		int pos = Random.randomInteger(1, n-1);
 		s.reverse(0, pos);
 		s.reverse(pos, n);

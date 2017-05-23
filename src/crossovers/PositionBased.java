@@ -21,10 +21,10 @@ public class PositionBased implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int nbHerites = Random.randomInteger(1, child.getInstance().getNbJobs());
+		int nbHerites = Random.randomInteger(1, child.getInstance().getSize());
 
 		// ajoute des jobs choisis aléatoirement depuis parent1
-		for(Integer i : Random.randomSample(0, child.getInstance().getNbJobs(), nbHerites))
+		for(Integer i : Random.randomSample(0, child.getInstance().getSize(), nbHerites))
 			child.setOrder(parent1.getJob(i),i);
 
 		child.merge(parent2);

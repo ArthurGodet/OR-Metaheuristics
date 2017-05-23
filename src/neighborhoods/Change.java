@@ -45,7 +45,7 @@ public class Change extends Neighborhood {
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			int n = sol.getInstance().getNbJobs();
+			int n = sol.getInstance().getSize();
 			return i != n-3 || j != n-2 || k != n-1;
 		}
 
@@ -59,9 +59,9 @@ public class Change extends Neighborhood {
 
 			// calcul des indices suivants
 			k++;
-			if(k == sol.getInstance().getNbJobs()) {
+			if(k == sol.getInstance().getSize()) {
 				j++;
-				if(j == sol.getInstance().getNbJobs()-1) {
+				if(j == sol.getInstance().getSize()-1) {
 					i++;
 					j = i+1;
 				}
@@ -81,7 +81,7 @@ public class Change extends Neighborhood {
 	 */
 	@Override
 	public void assignRandomNeighbor(Solution sol) {
-		int[] triplet = Random.randomTriplet(0, sol.getInstance().getNbJobs());
+		int[] triplet = Random.randomTriplet(0, sol.getInstance().getSize());
 		sol.change(triplet[0], triplet[1], triplet[2]);
 		sol.evaluate();
 	}

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import definition.Instance;
+import definition.InstanceFlowshop;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
@@ -41,7 +42,7 @@ public class Grasp extends Solver{
 		do{
 			Solution s = new Solution(this.getInstance());
 			List<Integer> lj = creerListeJob();
-			for(int j = 0; j<this.getInstance().getNbJobs(); j++)
+			for(int j = 0; j<this.getInstance().getSize(); j++)
 				s.setOrder(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
 			
@@ -60,8 +61,8 @@ public class Grasp extends Solver{
 	 */
 	private List<Integer> creerListeJob(){
 		List<Job> l = new ArrayList<Job>();
-		for(int id = 0; id<this.getInstance().getNbJobs(); id++)
-			l.add(new Job(this.getInstance(),id));
+		for(int id = 0; id<this.getInstance().getSize(); id++)
+			l.add(new Job(((InstanceFlowshop)this.getInstance()),id));
 		Collections.sort(l, Collections.reverseOrder());
 		
 		List<Integer> res = new ArrayList<Integer>();
@@ -87,7 +88,7 @@ public class Grasp extends Solver{
 		 * @param inst the inst
 		 * @param id the id
 		 */
-		public Job(Instance inst, int id){
+		public Job(InstanceFlowshop inst, int id){
 			this.id = id;
 			this.duree = 0;
 			for(int j = 0; j<inst.getNbMachines(); j++)

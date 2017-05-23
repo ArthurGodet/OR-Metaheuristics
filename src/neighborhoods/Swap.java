@@ -44,7 +44,7 @@ public class Swap extends Neighborhood {
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			return i != sol.getInstance().getNbJobs()-2 || j != sol.getInstance().getNbJobs()-1;
+			return i != sol.getInstance().getSize()-2 || j != sol.getInstance().getSize()-1;
 		}
 
 		/* (non-Javadoc)
@@ -57,7 +57,7 @@ public class Swap extends Neighborhood {
 
 			// calcul des indices suivants
 			j++;
-			if(j == sol.getInstance().getNbJobs()) {
+			if(j == sol.getInstance().getSize()) {
 				i++;
 				j = i+1;
 			}
@@ -75,7 +75,7 @@ public class Swap extends Neighborhood {
 	 */
 	@Override
 	public void assignRandomNeighbor(Solution sol) {
-		int[] couple = Random.randomCouple(0, sol.getInstance().getNbJobs());
+		int[] couple = Random.randomCouple(0, sol.getInstance().getSize());
 		sol.swap(couple[0], couple[1]);
 		sol.evaluate();
 	}

@@ -33,7 +33,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 */
 	public Solution(Instance i){
 		this.instance = i;
-		this.order = new int[i.getNbJobs()];
+		this.order = new int[i.getSize()];
 		for(int j = 0; j<this.order.length; j++)
 			this.order[j] = -1;
 		this.score = Integer.MAX_VALUE;
@@ -104,14 +104,17 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 */
 	public void evaluate(){
 		// TODO
-		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
-		for(int i = 0; i<this.order.length && this.order[i] != -1; i++){
-			dateDisponibilite[0] += this.instance.getDureeOperation(this.order[i],0);
-			for(int j = 1; j<this.instance.getNbMachines(); j++){
-				dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + this.instance.getDureeOperation(this.order[i],j);
+		if(this.getInstance() instanceof InstanceFlowshop){
+			InstanceFlowshop inst = (InstanceFlowshop)this.getInstance();
+			int[] dateDisponibilite = new int[inst.getNbMachines()];
+			for(int i = 0; i<this.order.length && this.order[i] != -1; i++){
+				dateDisponibilite[0] += inst.getDureeOperation(this.order[i],0);
+				for(int j = 1; j<inst.getNbMachines(); j++){
+					dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + inst.getDureeOperation(this.order[i],j);
+				}
 			}
+			this.score = dateDisponibilite[inst.getNbMachines()-1];
 		}
-		this.score = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
 
 	/* (non-Javadoc)
@@ -261,7 +264,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 */
 	public void merge(Solution other) {
 		int insertion = 0;
-		for(int i=0; i<other.getInstance().getNbJobs(); i++)
+		for(int i=0; i<other.getInstance().getSize(); i++)
 			if(!this.contains(other.getJob(i))) {
 				while(this.getJob(insertion) != -1)
 					insertion++;
@@ -289,10 +292,10 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 * @return the solution
 	 */
 	public static Solution generateSolution(Instance inst){
-		List<Integer> jobs = Random.randomSample(0, inst.getNbJobs(), inst.getNbJobs());
+		List<Integer> jobs = Random.randomSample(0, inst.getSize(), inst.getSize());
 
 		Solution s = new Solution(inst);
-		for(int i = 0; i<inst.getNbJobs(); i++)
+		for(int i = 0; i<inst.getSize(); i++)
 			s.setOrder(jobs.get(i), i);
 		s.evaluate();
 

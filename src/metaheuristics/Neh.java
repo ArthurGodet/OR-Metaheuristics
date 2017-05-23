@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import definition.Instance;
+import definition.InstanceFlowshop;
 import definition.Solution;
 import util.Timer;
 
@@ -57,8 +58,8 @@ public class Neh extends Solver{
 	 */
 	private List<Job> creerListeNEH(){
 		List<Job> l = new ArrayList<Job>();
-		for(int id = 0; id<this.getInstance().getNbJobs(); id++)
-			l.add(new Job(this.getInstance(),id));
+		for(int id = 0; id<this.getInstance().getSize(); id++)
+			l.add(new Job(((InstanceFlowshop)this.getInstance()),id));
 		Collections.sort(l, Collections.reverseOrder());
 		return l;
 	}
@@ -100,7 +101,7 @@ public class Neh extends Solver{
 		 * @param inst the inst
 		 * @param id the id
 		 */
-		public Job(Instance inst, int id){
+		public Job(InstanceFlowshop inst, int id){
 			this.id = id;
 			this.duree = 0;
 			for(int j = 0; j<inst.getNbMachines(); j++)
