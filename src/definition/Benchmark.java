@@ -25,7 +25,7 @@ public class Benchmark {
 	 */
 	public static void writeResults(Solver solver) throws IOException{
 		FileWriter fw = new FileWriter("results/"+System.getProperty("user.name")+"/"+solver.getName()+".txt",true);
-		fw.write(solver.getSolution().getCmax() + "\n");
+		fw.write(solver.getSolution().getScore() + "\n");
 		fw.close();
 	}
 	
