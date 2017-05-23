@@ -102,7 +102,7 @@ public class SimulatedAnnealing extends Solver{
 					s = t.clone();
 					change = true;
 				}
-				if(t.getCmax()-s.getCmax() <= 0 || Math.random()<= Math.exp(-((double)(t.getCmax()-s.getCmax()))/temp)){
+				if(t.getScore()-s.getScore() <= 0 || Math.random()<= Math.exp(-((double)(t.getScore()-s.getScore()))/temp)){
 					s = t.clone();
 					change = true;
 					nbChange++;

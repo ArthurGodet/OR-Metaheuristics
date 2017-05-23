@@ -192,11 +192,11 @@ public class AntColonyOptimization extends Solver {
 	public double heuristicFactor(int job, int pos, int k){
 		this.ants[k].setOrder(job, pos);
 		this.ants[k].evaluate();
-		int Cmax = this.ants[k].getCmax();
+		int Cmax = this.ants[k].getScore();
 		this.ants[k].setOrder(-1,pos);
 		this.ants[k].evaluate();
 		
-		return 1/((double)(Cmax-this.ants[k].getCmax()));
+		return 1/((double)(Cmax-this.ants[k].getScore()));
 	}
 	
 	/**
@@ -235,7 +235,7 @@ public class AntColonyOptimization extends Solver {
 			for(int j = 0; j<this.getInstance().getNbJobs(); j++){
 				this.pheromoneTrails[i][j] *= (1-this.rho);
 				if(ants[ants.length-1].contains(i)&&ants[ants.length-1].getIndex(i)==j)
-					this.pheromoneTrails[i][j] += this.rho/((double)(ants[ants.length-1].getCmax()));
+					this.pheromoneTrails[i][j] += this.rho/((double)(ants[ants.length-1].getScore()));
 				if(this.pheromoneTrails[i][j]>this.thoMax)
 					this.pheromoneTrails[i][j] = this.thoMax;
 				if(this.pheromoneTrails[i][j] < this.thoMin)

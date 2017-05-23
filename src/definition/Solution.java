@@ -12,7 +12,6 @@ import java.util.List;
 
 import util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
  * Représentation d'une solution du problème de flowshop de permutation.
  */
@@ -21,8 +20,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	/** The order. */
 	private int[] order;
 	
-	/** The cmax. */
-	private int cmax;
+	/** The score. */
+	private int score;
 	
 	/** The instance. */
 	private Instance instance;
@@ -37,7 +36,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		this.order = new int[i.getNbJobs()];
 		for(int j = 0; j<this.order.length; j++)
 			this.order[j] = -1;
-		this.cmax = Integer.MAX_VALUE;
+		this.score = Integer.MAX_VALUE;
 	}
 
 	/**
@@ -83,12 +82,12 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	}
 
 	/**
-	 * Gets the cmax.
+	 * Gets the score.
 	 *
 	 * @return la durée totale de l'ordonnancement
 	 */
-	public int getCmax() {
-		return cmax;
+	public int getScore() {
+		return score;
 	}
 
 	/**
@@ -104,6 +103,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 *  recalcule la durée totale de l'ordonnancement.
 	 */
 	public void evaluate(){
+		// TODO
 		int[] dateDisponibilite = new int[this.instance.getNbMachines()];
 		for(int i = 0; i<this.order.length && this.order[i] != -1; i++){
 			dateDisponibilite[0] += this.instance.getDureeOperation(this.order[i],0);
@@ -111,14 +111,14 @@ public class Solution implements Comparable<Solution>, Cloneable{
 				dateDisponibilite[j] = Math.max(dateDisponibilite[j],dateDisponibilite[j-1]) + this.instance.getDureeOperation(this.order[i],j);
 			}
 		}
-		this.cmax = dateDisponibilite[this.instance.getNbMachines()-1];
+		this.score = dateDisponibilite[this.instance.getNbMachines()-1];
 	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Solution s){
-		return Integer.compare(this.getCmax(),s.getCmax());
+		return Integer.compare(this.getScore(),s.getScore());
 	}
 
 	/* (non-Javadoc)
@@ -127,7 +127,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	@Override
 	public Solution clone() {
 		Solution c = new Solution(getInstance());
-		c.cmax = this.cmax;
+		c.score = this.score;
 		c.order = this.order.clone();
 		return c;
 	}
@@ -137,7 +137,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 */
 	@Override
 	public String toString(){
-		String s = "Cmax = " + this.cmax + "  <---  (";
+		String s = "score = " + this.score + "  <---  (";
 		for(int i = 0; i<this.order.length; i++){
 			s += (this.order[i]+1) + (i == this.order.length-1 ? "": " ");
 		}
