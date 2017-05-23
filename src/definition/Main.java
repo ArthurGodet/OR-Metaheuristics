@@ -154,15 +154,15 @@ public class Main {
 			instances[i] = new InstanceFlowshop(String.format("instances/tai%02d.txt", instanceIndex[i]));
 
 		Solver[] solvers = new Solver[]{
-				new AntColonyOptimization(instance),
-				new BeesAlgorithm(instance),
-				new Genetic(instance),
-				new Grasp(instance),
-				new Ils(instance),
-				new Memetic(instance),
-				new SimulatedAnnealing(instance),
-				new TabuSearch(instance, new Shift(), new Solution(instance)),
-				new Vns(instance),
+				//new AntColonyOptimization(instance),
+				//new BeesAlgorithm(instance),
+				//new Genetic(instance),
+				//new Grasp(instance),
+				//new Ils(instance),
+				//new Memetic(instance),
+				//new SimulatedAnnealing(instance),
+				//new TabuSearch(instance, new Shift(), new Solution(instance)),
+				//new Vns(instance),
 				new WolfPackAlgorithm(instance)
 		};
 		Parallel parallel = new Parallel(instances[0],1);

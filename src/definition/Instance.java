@@ -16,9 +16,9 @@ import java.util.Scanner;
  */
 public abstract class Instance {
 	/** The name of the instance. */
-	private String name;
+	protected String name;
 	/** The name of the problem. */
-	private String problem;
+	protected String problem;
 	
 	public abstract int getSize();
 

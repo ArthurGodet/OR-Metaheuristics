@@ -24,9 +24,6 @@ public class InstanceFlowshop extends Instance{
 	
 	/** The durees operations. */
 	private int[][] dureesOperations;
-	
-	/** The name of the instance. */
-	private String name;
 
 	/**
 	 * Construit un problème à partir d'un fichier.
@@ -34,6 +31,7 @@ public class InstanceFlowshop extends Instance{
 	 * @param s nom du fichier
 	 */
 	public InstanceFlowshop(String s) {
+		this.problem = "Flowshop de permutation";
 		this.name = s;
 		try {
 			Scanner scanner = new Scanner(new FileReader(s));
@@ -67,15 +65,6 @@ public class InstanceFlowshop extends Instance{
 	}
 
 	/**
-	 * Gets the nb jobs.
-	 *
-	 * @return le nombre de jobs du problème
-	 */
-	public int getNbJobs() {
-		return nbJobs;
-	}
-
-	/**
 	 * Gets the nb machines.
 	 *
 	 * @return le nombre de machines du problème
@@ -93,15 +82,6 @@ public class InstanceFlowshop extends Instance{
 	 */
 	public int getDureeOperation(int job, int machine){
 		return this.dureesOperations[job][machine];
-	}
-	
-	/**
-	 * Gets the name of the Instance.
-	 *
-	 * @return the name of the Instance
-	 */
-	public String getName(){
-		return this.name;
 	}
 
 	@Override
