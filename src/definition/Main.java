@@ -15,7 +15,7 @@ import metaheuristics.Grasp;
 import metaheuristics.Ils;
 import metaheuristics.LocalSearch;
 import metaheuristics.Memetic;
-import metaheuristics.Neh;
+import metaheuristics.Greedy;
 import metaheuristics.Parallel;
 import metaheuristics.SimulatedAnnealing;
 import metaheuristics.Solver;

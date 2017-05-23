@@ -103,7 +103,6 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 *  recalcule la durée totale de l'ordonnancement.
 	 */
 	public void evaluate(){
-		// TODO
 		if(this.getInstance() instanceof InstanceFlowshop){
 			InstanceFlowshop inst = (InstanceFlowshop)this.getInstance();
 			int[] dateDisponibilite = new int[inst.getNbMachines()];
@@ -114,6 +113,13 @@ public class Solution implements Comparable<Solution>, Cloneable{
 				}
 			}
 			this.score = dateDisponibilite[inst.getNbMachines()-1];
+		}
+		else{
+			InstanceTSP inst = (InstanceTSP)this.getInstance();
+			this.score = 0;
+			for(int i = 0; i<this.order.length-1; i++)
+				this.score += inst.getDistance(i,i+1);
+			this.score += inst.getDistance(this.order.length-1,0);
 		}
 	}
 

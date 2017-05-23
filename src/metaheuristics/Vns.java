@@ -33,10 +33,10 @@ public class Vns extends Solver{
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer) {
-		this.setSolution(Neh.solve(this.getInstance()));
+		this.setSolution(Greedy.solve(this.getInstance()));
 		Neighborhood[] tab = new Neighborhood[] {new Change(), new Shift(), new Swap()};
 		
-		Solution s = Neh.solve(this.getInstance());
+		Solution s = Greedy.solve(this.getInstance());
 		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],s);
 		
 		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !

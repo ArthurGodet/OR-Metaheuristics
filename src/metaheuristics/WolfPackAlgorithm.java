@@ -124,7 +124,7 @@ public class WolfPackAlgorithm extends Solver{
 	 */
 	@Override
 	public void solve(Timer timer) {
-		this.setSolution(Neh.solve(this.getInstance()));
+		this.setSolution(Greedy.solve(this.getInstance()));
 		this.initialisation();
 		Arrays.sort(this.wolves);
 		if(this.getSolution().compareTo(this.wolves[0])<0)

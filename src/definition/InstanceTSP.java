@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class InstanceTSP extends Instance{
-	private int nbVilles;
+	private int nbCities;
 	
-	private double[][] distance;
+	private int[][] distance;
 	
 	
 	/**
@@ -23,18 +23,18 @@ public class InstanceTSP extends Instance{
 
 			// lecture du nombre de jobs
 			if (scanner.hasNextInt())
-				this.nbVilles = scanner.nextInt();
+				this.nbCities = scanner.nextInt();
 
-			this.distance = new double[this.nbVilles][this.nbVilles];
-			int ville1 = 0;
-			int ville2 = 0;
+			this.distance = new int[this.nbCities][this.nbCities];
+			int city1 = 0;
+			int city2 = 0;
 			while (scanner.hasNextInt()) {
-				this.distance[ville1][ville2] = scanner.nextDouble();
-				if (ville2 < nbVilles - 1)
-					ville2++;
+				this.distance[city1][city2] = scanner.nextInt();
+				if (city2 < nbCities - 1)
+					city2++;
 				else {
-					ville1++;
-					ville2 = 0;
+					city1++;
+					city2 = 0;
 				}
 			}
 			scanner.close();
@@ -47,10 +47,10 @@ public class InstanceTSP extends Instance{
 
 	@Override
 	public int getSize() {
-		return nbVilles;
+		return nbCities;
 	}
 	
-	public double getDistance(int ville1, int ville2){
-		return this.distance[ville1][ville2];
+	public int getDistance(int city1, int city2){
+		return this.distance[city1][city2];
 	}
 }

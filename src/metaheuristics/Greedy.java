@@ -12,6 +12,7 @@ import java.util.List;
 
 import definition.Instance;
 import definition.InstanceFlowshop;
+import definition.InstanceTSP;
 import definition.Solution;
 import util.Timer;
 
@@ -19,24 +20,45 @@ import util.Timer;
 /**
  * Solver utilisant l'heuristique NEH.
  */
-public class Neh extends Solver{
+public class Greedy extends Solver{
 
 	/**
 	 * Instantiates a new neh.
 	 *
 	 * @param inst the inst
 	 */
-	public Neh(Instance inst) {
-		super(inst, "NEH");
+	public Greedy(Instance inst) {
+		super(inst, (inst instanceof InstanceFlowshop ? "NEH" : "NearestNeighbor"));
 	}
 	
 	/* (non-Javadoc)
 	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer){
-		List<Job> ljNEH = this.creerListeNEH();
-		for(int k = 0; k < ljNEH.size(); k++)
-			ordonnancerJobNEH(ljNEH.get(k).getId(),k);
+		if(this.getInstance() instanceof InstanceFlowshop){
+			List<Job> ljNEH = this.creerListeNEH();
+			for(int k = 0; k < ljNEH.size(); k++)
+				ordonnancerJobNEH(ljNEH.get(k).getId(),k);
+		}
+		else{
+			InstanceTSP inst = (InstanceTSP)this.getInstance();
+			List<Integer> cities = new ArrayList<Integer>();
+			for(int i = 1; i<this.getInstance().getSize(); i++)
+				cities.add(i);
+			Solution sol = new Solution(this.getInstance());
+			sol.setOrder(0,0);
+			for(int k = 1; k<this.getInstance().getSize(); k++){
+				int city = cities.get(0);
+				int dist = inst.getDistance(sol.getJob(k-1),city);
+				for(int j = 1; j<cities.size(); j++){
+					if(inst.getDistance(sol.getJob(k-1),cities.get(j))<dist){
+						city = cities.get(j);
+						dist = inst.getDistance(sol.getJob(k-1),cities.get(j));
+					}
+				}
+				sol.setOrder(city,k);
+			}
+		}
 	}
 
 	/**
@@ -46,9 +68,9 @@ public class Neh extends Solver{
 	 * @return the solution
 	 */
 	public static Solution solve(Instance instance) {
-		Neh neh = new Neh(instance);
-		neh.solve();
-		return neh.getSolution();
+		Greedy greedy = new Greedy(instance);
+		greedy.solve();
+		return greedy.getSolution();
 	}
 	
 	/**

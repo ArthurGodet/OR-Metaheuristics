@@ -133,7 +133,7 @@ public class AntColonyOptimization extends Solver {
 			for(int j = 0; j<this.getInstance().getSize(); j++)
 				this.pheromoneTrails[i][j] = this.thoMax;
 		
-		this.setSolution(Neh.solve(this.getInstance()));
+		this.setSolution(Greedy.solve(this.getInstance()));
 	}
 	
 	/**

@@ -148,7 +148,7 @@ public class Parallel extends Solver {
 			else if(this.solver instanceof Vns)
 				solvers[i] = new Vns(this.getInstance());
 			else if(this.solver instanceof TabuSearch)
-				solvers[i] = new TabuSearch(this.getInstance(),new Shift(),Neh.solve(this.getInstance()));
+				solvers[i] = new TabuSearch(this.getInstance(),new Shift(),Greedy.solve(this.getInstance()));
 			else if(this.solver instanceof SimulatedAnnealing)
 				solvers[i] = new SimulatedAnnealing(this.getInstance());
 			else if(this.solver instanceof Memetic)
