@@ -21,7 +21,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	private int[] order;
 	
 	/** The score. */
-	private int score;
+	private double score;
 	
 	/** The instance. */
 	private Instance instance;
@@ -86,7 +86,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 *
 	 * @return la durée totale de l'ordonnancement
 	 */
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
@@ -118,8 +118,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 			InstanceTSP inst = (InstanceTSP)this.getInstance();
 			this.score = 0;
 			for(int i = 0; i<this.order.length-1; i++)
-				this.score += inst.getDistance(i,i+1);
-			this.score += inst.getDistance(this.order.length-1,0);
+				this.score += inst.getDistance(this.order[i],this.order[i+1]);
+			this.score += inst.getDistance(this.order[this.order.length-1],this.order[0]);
 		}
 	}
 
@@ -127,7 +127,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Solution s){
-		return Integer.compare(this.getScore(),s.getScore());
+		return Double.compare(this.getScore(),s.getScore());
 	}
 
 	/* (non-Javadoc)

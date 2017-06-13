@@ -49,7 +49,7 @@ public class Greedy extends Solver{
 			sol.setOrder(0,0);
 			for(int k = 1; k<this.getInstance().getSize(); k++){
 				int city = cities.get(0);
-				int dist = inst.getDistance(sol.getJob(k-1),city);
+				double dist = inst.getDistance(sol.getJob(k-1),city);
 				for(int j = 1; j<cities.size(); j++){
 					if(inst.getDistance(sol.getJob(k-1),cities.get(j))<dist){
 						city = cities.get(j);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import definition.Instance;
+import definition.InstanceFlowshop;
 import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
@@ -84,7 +85,8 @@ public class SimulatedAnnealing extends Solver{
 
 		// Application de l'algorithme
 		int count = 0;
-		int L = this.sizefactor*this.getInstance().getSize()*(this.getInstance().getNbMachines()-1);
+		int a = (this.getInstance() instanceof InstanceFlowshop ? ((InstanceFlowshop)this.getInstance()).getNbMachines() : this.getInstance().getSize());
+		int L = this.sizefactor*this.getInstance().getSize()*(a-1);
 		while(count<5 && !timer.isFinished()){
 			Solution t = new Solution(this.getInstance());
 			boolean change = true;

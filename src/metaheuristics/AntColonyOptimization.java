@@ -192,7 +192,7 @@ public class AntColonyOptimization extends Solver {
 	public double heuristicFactor(int job, int pos, int k){
 		this.ants[k].setOrder(job, pos);
 		this.ants[k].evaluate();
-		int Cmax = this.ants[k].getScore();
+		double Cmax = this.ants[k].getScore();
 		this.ants[k].setOrder(-1,pos);
 		this.ants[k].evaluate();
 		
