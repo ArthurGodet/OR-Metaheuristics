@@ -40,7 +40,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Instance instance = new InstanceFlowshop("instances/Flowshop/tai51.txt");
-		Timer timer = new Timer(15000);
+		Timer timer = new Timer(60000);
 		/*
 		Solver solver = new Memetic(instance);
 		solver.solve(timer);
@@ -210,23 +210,24 @@ public class Main {
 		s.setOrder(o);
 		s.evaluate();
 		System.out.println(s);
+		System.out.println(Greedy.solve(instances[0]));
 		
 		Solver[] solvers = new Solver[]{
-				//new AntColonyOptimization(instance),
-				//new BeesAlgorithm(instance),
-				//new Genetic(instance),
-				//new Grasp(instance),
-				//new Ils(instance),
-				//new Memetic(instance),
-				//new SimulatedAnnealing(instance),
-				//new TabuSearch(instance, new Shift(), new Solution(instance)),
-				//new Vns(instance),
+				new AntColonyOptimization(instance),
+				new BeesAlgorithm(instance),
+				new Genetic(instance),
+				new Grasp(instance),
+				new Ils(instance),
+				new Memetic(instance),
+				new SimulatedAnnealing(instance),
+				new TabuSearch(instance, new Shift(), new Solution(instance)),
+				new Vns(instance),
 				new WolfPackAlgorithm(instance)
 		};
-		Parallel parallel = new Parallel(instances[0],1);
+		Parallel parallel = new Parallel(instances[0],4);
 		//*
 		try{
-			int nbFois = 1;
+			int nbFois = 5;
 			for(int m = 0; m<nbFois; m++){
 				for(int i = 0; i<instances.length; i++){
 					parallel.setInstance(instances[i]);

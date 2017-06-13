@@ -41,7 +41,7 @@ public class Grasp extends Solver{
 		int n = 0;
 		do{
 			Solution s = new Solution(this.getInstance());
-			List<Integer> lj = creerListeJob();
+			List<Integer> lj = (this.getInstance() instanceof InstanceFlowshop ? creerListeJob() : creerListeVilles());
 			for(int j = 0; j<this.getInstance().getSize(); j++)
 				s.setOrder(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
@@ -52,6 +52,17 @@ public class Grasp extends Solver{
 				this.setSolution(ls.getSolution().clone());
 			n++;
 		}while(!timer.isFinished());
+	}
+
+	private List<Integer> creerListeVilles() {
+		List<Integer> l = new ArrayList<Integer>();
+		for(int i = 0; i<this.getInstance().getSize(); i++)
+			l.add(i);
+		
+		List<Integer> res = new ArrayList<Integer>();
+		while(l.size() != 0)
+			res.add(l.remove((((int)(Math.random()*l.size())))));
+		return res;
 	}
 
 	/**

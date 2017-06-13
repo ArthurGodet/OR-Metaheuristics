@@ -117,9 +117,8 @@ public class Solution implements Comparable<Solution>, Cloneable{
 		else{
 			InstanceTSP inst = (InstanceTSP)this.getInstance();
 			this.score = 0;
-			for(int i = 0; i<this.order.length-1; i++)
-				this.score += inst.getDistance(this.order[i],this.order[i+1]);
-			this.score += inst.getDistance(this.order[this.order.length-1],this.order[0]);
+			for(int i = 0; i<this.order.length && this.order[((i+1)%this.order.length)] != -1; i++)
+				this.score += inst.getDistance(this.order[i],this.order[((i+1)%this.order.length)]);
 		}
 	}
 

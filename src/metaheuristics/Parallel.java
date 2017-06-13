@@ -90,7 +90,6 @@ public class Parallel extends Solver {
 			try {
 				this.solver.solve(this.timer);
 				Benchmark.writeResults(this.solver);
-				System.out.println(this.solver.getSolution());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

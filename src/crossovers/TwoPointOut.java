@@ -26,7 +26,7 @@ public class TwoPointOut implements Crossover {
 		child.copyRange(parent1, 0, coupure[0]);
 		child.copyRange(parent1, coupure[1], child.getInstance().getSize());
 		child.merge(parent2);
-
+		
 		child.evaluate();
 		return child;
 	}

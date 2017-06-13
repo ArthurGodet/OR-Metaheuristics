@@ -56,8 +56,11 @@ public class Greedy extends Solver{
 						dist = inst.getDistance(sol.getJob(k-1),cities.get(j));
 					}
 				}
+				cities.remove(new Integer(city));
 				sol.setOrder(city,k);
 			}
+			sol.evaluate();
+			this.setSolution(sol);
 		}
 	}
 
