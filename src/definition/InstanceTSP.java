@@ -24,7 +24,7 @@ public class InstanceTSP extends Instance{
 			// lecture du nombre de villes
 			for(int i = 0; i<3; i++)
 				scanner.nextLine();
-			this.nbCities = new Integer(scanner.nextLine().substring(12));
+			this.nbCities = new Integer(scanner.nextLine().substring(11));
 			scanner.nextLine();
 			scanner.nextLine();
 			

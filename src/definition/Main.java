@@ -7,6 +7,7 @@
 package definition;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 
 import metaheuristics.AntColonyOptimization;
@@ -158,10 +159,25 @@ public class Main {
 		
 		//*
 		// TSP instances
+		
+		class Filter implements FileFilter{
+			public Filter(){
+				
+			}
+			
+			public boolean accept(File pathname) {
+				String path = pathname.getName();
+				String type = path.substring(path.length()-3);
+				System.out.println(type);
+				return type.equals("tsp");
+			}
+		}
+		
 		File folder = new File("instances/TSP");
-		File[] listOfFiles = folder.listFiles();
+		File[] listOfFiles = folder.listFiles(new Filter());
 		Instance[] instances = new Instance[listOfFiles.length];
 		for(int i = 0; i<instances.length; i++){
+			System.out.println(listOfFiles[i].getPath());
 			instances[i] = new InstanceTSP(listOfFiles[i].getPath());
 		}
 		//*/
@@ -169,16 +185,16 @@ public class Main {
 		
 		
 		Solver[] solvers = new Solver[]{
-				new AntColonyOptimization(instance),
-				new BeesAlgorithm(instance),
-				new Genetic(instance),
-				new Grasp(instance),
-				new Ils(instance),
-				new Memetic(instance),
-				new SimulatedAnnealing(instance),
+				//new AntColonyOptimization(instance),
+				//new BeesAlgorithm(instance),
+				//new Genetic(instance),
+				//new Grasp(instance),
+				//new Ils(instance),
+				//new Memetic(instance),
+				//new SimulatedAnnealing(instance),
 				new TabuSearch(instance, new Shift(), new Solution(instance)),
 				new Vns(instance),
-				new WolfPackAlgorithm(instance)
+				//new WolfPackAlgorithm(instance)
 		};
 		Parallel parallel = new Parallel(instances[0],2);
 		//*

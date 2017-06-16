@@ -1,10 +1,7 @@
 NAME : usa13509
-COMMENT : Cities with population at least 500 in the continental US.
-COMMENT : Contributed by David Applegate and Andre Rohe, based on the
-COMMENT : data set "US.lat-long" from the ftp site ftp.cs.toronto.edu.
-COMMENT : The file US.lat-long.Z can be found in the directory /doc/geography.
+COMMENT : Cities with population at least 500 in the continental US. Contributed by David Applegate and Andre Rohe, based on the data set "US.lat-long" from the ftp site ftp.cs.toronto.edu. The file US.lat-long.Z can be found in the directory /doc/geography.
 TYPE : TSP
-DIMENSION : 13509
+DIMENSION: 13509
 EDGE_WEIGHT_TYPE : EUC_2D
 NODE_COORD_SECTION
 1 245552.778 817827.778
