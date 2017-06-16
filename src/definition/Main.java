@@ -6,6 +6,7 @@
  */
 package definition;
 
+import java.io.File;
 import java.io.IOException;
 
 import metaheuristics.AntColonyOptimization;
@@ -135,6 +136,7 @@ public class Main {
 		//*/
 
 		/*
+		// Flowshop instances
 		int[] instanceIndex = new int[] {
 				 1,   2,   3,   4,   5,   6,   7,   8,   9,  10,
 				 11,  12,  13,  14,  15,  16,  17,  18,  19,  20,
@@ -142,75 +144,29 @@ public class Main {
 				 31,  32,  33,  34,  35,  36,  37,  38,  39,  40,
 				 41,  42,  43,  44,  45,  46,  47,  48,  49,  50,
 				 51,  52,  53,  54,  55,  56,  57,  58,  59,  60,
-				 //61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
-				 //71,  72,  73,  74,  75,  76,  77,  78,  79,  80,
-				 //81,  82,  83,  84,  85,  86,  87,  88,  89,  90,
-				 //91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
-				//101, 102, 103, 104, 105, 106, 107, 108, 109, 110,
-				//111, 112, 113, 114, 115, 116, 117, 118, 119, 120
+				 61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+				 71,  72,  73,  74,  75,  76,  77,  78,  79,  80,
+				 81,  82,  83,  84,  85,  86,  87,  88,  89,  90,
+				 91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+				101, 102, 103, 104, 105, 106, 107, 108, 109, 110,
+				111, 112, 113, 114, 115, 116, 117, 118, 119, 120
 		};
 		Instance[] instances = new Instance[instanceIndex.length];
 		for(int i = 0; i < instanceIndex.length; i++)
 			instances[i] = new InstanceFlowshop(String.format("instances/Flowshop/tai%02d.txt", instanceIndex[i]));
 		*/
-		Instance[] instances = new Instance[1];
-		instances[0] = new InstanceTSP("instances/TSP/att48.tsp");
 		
-		Solution s = new Solution(instances[0]);
-		int[] o = new int[]{1,
-				8,
-				38,
-				31,
-				44,
-				18,
-				7,
-				28,
-				6,
-				37,
-				19,
-				27,
-				17,
-				43,
-				30,
-				36,
-				46,
-				33,
-				20,
-				47,
-				21,
-				32,
-				39,
-				48,
-				5,
-				42,
-				24,
-				10,
-				45,
-				35,
-				4,
-				26,
-				2,
-				29,
-				34,
-				41,
-				16,
-				22,
-				3,
-				23,
-				14,
-				25,
-				13,
-				11,
-				12,
-				15,
-				40,
-				9};
-		for(int i = 0; i<o.length; i++)
-			o[i]--;
-		s.setOrder(o);
-		s.evaluate();
-		System.out.println(s);
-		System.out.println(Greedy.solve(instances[0]));
+		//*
+		// TSP instances
+		File folder = new File("instances/TSP");
+		File[] listOfFiles = folder.listFiles();
+		Instance[] instances = new Instance[listOfFiles.length];
+		for(int i = 0; i<instances.length; i++){
+			instances[i] = new InstanceTSP(listOfFiles[i].getPath());
+		}
+		//*/
+		//instances[0] = new InstanceTSP("instances/TSP/att48.tsp");
+		
 		
 		Solver[] solvers = new Solver[]{
 				new AntColonyOptimization(instance),
@@ -224,10 +180,10 @@ public class Main {
 				new Vns(instance),
 				new WolfPackAlgorithm(instance)
 		};
-		Parallel parallel = new Parallel(instances[0],4);
+		Parallel parallel = new Parallel(instances[0],2);
 		//*
 		try{
-			int nbFois = 5;
+			int nbFois = 2;
 			for(int m = 0; m<nbFois; m++){
 				for(int i = 0; i<instances.length; i++){
 					parallel.setInstance(instances[i]);
