@@ -42,7 +42,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Instance instance = new InstanceFlowshop("instances/Flowshop/tai51.txt");
-		Timer timer = new Timer(60000);
+		Timer timer = new Timer(300000);
 		/*
 		Solver solver = new Memetic(instance);
 		solver.solve(timer);
@@ -168,7 +168,6 @@ public class Main {
 			public boolean accept(File pathname) {
 				String path = pathname.getName();
 				String type = path.substring(path.length()-3);
-				System.out.println(type);
 				return type.equals("tsp");
 			}
 		}
@@ -177,12 +176,12 @@ public class Main {
 		File[] listOfFiles = folder.listFiles(new Filter());
 		Instance[] instances = new Instance[listOfFiles.length];
 		for(int i = 0; i<instances.length; i++){
-			System.out.println(listOfFiles[i].getPath());
 			instances[i] = new InstanceTSP(listOfFiles[i].getPath());
 		}
 		//*/
-		//instances[0] = new InstanceTSP("instances/TSP/att48.tsp");
-		
+		//Instance[] instances = new Instance[2];
+		//instances[0] = new InstanceTSP("instances/TSP/pr76.tsp");
+		//instances[1] = new InstanceTSP("instances/TSP/st70.tsp");
 		
 		Solver[] solvers = new Solver[]{
 				//new AntColonyOptimization(instance),
@@ -196,10 +195,10 @@ public class Main {
 				new Vns(instance),
 				//new WolfPackAlgorithm(instance)
 		};
-		Parallel parallel = new Parallel(instances[0],2);
+		Parallel parallel = new Parallel(instances[0],1);
 		//*
 		try{
-			int nbFois = 2;
+			int nbFois = 1;
 			for(int m = 0; m<nbFois; m++){
 				for(int i = 0; i<instances.length; i++){
 					parallel.setInstance(instances[i]);

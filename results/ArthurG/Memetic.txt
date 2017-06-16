@@ -1230,13 +1230,3 @@ instances/tai51.txt
 3893
 instances/tai52.txt
 3719
-instances/TSP/att48.tsp
-33523.708507435585
-instances/TSP/att48.tsp
-33523.708507435585
-instances/TSP/att48.tsp
-33523.70850743558
-instances/TSP/att48.tsp
-33523.70850743558
-instances/TSP/att48.tsp
-33523.70850743559
