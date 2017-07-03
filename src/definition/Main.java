@@ -42,7 +42,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Instance instance = new InstanceFlowshop("instances/Flowshop/tai51.txt");
-		Timer timer = new Timer(300000);
+		Timer timer = new Timer(300000); // Donner plus que 5 minutes !
 		/*
 		Solver solver = new Memetic(instance);
 		solver.solve(timer);
@@ -184,18 +184,18 @@ public class Main {
 		//instances[1] = new InstanceTSP("instances/TSP/st70.tsp");
 		
 		Solver[] solvers = new Solver[]{
-				//new AntColonyOptimization(instance),
-				//new BeesAlgorithm(instance),
+				new AntColonyOptimization(instance),
+				new BeesAlgorithm(instance),
 				//new Genetic(instance),
 				//new Grasp(instance),
 				//new Ils(instance),
 				//new Memetic(instance),
 				//new SimulatedAnnealing(instance),
-				new TabuSearch(instance, new Shift(), new Solution(instance)),
-				new Vns(instance),
-				//new WolfPackAlgorithm(instance)
+				//new TabuSearch(instance, new Shift(), new Solution(instance)),
+				//new Vns(instance),
+				new WolfPackAlgorithm(instance)
 		};
-		Parallel parallel = new Parallel(instances[0],1);
+		Parallel parallel = new Parallel(instances[0],3);
 		//*
 		try{
 			int nbFois = 1;
