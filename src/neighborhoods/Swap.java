@@ -1,8 +1,8 @@
-/*
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 29/03/2017
+/**
+ * Copyright (c) 2017, Arthur Godet, Joachim Hotonnier and Marie Deur. All rights reserved.
+ *
+ * Licensed under the BSD 4-clause license.
+ * See LICENSE file in the project root for full license information.
  */
 package neighborhoods;
 
@@ -15,6 +15,11 @@ import util.Random;
 /**
  * The Swap type of neighborhood. The neighbors are computing by exchanging the positions of two
  * jobs from the given solution's scheduling.
+ * 
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 19/03/2017
  */
 public class Swap extends Neighborhood {
 

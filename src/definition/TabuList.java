@@ -1,8 +1,8 @@
-/*
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 29/03/2017
+/**
+ * Copyright (c) 2017, Arthur Godet, Joachim Hotonnier and Marie Deur. All rights reserved.
+ *
+ * Licensed under the BSD 4-clause license.
+ * See LICENSE file in the project root for full license information.
  */
 package definition;
 
@@ -14,6 +14,11 @@ import java.util.TreeSet;
 
 /**
  * Container used in the TabuSearch Solver.
+ * 
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 19/03/2017
  */
 public class TabuList {
 	

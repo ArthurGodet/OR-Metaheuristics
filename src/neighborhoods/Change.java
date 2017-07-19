@@ -1,8 +1,8 @@
-/*
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 29/03/2017
+/**
+ * Copyright (c) 2017, Arthur Godet, Joachim Hotonnier and Marie Deur. All rights reserved.
+ *
+ * Licensed under the BSD 4-clause license.
+ * See LICENSE file in the project root for full license information.
  */
 package neighborhoods;
 
@@ -15,6 +15,11 @@ import util.Random;
 /**
  * The Change type of neighborhood. The neighbors are computing by doing circular permutation from
  * the given solution.
+ * 
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 19/03/2017
  */
 public class Change extends Neighborhood {
 
