@@ -16,9 +16,9 @@ donner une explication claire de ce que fait le Main et comment le voir
 
 ## Authors
 
-* **Arthur Godet** - *Code and design of the Wolf Pack metaheuristic* - [ArthurGodet](https://github.com/ArthurGodet)
-* **Joachim Hotonnier** - *Initial work and code* - [jhtr](https://github.com/jhtr)
-* **Marie Deur**
+* **Arthur Godet** - *Code (implementation of algorithms and factorization) | Design of the Wolf Pack metaheuristic* - [ArthurGodet](https://github.com/ArthurGodet)
+* **Joachim Hotonnier** - *Code (structure, factorization and utils)* - [jhtr](https://github.com/jhtr)
+* **Marie Deur** - *Code*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
