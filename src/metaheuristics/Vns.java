@@ -14,16 +14,15 @@ import neighborhoods.Shift;
 import neighborhoods.Swap;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Vns.
+ * Implementation of the VNS (Variable Neighborhood Search) metaheuristic.
  */
 public class Vns extends Solver{
 	
 	/**
-	 * Instantiates a new vns.
+	 * Instantiates a new VNS solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public Vns(Instance inst) {
 		super(inst,"VNS");
@@ -39,7 +38,7 @@ public class Vns extends Solver{
 		Solution s = Greedy.solve(this.getInstance());
 		LocalSearch ls = new LocalSearch(this.getInstance(),tab[0],s);
 		
-		int k = 0; // ATTENTION : influe l'ordre d'application influe sur le resultat final !
+		int k = 0; // ATTENTION : the order of application affects the final result !
 		do{
 			if(k==3)
 				k=0;

@@ -12,23 +12,21 @@ import java.util.List;
 
 import definition.Instance;
 import definition.InstanceFlowshop;
-import definition.Neighborhood;
 import definition.Solution;
+import metaheuristics.Greedy.Job;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Grasp.
+ * Implementation of the GRASP (Greedy Randomized Adaptive Search Procedure) metaheuristic.
  */
 public class Grasp extends Solver{
 	
 	/**
-	 * Instantiates a new grasp.
+	 * Instantiates a new GRASP solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
-	// Greedy Randomize Adaptive Search Procedure
 	public Grasp(Instance inst) {
 		super(inst,"GRASP");
 	}
@@ -38,10 +36,9 @@ public class Grasp extends Solver{
 	 */
 	public void solve(Timer timer) {
 		this.setSolution(Greedy.solve(this.getInstance()));
-		int n = 0;
 		do{
 			Solution s = new Solution(this.getInstance());
-			List<Integer> lj = (this.getInstance() instanceof InstanceFlowshop ? creerListeJob() : creerListeVilles());
+			List<Integer> lj = (this.getInstance() instanceof InstanceFlowshop ? createListOfJobs() : createListOfCities());
 			for(int j = 0; j<this.getInstance().getSize(); j++)
 				s.setScheduling(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
@@ -50,16 +47,15 @@ public class Grasp extends Solver{
 			ls.solve();
 			if(ls.getSolution().compareTo(this.getSolution())<0)
 				this.setSolution(ls.getSolution().clone());
-			n++;
 		}while(!timer.isFinished());
 	}
 
 	/**
-	 * Creer liste villes.
+	 * Creates the list of cities.
 	 *
 	 * @return the list
 	 */
-	private List<Integer> creerListeVilles() {
+	private List<Integer> createListOfCities() {
 		List<Integer> l = new ArrayList<Integer>();
 		for(int i = 0; i<this.getInstance().getSize(); i++)
 			l.add(i);
@@ -71,69 +67,20 @@ public class Grasp extends Solver{
 	}
 
 	/**
-	 * Creer liste job.
+	 * Creates the list of jobs.
 	 *
 	 * @return the list
 	 */
-	private List<Integer> creerListeJob(){
+	private List<Integer> createListOfJobs(){
 		List<Job> l = new ArrayList<Job>();
+		Greedy g = new Greedy(this.getInstance());
 		for(int id = 0; id<this.getInstance().getSize(); id++)
-			l.add(new Job(((InstanceFlowshop)this.getInstance()),id));
+			l.add(g.new Job(((InstanceFlowshop)this.getInstance()),id));
 		Collections.sort(l, Collections.reverseOrder());
 		
 		List<Integer> res = new ArrayList<Integer>();
 		for(int i = 0; i<l.size(); i++)
 			res.add(l.get(i).getId());
 		return res;
-	}
-
-	/**
-	 * The Class Job.
-	 */
-	public class Job implements Comparable<Job>{
-		
-		/** The duree. */
-		private int duree;
-		
-		/** The id. */
-		private int id;
-
-		/**
-		 * Instantiates a new job.
-		 *
-		 * @param inst the inst
-		 * @param id the id
-		 */
-		public Job(InstanceFlowshop inst, int id){
-			this.id = id;
-			this.duree = 0;
-			for(int j = 0; j<inst.getNbMachines(); j++)
-				this.duree += inst.getDuration(this.id,j);
-		}
-
-		/**
-		 * Gets the id.
-		 *
-		 * @return the id
-		 */
-		public int getId(){
-			return this.id;
-		}
-
-		/**
-		 * Gets the duree.
-		 *
-		 * @return the duree
-		 */
-		public int getDuree(){
-			return this.duree;
-		}
-
-		/* (non-Javadoc)
-		 * @see java.lang.Comparable#compareTo(java.lang.Object)
-		 */
-		public int compareTo(Job o) {
-			return Integer.compare(this.getDuree(),o.getDuree());
-		}
 	}
 }

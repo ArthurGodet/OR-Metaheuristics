@@ -12,25 +12,23 @@ import java.util.List;
 import definition.Instance;
 import definition.Neighborhood;
 import definition.Solution;
-import neighborhoods.Change;
 import neighborhoods.Shift;
 import neighborhoods.Swap;
 import util.Random;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class WolfPackAlgorithm.
+ * Implementation of the Wolf Pack metaheuristic, a new algorithm designed by Arthur Godet.
  */
 public class WolfPackAlgorithm extends Solver{
 	
-	/** The pack size. */
+	/** The Constant PACK_SIZE. */
 	public static int PACK_SIZE = 10;
 	
-	/** The communication rate. */
+	/** The Constant COMMUNICATION_RATE. */
 	public static double COMMUNICATION_RATE = 0.4; // < 0.5
 	
-	/** The pack size. */
+	/** The size of the pack. */
 	private int packSize;
 	
 	/** The wolves. */
@@ -40,10 +38,10 @@ public class WolfPackAlgorithm extends Solver{
 	private double communicationRate;
 
 	/**
-	 * Instantiates a new wolf pack algorithm.
+	 * Instantiates a new Wolf Pack algorithm solver.
 	 *
-	 * @param inst the inst
-	 * @param packSize the pack size
+	 * @param inst the instance
+	 * @param packSize the size of the pack
 	 * @param communicationRate the communication rate
 	 */
 	public WolfPackAlgorithm(Instance inst, int packSize, double communicationRate) {
@@ -53,18 +51,18 @@ public class WolfPackAlgorithm extends Solver{
 	}
 	
 	/**
-	 * Instantiates a new wolf pack algorithm.
+	 * Instantiates a new Wolf Pack algorithm solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public WolfPackAlgorithm(Instance inst) {
 		this(inst,PACK_SIZE,COMMUNICATION_RATE);
 	}
 	
 	/**
-	 * Initialisation.
+	 * Initiation.
 	 */
-	private void initialisation(){
+	private void initiation(){
 		this.wolves = new Solution[this.packSize];
 		for(int i = 0; i<this.packSize; i++)
 			this.wolves[i] = this.localHunt(Solution.generateSolution(this.getInstance()));
@@ -73,13 +71,13 @@ public class WolfPackAlgorithm extends Solver{
 	/**
 	 * Local hunt.
 	 *
-	 * @param s the s
+	 * @param s the wolf hunting
 	 * @return the solution
 	 */
 	private Solution localHunt(Solution s){
 		Solution minSol = new Solution(this.getInstance());
 		LocalSearch ls = new LocalSearch(this.getInstance(), new Shift(), s.clone());
-		//*
+		
 		Neighborhood[] nh = new Neighborhood[]{new Shift(), new Swap()};
 		for(Neighborhood n : nh) {
 			ls.setSolution(s.clone());
@@ -88,16 +86,18 @@ public class WolfPackAlgorithm extends Solver{
 			if(ls.getSolution().compareTo(minSol) < 0)
 				minSol = ls.getSolution().clone();
 		}
-		//*/
+		
 		ls.solve();
 		minSol = ls.getSolution();
 		return minSol;
 	}
 	
 	/**
-	 * Communicate.
+	 * Creates a new solution inspired by the alpha wolf. The best hunter gives information to the
+	 * others on where to hunt. The solution is created by picking element from the best hunter's 
+	 * scheduling and randomly completing.
 	 *
-	 * @param rate the rate
+	 * @param rate the communication rate
 	 * @return the solution
 	 */
 	private Solution communicate(double rate){
@@ -125,7 +125,7 @@ public class WolfPackAlgorithm extends Solver{
 	@Override
 	public void solve(Timer timer) {
 		this.setSolution(Greedy.solve(this.getInstance()));
-		this.initialisation();
+		this.initiation();
 		Arrays.sort(this.wolves);
 		if(this.getSolution().compareTo(this.wolves[0])<0)
 			this.wolves[0] = this.getSolution().clone();
@@ -134,8 +134,8 @@ public class WolfPackAlgorithm extends Solver{
 			for(int i = 1; i<this.packSize-1; i++){
 				this.wolves[i] = this.communicate(this.communicationRate);
 			}
-			// Best hunter's local hunt
-			this.wolves[0] = this.communicate(this.communicationRate*2);
+			// Best hunter's local hunt 
+			this.wolves[0] = this.communicate(this.communicationRate*2); // *2 : the best hunter communicates better with itself
 			// Lonely wolf's hunt
 			this.wolves[this.packSize-1] = this.localHunt(Solution.generateSolution(this.getInstance()));
 			
@@ -148,18 +148,18 @@ public class WolfPackAlgorithm extends Solver{
 	}
 
 	/**
-	 * Gets the pack size.
+	 * Gets the size of the pack.
 	 *
-	 * @return the pack size
+	 * @return the size of the pack
 	 */
 	public int getPackSize() {
 		return packSize;
 	}
 
 	/**
-	 * Sets the pack size.
+	 * Sets the size of the pack.
 	 *
-	 * @param packSize the new pack size
+	 * @param packSize the new size of the pack
 	 */
 	public void setPackSize(int packSize) {
 		this.packSize = packSize;

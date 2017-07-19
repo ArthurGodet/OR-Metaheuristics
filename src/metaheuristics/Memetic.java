@@ -17,19 +17,19 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Memetic.
+ * Implementation of the Memetic metaheuristic. It consists of a genetic algorithm with local
+ * search applied on every created child.
  */
 public class Memetic extends Genetic{
 
 	/**
-	 * Instantiates a new memetic.
+	 * Instantiates a new Memetic solver.
 	 *
-	 * @param inst the inst
-	 * @param nh the nh
-	 * @param c the c
-	 * @param probaMutation the proba mutation
+	 * @param inst the instance
+	 * @param nh the type of neighborhood
+	 * @param c the crossover technique
+	 * @param probaMutation the probability of mutation
 	 * @param crossoverRatio the crossover ratio
 	 */
 	public Memetic(Instance inst, Neighborhood nh, Crossover c, double probaMutation, double crossoverRatio) {
@@ -38,20 +38,20 @@ public class Memetic extends Genetic{
 	}
 
 	/**
-	 * Instantiates a new memetic.
+	 * Instantiates a new Memetic solver.
 	 *
-	 * @param inst the inst
-	 * @param nh the nh
-	 * @param c the c
+	 * @param inst the instance
+	 * @param nh the type of neighborhood
+	 * @param c the crossover technique
 	 */
 	public Memetic(Instance inst, Neighborhood nh, Crossover c) {
 		this(inst, nh, c, PROBA_MUTATION, CROSSOVER_RATIO);
 	}
 	
 	/**
-	 * Instantiates a new memetic.
+	 * Instantiates a new Memetic solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public Memetic(Instance inst){
 		this(inst, new Shift(), new TwoPointOut());
@@ -64,24 +64,14 @@ public class Memetic extends Genetic{
 		this.setSolution(Greedy.solve(this.getInstance()));
 
 		while(!timer.isFinished()){
-			// Génération de la population initiale
-			ArrayList<Solution> population = new ArrayList<Solution>();
-			population.add(this.getSolution().clone());
-			for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
-				population.add(Solution.generateSolution(this.getInstance()));
-
-			Collections.sort(population); // trie la population par ordre croissant de Cmax
+			// Generates the initial population
+			ArrayList<Solution> population = this.generateInitialPopulation();
 			
-			// Application de l'algorithme génétique
+			// Applies the genetic algorithm
 			while(population.get(0).getScore() != population.get((int)(population.size()*0.95)).getScore() && !timer.isFinished()){
-				ArrayList<Solution> newGeneration = new ArrayList<Solution>();
-				newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
-				for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
-					Solution parent1 = this.groupSelection(population);
-					Solution parent2 = this.groupSelection(population);
-					newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
-				}
+				ArrayList<Solution> newGeneration = this.generateNewGeneration(population);
 				
+				// Applies a local search on each member of the population
 				LocalSearch ls = new LocalSearch(this.getInstance(),this.nh,this.getSolution());
 				for(int i = 0; i<newGeneration.size(); i++){
 					ls.setSolution(newGeneration.remove(i));
@@ -89,7 +79,7 @@ public class Memetic extends Genetic{
 					newGeneration.add(i,ls.getSolution());
 				}
 				
-				Collections.sort(newGeneration); // trie la nouvelle population par ordre croissant de Cmax
+				Collections.sort(newGeneration); // Sorts the new population by increasing score
 				population = newGeneration;
 				if(this.getSolution().getScore() > population.get(0).getScore()){
 					this.setSolution(population.get(0).clone());

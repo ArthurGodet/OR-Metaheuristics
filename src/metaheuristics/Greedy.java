@@ -16,16 +16,16 @@ import definition.InstanceTSP;
 import definition.Solution;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * Solver utilisant l'heuristique NEH.
+ * Implementation of a greedy algorithm : NEH for permutation flow shop problems and Nearest 
+ * Neighbor for TSP.
  */
 public class Greedy extends Solver{
 
 	/**
-	 * Instantiates a new neh.
+	 * Instantiates a new NEH solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public Greedy(Instance inst) {
 		super(inst, (inst instanceof InstanceFlowshop ? "NEH" : "NearestNeighbor"));
@@ -36,9 +36,9 @@ public class Greedy extends Solver{
 	 */
 	public void solve(Timer timer){
 		if(this.getInstance() instanceof InstanceFlowshop){
-			List<Job> ljNEH = this.creerListeNEH();
+			List<Job> ljNEH = this.createListForNEH();
 			for(int k = 0; k < ljNEH.size(); k++)
-				ordonnancerJobNEH(ljNEH.get(k).getId(),k);
+				scheduleJobNEH(ljNEH.get(k).getId(),k);
 		}
 		else{
 			InstanceTSP inst = (InstanceTSP)this.getInstance();
@@ -65,7 +65,7 @@ public class Greedy extends Solver{
 	}
 
 	/**
-	 * Solve.
+	 * Returns the solution from the greedy algorithm for the given instance of the problem.
 	 *
 	 * @param instance the instance
 	 * @return the solution
@@ -77,11 +77,11 @@ public class Greedy extends Solver{
 	}
 	
 	/**
-	 * Creer liste NEH.
+	 * Creates list of job for NEH algorithm.
 	 *
 	 * @return the list
 	 */
-	private List<Job> creerListeNEH(){
+	private List<Job> createListForNEH(){
 		List<Job> l = new ArrayList<Job>();
 		for(int id = 0; id<this.getInstance().getSize(); id++)
 			l.add(new Job(((InstanceFlowshop)this.getInstance()),id));
@@ -90,16 +90,16 @@ public class Greedy extends Solver{
 	}
 	
 	/**
-	 * Ordonnancer job NEH.
+	 * Schedules job following NEH algorithm.
 	 *
 	 * @param j the j
 	 * @param k the k
 	 */
-	private void ordonnancerJobNEH(int j, int k) { 
+	private void scheduleJobNEH(int j, int k) { 
 		this.getSolution().setScheduling(j,k);
 		this.getSolution().evaluate();
 
-		// On cherche le meilleur emplacement pour le Job j dans l'Ordonnancement actuel
+		// We are looking for the best position for the Job j in the current scheduling
 		Solution current = getSolution().clone();
 		for(int i = k; i>0; i--){
 			current.swap(i-1,i);
@@ -114,8 +114,8 @@ public class Greedy extends Solver{
 	 */
 	public class Job implements Comparable<Job>{
 		
-		/** The duree. */
-		private int duree;
+		/** The duration. */
+		private int duration;
 		
 		/** The id. */
 		private int id;
@@ -123,14 +123,14 @@ public class Greedy extends Solver{
 		/**
 		 * Instantiates a new job.
 		 *
-		 * @param inst the inst
+		 * @param inst the instance
 		 * @param id the id
 		 */
 		public Job(InstanceFlowshop inst, int id){
 			this.id = id;
-			this.duree = 0;
+			this.duration = 0;
 			for(int j = 0; j<inst.getNbMachines(); j++)
-				this.duree += inst.getDuration(this.id,j);
+				this.duration += inst.getDuration(this.id,j);
 		}
 		
 		/**
@@ -143,19 +143,19 @@ public class Greedy extends Solver{
 		}
 		
 		/**
-		 * Gets the duree.
+		 * Gets the duration.
 		 *
-		 * @return the duree
+		 * @return the duration
 		 */
-		public int getDuree(){
-			return this.duree;
+		public int getDuration(){
+			return this.duration;
 		}
 
 		/* (non-Javadoc)
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
 		public int compareTo(Job o) {
-			return Integer.compare(this.getDuree(),o.getDuree());
+			return Integer.compare(this.getDuration(),o.getDuration());
 		}
 	}
 }

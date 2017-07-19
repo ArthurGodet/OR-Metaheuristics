@@ -8,7 +8,6 @@ package metaheuristics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import definition.Instance;
 import definition.Solution;
@@ -17,36 +16,35 @@ import neighborhoods.Shift;
 import neighborhoods.Swap;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class BeesAlgorithm.
+ * Implementation of the Bees Colony metaheuristic.
  */
 public class BeesAlgorithm extends Solver{
 	
-	/** The colony size. */
+	/** The Constant COLONY_SIZE. */
 	public static int COLONY_SIZE = 50;
 	
-	/** The nb foragers. */
+	/** The Constant NB_FORAGERS. */
 	public static int NB_FORAGERS = 20; // < COLONY_SIZE/2
 	
-	/** The colony size. */
+	/** The colony's size. */
 	private int colonySize;
 	
-	/** The nb foragers. */
+	/** The number of foragers. */
 	private int nbForagers;
 	
 	/** The bees. */
 	private Solution[] bees;
 	
-	/** The abandonned sites. */
-	private ArrayList<Solution> abandonnedSites;
+	/** The abandoned sites. */
+	private ArrayList<Solution> abandonedSites;
 	
 	/**
 	 * Instantiates a new bees algorithm.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 * @param colonySize the colony size
-	 * @param nbForagers the nb foragers
+	 * @param nbForagers the number of foragers
 	 */
 	public BeesAlgorithm(Instance inst, int colonySize, int nbForagers) {
 		super(inst,"Bees algorithm");
@@ -57,7 +55,7 @@ public class BeesAlgorithm extends Solver{
 	/**
 	 * Instantiates a new bees algorithm.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public BeesAlgorithm(Instance inst){
 		this(inst,COLONY_SIZE,NB_FORAGERS);
@@ -69,7 +67,7 @@ public class BeesAlgorithm extends Solver{
 	@Override
 	public void solve(Timer timer) {
 		this.setSolution(Greedy.solve(this.getInstance()));
-		this.initialisation();
+		this.initiation();
 		Change change = new Change();
 		Shift shift = new Shift();
 		Swap swap = new Swap();
@@ -78,24 +76,24 @@ public class BeesAlgorithm extends Solver{
 		while(!timer.isFinished()){
 			for(int i = 0; i<this.colonySize; i++){
 				if(i<this.nbForagers){
-					// Select the best neighbor wherever the neighborhood
+					// Selects the best neighbor whatever the neighborhood
 					s = change.getBestNeighbor(this.bees[i]);
-					if(!this.abandonnedSites.contains(s))
-						this.abandonnedSites.add(s.clone());
+					if(!this.abandonedSites.contains(s))
+						this.abandonedSites.add(s.clone());
 					Solution t = shift.getBestNeighbor(this.bees[i]);
-					if(!this.abandonnedSites.contains(t))
-						this.abandonnedSites.add(t.clone());
+					if(!this.abandonedSites.contains(t))
+						this.abandonedSites.add(t.clone());
 					if(t.compareTo(s)<0)
 						s = t.clone();
 					t = swap.getBestNeighbor(this.bees[i]);
-					if(!this.abandonnedSites.contains(t))
-						this.abandonnedSites.add(t.clone());
+					if(!this.abandonedSites.contains(t))
+						this.abandonedSites.add(t.clone());
 					if(t.compareTo(s)<0)
 						s = t.clone();
 					
-					// Check if the site should be abandonned
-					if(!this.abandonnedSites.contains(this.bees[i]))
-						this.abandonnedSites.add(this.bees[i]);
+					// Checks if the site should be abandoned
+					if(!this.abandonedSites.contains(this.bees[i]))
+						this.abandonedSites.add(this.bees[i]);
 					
 					if(s.compareTo(this.bees[i])<0)
 						this.bees[i] = s.clone();
@@ -105,7 +103,7 @@ public class BeesAlgorithm extends Solver{
 				else{
 					do{
 						this.bees[i] = Solution.generateSolution(this.getInstance());
-					}while(this.abandonnedSites.contains(this.bees[i]));
+					}while(this.abandonedSites.contains(this.bees[i]));
 				}
 			}
 			Arrays.sort(this.bees);
@@ -115,10 +113,10 @@ public class BeesAlgorithm extends Solver{
 	}
 	
 	/**
-	 * Initialisation.
+	 * Initiation.
 	 */
-	private void initialisation(){
-		this.abandonnedSites = new ArrayList<Solution>();
+	private void initiation(){
+		this.abandonedSites = new ArrayList<Solution>();
 		this.bees = new Solution[this.colonySize];
 		for(int i = 0; i<this.colonySize; i++){
 			this.bees[i] = Solution.generateSolution(this.getInstance());
@@ -126,36 +124,36 @@ public class BeesAlgorithm extends Solver{
 	}
 
 	/**
-	 * Gets the colony size.
+	 * Gets the colony's size.
 	 *
-	 * @return the colony size
+	 * @return the colony's size
 	 */
 	public int getColonySize() {
 		return colonySize;
 	}
 
 	/**
-	 * Sets the colony size.
+	 * Sets the colony's size.
 	 *
-	 * @param colonySize the new colony size
+	 * @param colonySize the new size of the colony
 	 */
 	public void setColonySize(int colonySize) {
 		this.colonySize = colonySize;
 	}
 
 	/**
-	 * Gets the nb foragers.
+	 * Gets the number of foragers.
 	 *
-	 * @return the nb foragers
+	 * @return the number of foragers
 	 */
 	public int getNbForagers() {
 		return nbForagers;
 	}
 
 	/**
-	 * Sets the nb foragers.
+	 * Sets the number of foragers.
 	 *
-	 * @param nbForagers the new nb foragers
+	 * @param nbForagers the new number of foragers
 	 */
 	public void setNbForagers(int nbForagers) {
 		this.nbForagers = nbForagers;

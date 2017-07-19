@@ -7,7 +7,6 @@
 package metaheuristics;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -17,23 +16,22 @@ import definition.Instance;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * Solver running 4 solvers in parallel.
+ * Solver running 4 solvers of the same type in parallel.
  */
 public class Parallel extends Solver {
 	
 	/** The Constant NUM_THREADS. */
 	public static final int NUM_THREADS = 4;
 	
-	/** The num threads. */
+	/** The number of threads. */
 	private int numThreads;
 	
-	/** The solver. */
+	/** The type of solver. */
 	private Solver solver;
 
 	/**
-	 * Instantiates a new parallel.
+	 * Instantiates a new Parallel solver.
 	 *
 	 * @param instance the instance
 	 */
@@ -42,13 +40,13 @@ public class Parallel extends Solver {
 	}
 	
 	/**
-	 * Instantiates a new parallel.
+	 * Instantiates a new Parallel solver.
 	 *
 	 * @param instance the instance
-	 * @param numThreads the num threads
+	 * @param numThreads the number of threads
 	 */
 	public Parallel(Instance instance,int numThreads){
-		super(instance,"Calculs parallèles");
+		super(instance,"Parallel");
 		this.numThreads = numThreads;
 	}
 
@@ -96,10 +94,8 @@ public class Parallel extends Solver {
 		}
 	}
 
-	/**
-	 * Solve.
-	 *
-	 * @param timer the timer
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer){
 		Solver[] solvers = this.prepareSolvers();
@@ -118,23 +114,20 @@ public class Parallel extends Solver {
 		try {
 			exe.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*
+		
 		try {
 			for(int i = 0; i<NUM_THREADS; i++){
 				Benchmark.writeResults(solvers[i]);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//*/
 	}
 
 	/**
-	 * Prepare solvers.
+	 * Prepare the numThreads solvers.
 	 *
 	 * @return the solver[]
 	 */

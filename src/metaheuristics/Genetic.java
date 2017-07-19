@@ -18,40 +18,39 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * Solver utilisant un algorithme génétique.
+ * Implementation of a Genetic algorithm.
  */
 public class Genetic extends Solver{
 	
-	/** The proba mutation. */
+	/** The Constant PROBA_MUTATION. */
 	public static double PROBA_MUTATION = 0.001;
 	
-	/** The crossover ratio. */
+	/** The Constant CROSSOVER_RATIO. */
 	public static double CROSSOVER_RATIO = 0.85;
 	
-	/** The population size. */
+	/** The Constant POPULATION_SIZE. */
 	public static int POPULATION_SIZE = 100;
 
-	/** The proba mutation. */
+	/** The probability of mutation. */
 	protected double probaMutation;
 	
 	/** The crossover ratio. */
 	protected double crossoverRatio;
 	
-	/** The nh. */
+	/** The type of neighborhood. */
 	protected Neighborhood nh;
 	
-	/** The cross. */
+	/** The crossover technique. */
 	protected Crossover cross;
 
 	/**
-	 * Instantiates a new genetic.
+	 * Instantiates a new solver applying the genetic algorithm.
 	 *
-	 * @param inst the inst
-	 * @param nh the nh
-	 * @param c the c
-	 * @param probaMutation the proba mutation
+	 * @param inst the instance
+	 * @param nh the type of neighborhood
+	 * @param c the crossover technique
+	 * @param probaMutation the probability of mutation
 	 * @param crossoverRatio the crossover ratio
 	 */
 	public Genetic(Instance inst, Neighborhood nh, Crossover c, double probaMutation, double crossoverRatio) {
@@ -63,33 +62,33 @@ public class Genetic extends Solver{
 	}
 
 	/**
-	 * Instantiates a new genetic.
+	 * Instantiates a new solver applying the genetic algorithm.
 	 *
-	 * @param inst the inst
-	 * @param nh the nh
-	 * @param c the c
+	 * @param inst the instance
+	 * @param nh the type of neighborhood
+	 * @param c the crossover ratio
 	 */
 	public Genetic(Instance inst, Neighborhood nh, Crossover c) {
 		this(inst, nh, c, PROBA_MUTATION, CROSSOVER_RATIO);
 	}
 	
 	/**
-	 * Instantiates a new genetic.
+	 * Instantiates a new solver applying the genetic algorithm.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public Genetic(Instance inst){
 		this(inst, new Shift(), new TwoPointOut());
 	}
 
 	/**
-	 * Mutation.
+	 * Does a mutation if it happens.
 	 *
 	 * @param child the child
-	 * @return the solution
+	 * @return the child after a potential mutation
 	 */
 	public Solution mutation(Solution child){
-		if(Math.random()<this.probaMutation)
+		if(Math.random()<this.probaMutation) // checks if the mutation happens
 			nh.assignRandomNeighbor(child);
 		return child;
 	}
@@ -101,25 +100,14 @@ public class Genetic extends Solver{
 		this.setSolution(Greedy.solve(this.getInstance()));
 
 		while(!timer.isFinished()){
-			// Génération de la population initiale
-			ArrayList<Solution> population = new ArrayList<Solution>();
-			population.add(this.getSolution());
-			for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
-				population.add(Solution.generateSolution(this.getInstance()));
-
-			Collections.sort(population); // trie la population par ordre croissant de Cmax
+			// Generates the initial population
+			ArrayList<Solution> population = this.generateInitialPopulation();
 			
-			// Application de l'algorithme génétique
+			// Applies the genetic algorithm
 			while(population.get(0).getScore() != population.get((int)(population.size()*0.95)).getScore() && !timer.isFinished()){
-				ArrayList<Solution> newGeneration = new ArrayList<Solution>();
-				newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
-				for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
-					Solution parent1 = this.groupSelection(population);
-					Solution parent2 = this.groupSelection(population);
-					newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
-				}
+				ArrayList<Solution> newGeneration = this.generateNewGeneration(population);
 				
-				Collections.sort(newGeneration); // trie la nouvelle population par ordre croissant de Cmax
+				Collections.sort(newGeneration); // Sorts the new population by increasing score
 				population = newGeneration;
 				if(this.getSolution().getScore() > population.get(0).getScore()){
 					this.setSolution(population.get(0).clone());
@@ -129,10 +117,42 @@ public class Genetic extends Solver{
 	}
 	
 	/**
-	 * Pick a solution from the population with a non-uniform probability.
+	 * Generates an initial generation of the population.
 	 *
-	 * @param popu the popu
-	 * @return the solution
+	 * @return the new generation
+	 */
+	protected ArrayList<Solution> generateInitialPopulation(){
+		ArrayList<Solution> population = new ArrayList<Solution>();
+		population.add(this.getSolution());
+		for(int i = 1; i<Genetic.POPULATION_SIZE; i++)
+			population.add(Solution.generateSolution(this.getInstance()));
+
+		Collections.sort(population); // sorts the population by increasing score
+		return population;
+	}
+	
+	/**
+	 * Generates a new generation of the population.
+	 *
+	 * @param population the population
+	 * @return the new generation
+	 */
+	protected ArrayList<Solution> generateNewGeneration(List<Solution> population){
+		ArrayList<Solution> newGeneration = new ArrayList<Solution>();
+		newGeneration.addAll(population.subList(0,(int)(POPULATION_SIZE*(1.-this.crossoverRatio))-1)); // keep best 15% ---> elitism
+		for(int i = (int)(POPULATION_SIZE*(1.-crossoverRatio))-1; i<population.size(); i++){
+			Solution parent1 = this.groupSelection(population);
+			Solution parent2 = this.groupSelection(population);
+			newGeneration.add(this.mutation(this.cross.crossover(parent1, parent2)));
+		}
+		return newGeneration;
+	}
+	
+	/**
+	 * Picks a solution from the population with a non-uniform probability.
+	 *
+	 * @param popu the population
+	 * @return the picked solution
 	 */
 	public Solution groupSelection(List<Solution> popu){
 		double pick = Math.random();

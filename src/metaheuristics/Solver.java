@@ -10,25 +10,24 @@ import definition.Instance;
 import definition.Solution;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * Classe de base des Solvers.
+ * Abstract class for algorithms and metaheuristics.
  */
 public abstract class Solver {
 	
-	/** The solution. */
+	/** The best solution found. */
 	private Solution solution;
 	
-	/** The instance. */
+	/** The instance of the problem. */
 	private Instance instance;
 	
-	/** The name. */
+	/** The name of the algorithm. */
 	protected String name;
 
 	/**
 	 * Instantiates a new solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 * @param name the name
 	 */
 	public Solver(Instance inst, String name){
@@ -38,9 +37,9 @@ public abstract class Solver {
 	}
 	
 	/**
-	 * Gets the name.
+	 * Gets the name of the algorithm.
 	 *
-	 * @return Solver method name
+	 * @return the name of the algorithm
 	 */
 	public String getName(){
 		return this.name;
@@ -57,16 +56,16 @@ public abstract class Solver {
 	}
 
 	/**
-	 * Gets the solution.
+	 * Gets the best solution found for the attribute instance of the problem.
 	 *
-	 * @return the problem Solution
+	 * @return the best solution
 	 */
 	public Solution getSolution() {
 		return this.solution;
 	}
 
 	/**
-	 * Gets the single instance of Solver.
+	 * Gets the instance of the problem.
 	 *
 	 * @return problem data
 	 */
@@ -94,20 +93,20 @@ public abstract class Solver {
 	}
 
 	/**
-	 * Run the solver.
+	 * Solves the problem for the attribute instance respecting the given timer.
 	 * @param timer the timer
 	 */
 	public abstract void solve(Timer timer);
 
 	/**
-	 * Run the solver.
+	 * Runs the solver.
 	 */
 	public void solve() {
 		solve(new Timer(Long.MAX_VALUE));
 	}
 	
 	/**
-	 * Return a String with the name of the solver and its solution.
+	 * Return a String with the name of the solver and its best solution.
 	 *
 	 * @return the string
 	 */

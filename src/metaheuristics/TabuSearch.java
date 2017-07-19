@@ -15,9 +15,8 @@ import definition.Solution;
 import definition.TabuList;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class TabuSearch.
+ * Implementation of the Tabu Search metaheuristic.
  */
 public class TabuSearch extends LocalSearch{
 
@@ -25,10 +24,10 @@ public class TabuSearch extends LocalSearch{
 	private TabuList tabuList;
 
 	/**
-	 * Instantiates a new tabu search.
+	 * Instantiates a new Tabu Search solver.
 	 *
-	 * @param inst the inst
-	 * @param nh the nh
+	 * @param inst the instance
+	 * @param nh the type of neighborhood
 	 * @param s the s
 	 */
 	public TabuSearch(Instance inst, Neighborhood nh, Solution s) {
@@ -49,7 +48,7 @@ public class TabuSearch extends LocalSearch{
 			tabuList.add(currentSolution.clone());
 
 			Solution nextSolution = null;
-			for(Solution sol : neighbor.getNeighbors(currentSolution))
+			for(Solution sol : neighborhood.getNeighbors(currentSolution))
 				if(!tabuList.contains(sol) && (nextSolution == null || sol.compareTo(nextSolution) < 0))
 					nextSolution = sol.clone();
 

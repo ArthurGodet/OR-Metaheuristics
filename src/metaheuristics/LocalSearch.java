@@ -11,25 +11,24 @@ import definition.Neighborhood;
 import definition.Solution;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * Solver par recherche de minimum local pour un certain voisinage.
+ * Implementation of a Local Search algorithm.
  */
 public class LocalSearch extends Solver{
 	
-	/** The neighbor. */
-	protected Neighborhood neighbor;
+	/** The type of neighborhood. */
+	protected Neighborhood neighborhood;
 	
 	/**
-	 * Constructeur.
+	 * Instantiates a new Local Search solver based on a type of neighborhood and an initial solution.
 	 *
-	 * @param inst instance du problème
-	 * @param n voisinage à explorer
-	 * @param s solution de départ
+	 * @param inst the instance
+	 * @param n the neighborhood to explore
+	 * @param s the initial solution
 	 */
 	public LocalSearch(Instance inst, Neighborhood n, Solution s) {
 		super(inst,"Local Search");
-		this.neighbor = n;
+		this.neighborhood = n;
 		this.setSolution(s);
 	}
 	
@@ -39,7 +38,7 @@ public class LocalSearch extends Solver{
 	 * @param nh the new neighborhood
 	 */
 	public void setNeighborhood(Neighborhood nh){
-		this.neighbor = nh;
+		this.neighborhood = nh;
 	}
 
 	/* (non-Javadoc)
@@ -47,11 +46,9 @@ public class LocalSearch extends Solver{
 	 */
 	public void solve(Timer timer) {
 		double cmax = this.getSolution().getScore();
-		// la recherche dans le voisinage est faite de sorte à ne pas dégrader
-		// la solution lorsqu'une cuvette est atteinte, donc la boucle suivante est correcte.
 		do{
 			cmax = this.getSolution().getScore();
-			this.setSolution(this.neighbor.getBestNeighbor(this.getSolution()));
+			this.setSolution(this.neighborhood.getBestNeighbor(this.getSolution()));
 		}while(cmax>this.getSolution().getScore() && !timer.isFinished());
 	}
 }

@@ -7,22 +7,20 @@
 package metaheuristics;
 
 import definition.Instance;
-import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Shift;
 import util.Random;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Ils.
+ * Implementation of the ILS (Iterated Local Search) metaheuristic.
  */
 public class Ils extends Solver{
 	
 	/**
-	 * Instantiates a new ils.
+	 * Instantiates a new ILS solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public Ils(Instance inst) {
 		super(inst,"ILS");
@@ -49,11 +47,10 @@ public class Ils extends Solver{
 	}
 	
 	/**
-	 * Large step.
+	 * Does a large step. Here, cuts the solution's scheduling in two parts and reverses them.
 	 *
-	 * @param s the s
+	 * @param s the solution
 	 */
-	// coupe la solution en 2 et inverse les deux parties
 	public void largeStep(Solution s){
 		int n = this.getInstance().getSize();
 		int pos = Random.randomInteger(1, n-1);

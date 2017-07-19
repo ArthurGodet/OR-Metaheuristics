@@ -16,44 +16,43 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SimulatedAnnealing.
+ * Implementation of the Simulated Annealing metaheuristic.
  */
 public class SimulatedAnnealing extends Solver{
 	
-	/** The start temp. */
+	/** The Constant START_TEMP. */
 	public static double START_TEMP = 25.0;
 	
-	/** The tempfactor. */
-	public static double TEMPFACTOR = 0.99;  // doit être proche de 1
+	/** The Constant TEMPFACTOR. */
+	public static double TEMPFACTOR = 0.99;
 	
-	/** The sizefactor. */
-	public static int SIZEFACTOR = 1;  // n'apporte pas grand chose
+	/** The Constant SIZEFACTOR. */
+	public static int SIZEFACTOR = 1;
 	
-	/** The min percent. */
-	public static double MIN_PERCENT = 0.1; // doit être petit
+	/** The Constant MIN_PERCENT. */
+	public static double MIN_PERCENT = 0.1;
 	
-	/** The start temp. */
+	/** The starting temperature. */
 	private double startTemp;
 
-	/** The sizefactor. */
+	/** The size factor. */
 	private int sizefactor;
 
-	/** The tempfactor. */
+	/** The temperature factor. */
 	private double tempfactor;
 
-	/** The minpercent. */
+	/** The minimum accepted percent. */
 	private double minpercent;
 
 	/**
-	 * Instantiates a new simulated annealing.
+	 * Instantiates a new Simulated Annealing solver.
 	 *
-	 * @param inst the inst
-	 * @param startTemp the start temp
-	 * @param tempfactor the tempfactor
-	 * @param sizefactor the sizefactor
-	 * @param minpercent the minpercent
+	 * @param inst the instance
+	 * @param startTemp the starting temperature
+	 * @param tempfactor the temperature factor
+	 * @param sizefactor the size factor
+	 * @param minpercent the minimum accepted percent
 	 */
 	public SimulatedAnnealing(Instance inst, double startTemp, double tempfactor, int sizefactor, double minpercent) {
 		super(inst,"Simulated Annealing");
@@ -64,9 +63,9 @@ public class SimulatedAnnealing extends Solver{
 	}
 	
 	/**
-	 * Instantiates a new simulated annealing.
+	 * Instantiates a new Simulated Annealing solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public SimulatedAnnealing(Instance inst) {
 		this(inst,START_TEMP,TEMPFACTOR,SIZEFACTOR,MIN_PERCENT);
@@ -77,13 +76,13 @@ public class SimulatedAnnealing extends Solver{
 	 */
 	public void solve(Timer timer) {
 		this.setSolution(Greedy.solve(this.getInstance()).clone());
-		// Initialiser avec une solution
+		// Initiates a new solution
 		Solution s = Greedy.solve(this.getInstance());
 
-		// Initialisation des variables
+		// Initiates the variables
 		double temp = this.startTemp;
 
-		// Application de l'algorithme
+		// Applies the Simulated Annealing core algorithm
 		int count = 0;
 		int a = (this.getInstance() instanceof InstanceFlowshop ? ((InstanceFlowshop)this.getInstance()).getNbMachines() : this.getInstance().getSize());
 		int L = this.sizefactor*this.getInstance().getSize()*(a-1);

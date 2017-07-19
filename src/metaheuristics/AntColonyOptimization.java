@@ -16,9 +16,8 @@ import definition.Solution;
 import neighborhoods.Shift;
 import util.Timer;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AntColonyOptimization.
+ * Implementation of the Ant Colony Optimization metaheuristic.
  */
 public class AntColonyOptimization extends Solver {
 	
@@ -49,40 +48,40 @@ public class AntColonyOptimization extends Solver {
 	/** The number of ants. */
 	private int nbAnts;
 	
-	/** The alpha. */
+	/** The alpha parameter. */
 	private double alpha;
 	
-	/** The rho. */
+	/** The rho parameter. */
 	private double rho;
 	
-	/** The beta. */
+	/** The beta parameter. */
 	private double beta;
 	
-	/** The tho min. */
+	/** The minimum accepted value for tho. */
 	private double thoMin;
 	
-	/** The tho max. */
+	/** The maximum accepted value for tho. */
 	private double thoMax;
 	
 	/**
-	 * Instantiates a new ant colony optimization.
+	 * Instantiates a new ant colony optimization solver.
 	 *
-	 * @param inst the inst
+	 * @param inst the instance
 	 */
 	public AntColonyOptimization(Instance inst) {
 		this(inst,NB_ANTS,ALPHA,RHO,BETA,THO_MIN,THO_MAX);
 	}
 	
 	/**
-	 * Instantiates a new ant colony optimization.
+	 * Instantiates a new ant colony optimization solver.
 	 *
-	 * @param inst the inst
-	 * @param nbAnts the nb ants
-	 * @param alpha the alpha
-	 * @param rho the rho
-	 * @param beta the beta
-	 * @param thoMin the tho min
-	 * @param thoMax the tho max
+	 * @param inst the instance
+	 * @param nbAnts the number of ants
+	 * @param alpha the alpha parameter
+	 * @param rho the rho parameter
+	 * @param beta the beta parameter
+	 * @param thoMin the minimum accepted value for tho
+	 * @param thoMax the maximum accepted value for tho
 	 */
 	public AntColonyOptimization(Instance inst,int nbAnts, double alpha, double rho, double beta, double thoMin, double thoMax) {
 		super(inst, "Ant Colony Optimization");
@@ -94,13 +93,11 @@ public class AntColonyOptimization extends Solver {
 		this.thoMax = thoMax;
 	}
 	
-	/**
-	 * Solve.
-	 *
-	 * @param timer the timer
+	/* (non-Javadoc)
+	 * @see metaheuristics.Solver#solve(util.Timer)
 	 */
 	public void solve(Timer timer){
-		this.initialisation();
+		this.initiation();
 		// Loop for improvements of the solution.
 		while(!timer.isFinished()){
 			for(int k = 0; k<this.nbAnts; k++){
@@ -123,9 +120,9 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Initialize the pheromone trail.
+	 * Initializes the pheromone trail.
 	 */
-	public void initialisation(){
+	public void initiation(){
 		this.ants = new Solution[this.nbAnts];
 		
 		this.pheromoneTrails = new double[this.getInstance().getSize()][this.getInstance().getSize()];
@@ -137,10 +134,10 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Generate the candidates corresponding to the job selected.
+	 * Generates the candidates corresponding to the selected job/city.
 	 *
-	 * @param jobSelected the job selected
-	 * @return the list
+	 * @param jobSelected the selected job/city
+	 * @return the list of candidates
 	 */
 	public List<Integer> generateCandidates(int jobSelected){
 		List<Integer> candidates = new ArrayList<Integer>();
@@ -151,12 +148,12 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Return the probabilities associated to each candidate.
+	 * Returns the probabilities associated to each candidate.
 	 *
 	 * @param candidates the candidates
 	 * @param pos the position
-	 * @param k the k
-	 * @return the double[]
+	 * @param k the number of the ant
+	 * @return the probabilities
 	 */
 	public double[] proba(List<Integer> candidates, int pos, int k){
 		double[] proba = new double[candidates.size()];
@@ -171,23 +168,23 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Pheromone factor.
+	 * Gets the pheromone factor.
 	 *
 	 * @param job the job
-	 * @param pos the pos
-	 * @return the double
+	 * @param pos the position
+	 * @return the pheromone factor
 	 */
 	public double pheromoneFactor(int job, int pos){
 		return this.pheromoneTrails[job][pos];
 	}
 	
 	/**
-	 * Heuristic factor.
+	 * Computes the heuristic factor.
 	 *
 	 * @param job the job
-	 * @param pos the pos
-	 * @param k the k
-	 * @return the double
+	 * @param pos the position
+	 * @param k the number of the ant
+	 * @return the heuristic factor
 	 */
 	public double heuristicFactor(int job, int pos, int k){
 		this.ants[k].setScheduling(job, pos);
@@ -200,12 +197,11 @@ public class AntColonyOptimization extends Solver {
 	}
 	
 	/**
-	 * Draw.
+	 * Draws a random element, the pheromones and heuristic factors influencing the result.
 	 *
-	 * @param proba the proba
-	 * @return the int
+	 * @param proba the probabilities
+	 * @return the id of the element
 	 */
-	// Tire un élément au hasard en prenant en compte les proba des pheromones/heuristic
 	public int draw(double[] proba){
 		double prob = Math.random();
 		int num = 0;
@@ -245,108 +241,108 @@ public class AntColonyOptimization extends Solver {
 	}
 
 	/**
-	 * Gets the nb ants.
+	 * Gets the number of ants.
 	 *
-	 * @return the nb ants
+	 * @return the number of ants
 	 */
 	public int getNbAnts() {
 		return nbAnts;
 	}
 
 	/**
-	 * Sets the nb ants.
+	 * Sets the number of ants.
 	 *
-	 * @param nbAnts the new nb ants
+	 * @param nbAnts the new number of ants
 	 */
 	public void setNbAnts(int nbAnts) {
 		this.nbAnts = nbAnts;
 	}
 
 	/**
-	 * Gets the alpha.
+	 * Gets the alpha parameter.
 	 *
-	 * @return the alpha
+	 * @return the alpha parameter
 	 */
 	public double getAlpha() {
 		return alpha;
 	}
 
 	/**
-	 * Sets the alpha.
+	 * Sets the alpha parameter.
 	 *
-	 * @param alpha the new alpha
+	 * @param alpha the new alpha parameter
 	 */
 	public void setAlpha(double alpha) {
 		this.alpha = alpha;
 	}
 
 	/**
-	 * Gets the rho.
+	 * Gets the rho parameter.
 	 *
-	 * @return the rho
+	 * @return the rho parameter
 	 */
 	public double getRho() {
 		return rho;
 	}
 
 	/**
-	 * Sets the rho.
+	 * Sets the rho parameter.
 	 *
-	 * @param rho the new rho
+	 * @param rho the new rho parameter
 	 */
 	public void setRho(double rho) {
 		this.rho = rho;
 	}
 
 	/**
-	 * Gets the beta.
+	 * Gets the beta parameter.
 	 *
-	 * @return the beta
+	 * @return the beta parameter
 	 */
 	public double getBeta() {
 		return beta;
 	}
 
 	/**
-	 * Sets the beta.
+	 * Sets the beta parameter.
 	 *
-	 * @param beta the new beta
+	 * @param beta the new beta parameter
 	 */
 	public void setBeta(double beta) {
 		this.beta = beta;
 	}
 
 	/**
-	 * Gets the THO MIN.
+	 * Gets the minimum accepted value for tho.
 	 *
-	 * @return THO MIN
+	 * @return the minimum accepted value for tho
 	 */
 	public double getThoMin() {
 		return thoMin;
 	}
 
 	/**
-	 * Sets the THO MIN.
+	 * Sets the minimum accepted value for tho.
 	 *
-	 * @param thoMin the new tho min
+	 * @param thoMin the new minimum accepted value for tho
 	 */
 	public void setThoMin(double thoMin) {
 		this.thoMin = thoMin;
 	}
 
 	/**
-	 * Gets the THO MAX.
+	 * Gets the maximum accepted value for tho.
 	 *
-	 * @return THO MAX
+	 * @return the maximum accepted value for tho
 	 */
 	public double getThoMax() {
 		return thoMax;
 	}
 
 	/**
-	 * Sets the THO MAX.
+	 * Sets the maximum accepted value for tho.
 	 *
-	 * @param thoMax the new tho max
+	 * @param thoMax the new maximum accepted value for tho
 	 */
 	public void setThoMax(double thoMax) {
 		this.thoMax = thoMax;
