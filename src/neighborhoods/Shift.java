@@ -12,9 +12,9 @@ import definition.Neighborhood;
 import definition.Solution;
 import util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Shift.
+ * The Shift type of neighborhood. The neighbors are computing by shifting part of the given 
+ * solution's scheduling.
  */
 public class Shift extends Neighborhood {
 
@@ -23,19 +23,19 @@ public class Shift extends Neighborhood {
 	 */
 	public static class ShiftIterator implements Iterator<Solution> {
 
-		/** The sol. */
-		private Solution sol;
+		/** The solution. */
+		private Solution solution;
 
-		/** The j. */
+		/** The indexes. */
 		private int i, j;
 
 		/**
 		 * Instantiates a new shift iterator.
 		 *
-		 * @param sol the sol
+		 * @param solution the solution
 		 */
-		public ShiftIterator(Solution sol) {
-			this.sol = sol.clone();
+		public ShiftIterator(Solution solution) {
+			this.solution = solution.clone();
 			i = 0;
 			j = 0;
 		}
@@ -44,7 +44,7 @@ public class Shift extends Neighborhood {
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			return i != sol.getInstance().getSize()-2 || j != sol.getInstance().getSize()-1;
+			return i != solution.getInstance().getSize()-2 || j != solution.getInstance().getSize()-1;
 		}
 
 		/* (non-Javadoc)
@@ -52,15 +52,15 @@ public class Shift extends Neighborhood {
 		 */
 		public Solution next() {
 			j++;
-			if(j == sol.getInstance().getSize()) {
-				sol.leftShift(i, j-1);
+			if(j == solution.getInstance().getSize()) {
+				solution.leftShift(i, j-1);
 				i++;
 				j = i+1;
 			}
-			sol.swap(i, j);
-			sol.evaluate();
+			solution.swap(i, j);
+			solution.evaluate();
 
-			return sol;
+			return solution;
 		}
 
 	}
@@ -69,18 +69,18 @@ public class Shift extends Neighborhood {
 	 * @see definition.Neighborhood#assignRandomNeighbor(definition.Solution)
 	 */
 	@Override
-	public void assignRandomNeighbor(Solution sol) {
-		int[] couple = Random.randomCouple(0, sol.getInstance().getSize());
-		sol.rightShift(couple[0], couple[1]);
-		sol.evaluate();
+	public void assignRandomNeighbor(Solution solution) {
+		int[] couple = Random.randomCouple(0, solution.getInstance().getSize());
+		solution.rightShift(couple[0], couple[1]);
+		solution.evaluate();
 	}
 
 	/* (non-Javadoc)
 	 * @see definition.Neighborhood#getNeighbors(definition.Solution)
 	 */
 	@Override
-	public Iterable<Solution> getNeighbors(Solution sol) {
-		final Solution s = sol;
+	public Iterable<Solution> getNeighbors(Solution solution) {
+		final Solution s = solution;
 		return new Iterable<Solution>() {
 			public Iterator<Solution> iterator() {
 				return new ShiftIterator(s);

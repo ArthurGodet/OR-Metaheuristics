@@ -46,7 +46,7 @@ public class Greedy extends Solver{
 			for(int i = 1; i<this.getInstance().getSize(); i++)
 				cities.add(i);
 			Solution sol = new Solution(this.getInstance());
-			sol.setOrder(0,0);
+			sol.setScheduling(0,0);
 			for(int k = 1; k<this.getInstance().getSize(); k++){
 				int city = cities.get(0);
 				double dist = inst.getDistance(sol.getJob(k-1),city);
@@ -57,7 +57,7 @@ public class Greedy extends Solver{
 					}
 				}
 				cities.remove(new Integer(city));
-				sol.setOrder(city,k);
+				sol.setScheduling(city,k);
 			}
 			sol.evaluate();
 			this.setSolution(sol);
@@ -96,7 +96,7 @@ public class Greedy extends Solver{
 	 * @param k the k
 	 */
 	private void ordonnancerJobNEH(int j, int k) { 
-		this.getSolution().setOrder(j,k);
+		this.getSolution().setScheduling(j,k);
 		this.getSolution().evaluate();
 
 		// On cherche le meilleur emplacement pour le Job j dans l'Ordonnancement actuel
@@ -130,7 +130,7 @@ public class Greedy extends Solver{
 			this.id = id;
 			this.duree = 0;
 			for(int j = 0; j<inst.getNbMachines(); j++)
-				this.duree += inst.getDureeOperation(this.id,j);
+				this.duree += inst.getDuration(this.id,j);
 		}
 		
 		/**

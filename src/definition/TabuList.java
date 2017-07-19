@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
-// TODO: Auto-generated Javadoc
 /**
  * Container used in the TabuSearch Solver.
  */
@@ -40,37 +39,37 @@ public class TabuList {
 	}
 	
 	/**
-	 * Size.
+	 * Gets the size of the list.
 	 *
-	 * @return the int
+	 * @return the size of the list
 	 */
 	public int size() {
 		return set.size();
 	}
 	
 	/**
-	 * Adds the.
+	 * Adds the solution to the tabu list.
 	 *
-	 * @param s the s
+	 * @param s the solution to add
 	 */
-	public void add(Solution s)
+	public void add(Solution solution)
 	{
 		// remove oldest solution if the container is full
 		if(size() == capacity)
 			set.remove(queue.poll());
 		
-		set.add(s);
-		queue.add(s);
+		set.add(solution);
+		queue.add(solution);
 	}
 	
 	/**
-	 * Contains.
+	 * Checks if the list contains the solution
 	 *
 	 * @param s the s
 	 * @return true, if successful
 	 */
-	public boolean contains(Solution s)
+	public boolean contains(Solution solution)
 	{
-		return set.contains(s);
+		return set.contains(solution);
 	}
 }

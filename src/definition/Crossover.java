@@ -6,18 +6,17 @@
  */
 package definition;
 
-// TODO: Auto-generated Javadoc
 /**
  * The crossover interface.
  */
 public interface Crossover {
 
 	/**
-	 * Crossover.
+	 * Do a type of crossover technique to create a child from the two parents.
 	 *
 	 * @param parent1 the parent 1
 	 * @param parent2 the parent 2
-	 * @return the solution
+	 * @return the solution from the genetic crossover
 	 */
 	public Solution crossover(Solution parent1, Solution parent2);
 }

@@ -43,7 +43,7 @@ public class Grasp extends Solver{
 			Solution s = new Solution(this.getInstance());
 			List<Integer> lj = (this.getInstance() instanceof InstanceFlowshop ? creerListeJob() : creerListeVilles());
 			for(int j = 0; j<this.getInstance().getSize(); j++)
-				s.setOrder(lj.remove((int)(Math.random()*(lj.size()/4))),j);
+				s.setScheduling(lj.remove((int)(Math.random()*(lj.size()/4))),j);
 			s.evaluate();
 			
 			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s);
@@ -54,6 +54,11 @@ public class Grasp extends Solver{
 		}while(!timer.isFinished());
 	}
 
+	/**
+	 * Creer liste villes.
+	 *
+	 * @return the list
+	 */
 	private List<Integer> creerListeVilles() {
 		List<Integer> l = new ArrayList<Integer>();
 		for(int i = 0; i<this.getInstance().getSize(); i++)
@@ -103,7 +108,7 @@ public class Grasp extends Solver{
 			this.id = id;
 			this.duree = 0;
 			for(int j = 0; j<inst.getNbMachines(); j++)
-				this.duree += inst.getDureeOperation(this.id,j);
+				this.duree += inst.getDuration(this.id,j);
 		}
 
 		/**

@@ -9,36 +9,35 @@ package definition;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * Classe de base pour explorer les voisinages de solutions.
+ * Abstract class for the different types of neighborhood that can be built from a solution.
  */
 public abstract class Neighborhood {
 
 	/**
-	 * Gets the random neighbor.
+	 * Computes randomly a neighbor of the solution
 	 *
-	 * @param sol the sol
+	 * @param sol the solution
 	 */
-	public abstract void assignRandomNeighbor(Solution sol);
+	public abstract void assignRandomNeighbor(Solution solution);
 
 	/**
-	 * Gets the neighbors.
+	 * Gets the neighborhood of the solution.
 	 *
-	 * @param sol the sol
-	 * @return un iterable sur les solutions (à cloner pour manipuler) dans le voisinage de sol
+	 * @param sol the solution
+	 * @return an Iterable object on the solutions (that need to be cloned in order to be manipulated)
 	 */
-	public abstract Iterable<Solution> getNeighbors(Solution sol);
+	public abstract Iterable<Solution> getNeighbors(Solution solution);
 
 	/**
-	 * Gets the best neighbor.
+	 * Gets the best neighbor of the solution.
 	 *
-	 * @param sol the sol
-	 * @return une meilleure solution dans le voisinage de sol
+	 * @param sol the solution
+	 * @return a best solution in the solution's neighborhood
 	 */
-	public Solution getBestNeighbor(Solution sol) {
-		Solution best = sol.clone();
-		for(Solution s : getNeighbors(sol))
+	public Solution getBestNeighbor(Solution solution) {
+		Solution best = solution.clone();
+		for(Solution s : getNeighbors(solution))
 			if(s.compareTo(best) < 0)
 				best = s.clone();
 		return best;
@@ -47,12 +46,12 @@ public abstract class Neighborhood {
 	/**
 	 * Gets the neighbors list.
 	 *
-	 * @param sol the sol
-	 * @return la liste des solutions dans le voisinage de sol
+	 * @param sol the solution
+	 * @return the list of solution forming the neighborhood of the solution parameter
 	 */
-	public List<Solution> getNeighborsList(Solution sol) {
+	public List<Solution> getNeighborsList(Solution solution) {
 		List<Solution> list = new ArrayList<Solution>();
-		for(Solution s : getNeighbors(sol))
+		for(Solution s : getNeighbors(solution))
 			list.add(s.clone());
 		return list;
 	}

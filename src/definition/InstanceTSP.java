@@ -1,27 +1,39 @@
+/*
+ * @author Arthur Godet
+ * @author Joachim Hotonnier
+ * @author Marie Deur
+ * @since 29/03/2017
+ */
 package definition;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Representation of an instance for the Traveling Salesman Problem.
+ */
 public class InstanceTSP extends Instance{
+	
+	/** The number of cities. */
 	private int nbCities;
 	
+	/** The distances between cities. */
 	private double[][] distance;
 	
 	
 	/**
-	 * Construit un problème à partir d'un fichier.
+	 * Builds the instance from a text file with a certain format.
 	 *
-	 * @param s nom du fichier
+	 * @param s name of the file
 	 */
 	public InstanceTSP(String s) {
-		this.problem = "Traveler Salesman Problem";
+		this.problem = "Traveling Salesman Problem";
 		this.name = s;
 		try {
 			Scanner scanner = new Scanner(new FileReader(s));
 
-			// lecture du nombre de villes
+			// reads the number of cities
 			for(int i = 0; i<3; i++)
 				scanner.nextLine();
 			this.nbCities = new Integer(scanner.nextLine().substring(11));
@@ -37,6 +49,7 @@ public class InstanceTSP extends Instance{
 				index++;
 			}
 
+			// computes the distance between cities from the coordinates
 			this.distance = new double[this.nbCities][this.nbCities];
 			for(int i = 0; i<this.nbCities; i++){
 				for(int j = 0; j<this.nbCities; j++){
@@ -46,16 +59,26 @@ public class InstanceTSP extends Instance{
 			scanner.close();
 		}
 		catch (IOException e) {
-			System.err.println("Erreur : " + e.getMessage()) ;
+			System.err.println("Error : " + e.getMessage()) ;
 			System.exit(2) ;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see definition.Instance#getSize()
+	 */
 	@Override
 	public int getSize() {
 		return nbCities;
 	}
 	
+	/**
+	 * Gets the distance.
+	 *
+	 * @param city1 the city 1
+	 * @param city2 the city 2
+	 * @return the distance
+	 */
 	public double getDistance(int city1, int city2){
 		return this.distance[city1][city2];
 	}

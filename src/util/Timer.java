@@ -6,7 +6,6 @@
  */
 package util;
 
-// TODO: Auto-generated Javadoc
 /**
  * Utility class to get elapsed and remaining time.
  */

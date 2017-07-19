@@ -18,18 +18,14 @@ Bonus :
 [X] une classe Recuit Simule
 [X] Tester/ameliorer les parametres du recuit simule
 [X] une classe Fourmis
-[ ] Analyse statistique du role des parametres des Fourmis sur plusieurs instances
 [X] une classe Abeilles
-[ ] une classe ANN
 [X] une classe Genetique
 [X] Remplacer les Enum par des Class autonomes
 [X] une classe Tabou
-[ ] Analyse statistique des voisinages et croisements génétiques dans le Memetic
-[ ] Ajouter un Tabou à la fin de chaque algo en essayant les différents voisinages ???
 
 Une fois que tout le reste est fait :
-[ ] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
-[ ] Mettre en place tous les commentaires nécessaires
+[X] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
+[X] Mettre en place tous les commentaires nécessaires
 [ ] ajouter une licence GNU GPL/LPGL ou BSD ou MIT au projet (ATTENTION : ne pas oublier de rajouter le texte obligatoire a chaque fichier)
 [ ] faire un README aux petits oignons
 

@@ -2,7 +2,7 @@
  * @author Arthur Godet
  * @author Joachim Hotonnier
  * @author Marie Deur
- * @since 29/03/2017
+ * @since 19/03/2017
  */
 package definition;
 
@@ -10,45 +10,44 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
 /**
- * Représentation d'un problème de flowshop de permutation.
+ * Representation of an instance for the permutation flow shop problem.
  */
 public class InstanceFlowshop extends Instance{
 	
-	/** The nb jobs. */
+	/** The number of jobs. */
 	private int nbJobs;
 	
-	/** The nb machines. */
+	/** The number of machines. */
 	private int nbMachines;
 	
-	/** The durees operations. */
-	private int[][] dureesOperations;
+	/** The duration of the different operations. */
+	private int[][] durations;
 
 	/**
-	 * Construit un problème à partir d'un fichier.
+	 * Builds the instance from a text file with a certain format.
 	 *
-	 * @param s nom du fichier
+	 * @param s name of the file.
 	 */
 	public InstanceFlowshop(String s) {
-		this.problem = "Flowshop de permutation";
+		this.problem = "Permutation flow shop";
 		this.name = s;
 		try {
 			Scanner scanner = new Scanner(new FileReader(s));
 
-			// lecture du nombre de jobs
+			// reads the number of jobs
 			if (scanner.hasNextInt())
 				this.nbJobs = scanner.nextInt();
 
-			// lecture du nombre de machines
+			// reads the number of machines
 			if (scanner.hasNextInt())
 				this.nbMachines = scanner.nextInt();
 
-			this.dureesOperations = new int[this.nbJobs][this.nbMachines];
+			this.durations = new int[this.nbJobs][this.nbMachines];
 			int job = 0;
 			int machine = 0;
 			while (scanner.hasNextInt()) {
-				this.dureesOperations[job][machine] = scanner.nextInt();
+				this.durations[job][machine] = scanner.nextInt();
 				if (job < nbJobs - 1)
 					job++;
 				else {
@@ -59,31 +58,34 @@ public class InstanceFlowshop extends Instance{
 			scanner.close();
 		}
 		catch (IOException e) {
-			System.err.println("Erreur : " + e.getMessage()) ;
+			System.err.println("Error : " + e.getMessage()) ;
 			System.exit(2) ;
 		}
 	}
 
 	/**
-	 * Gets the nb machines.
+	 * Gets the number of machines.
 	 *
-	 * @return le nombre de machines du problème
+	 * @return the number of machines for this instance
 	 */
 	public int getNbMachines() {
 		return nbMachines;
 	}
 
 	/**
-	 * Gets the duree operation.
+	 * Gets the duration of the operation done by the machine for the job.
 	 *
 	 * @param job the job
 	 * @param machine the machine
-	 * @return la durée de traitement d'un job sur une machine
+	 * @return the duration of the operation done by the machine for the job
 	 */
-	public int getDureeOperation(int job, int machine){
-		return this.dureesOperations[job][machine];
+	public int getDuration(int job, int machine){
+		return this.durations[job][machine];
 	}
 
+	/* (non-Javadoc)
+	 * @see definition.Instance#getSize()
+	 */
 	@Override
 	public int getSize() {
 		return this.nbJobs;

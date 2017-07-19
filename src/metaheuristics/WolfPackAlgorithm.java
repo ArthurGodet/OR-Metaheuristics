@@ -106,11 +106,11 @@ public class WolfPackAlgorithm extends Solver{
 		int n = (int)(this.getInstance().getSize()*rate);
 		// We keep information from the best hunter
 		for(int i = 0; i < n; i++)
-			sol.setOrder(jobs.get(i), this.wolves[0].getIndex(jobs.get(i)));
+			sol.setScheduling(jobs.get(i), this.wolves[0].getIndex(jobs.get(i)));
 		// We complete in a random hunt
 		int insert = sol.getIndex(-1);
 		for(int i = n; i < this.getInstance().getSize(); i++){
-			sol.setOrder(jobs.get(i), insert);
+			sol.setScheduling(jobs.get(i), insert);
 			while(insert < this.getInstance().getSize() && sol.getJob(insert) != -1)
 				insert++;
 		}

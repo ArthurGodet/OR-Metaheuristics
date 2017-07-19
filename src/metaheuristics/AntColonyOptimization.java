@@ -112,7 +112,7 @@ public class AntColonyOptimization extends Solver {
 				while(candidates.size() != 0){
 					double[] proba = proba(candidates,pos,k);
 					int candidateSelected = draw(proba);
-					ants[k].setOrder(candidates.get(candidateSelected),pos);
+					ants[k].setScheduling(candidates.get(candidateSelected),pos);
 					candidates.remove(candidateSelected);
 					pos++;
 				}
@@ -190,10 +190,10 @@ public class AntColonyOptimization extends Solver {
 	 * @return the double
 	 */
 	public double heuristicFactor(int job, int pos, int k){
-		this.ants[k].setOrder(job, pos);
+		this.ants[k].setScheduling(job, pos);
 		this.ants[k].evaluate();
 		double Cmax = this.ants[k].getScore();
-		this.ants[k].setOrder(-1,pos);
+		this.ants[k].setScheduling(-1,pos);
 		this.ants[k].evaluate();
 		
 		return 1/((double)(Cmax-this.ants[k].getScore()));

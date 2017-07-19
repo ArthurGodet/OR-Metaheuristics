@@ -2,24 +2,25 @@
  * @author Arthur Godet
  * @author Joachim Hotonnier
  * @author Marie Deur
- * @since 29/03/2017
+ * @since 19/03/2017
  */
 package definition;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
-// TODO: Auto-generated Javadoc
 /**
- * Représentation d'un problème de flowshop de permutation.
+ * Abstract class for the different type of instances. Each type of instance represents a certain
+ * problem.
  */
 public abstract class Instance {
-	/** The name of the instance. */
+	/** The name of the specific instance of the problem. */
 	protected String name;
 	/** The name of the problem. */
 	protected String problem;
 	
+	/**
+	 * Gets the size.
+	 *
+	 * @return the size
+	 */
 	public abstract int getSize();
 
 	

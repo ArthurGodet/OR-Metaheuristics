@@ -11,29 +11,29 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * Classe module pour la génération d'aléatoire.
+ * Module class for generating randomness.
  */
 public class Random {
 
 	/**
-	 * Random integer.
+	 * Returns a random integer between from (inclusive) and to (exclusive).
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return un entier aléatoire entre from inclus et to exclus
+	 * @param from
+	 * @param to
+	 * @return a random integer between from (inclusive) and to (exclusive)
 	 */
 	public static int randomInteger(int from, int to) {
 		return from + (int)(Math.random()*(to - from));
 	}
 
 	/**
-	 * Random couple.
+	 * Returns a couple of integers both between from (inclusive) and to (exclusive), and the first
+	 * integer being strictly smaller than the second one.
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return un couple aléatoire d'entiers strictement croissant entre from inclus et to exclus
+	 * @param from
+	 * @param to
+	 * @return a couple of integers
 	 */
 	public static int[] randomCouple(int from, int to) {
 		int i = randomInteger(from, to);
@@ -47,11 +47,12 @@ public class Random {
 	}
 
 	/**
-	 * Random triplet.
+	 * Returns a triplet of integers each one between from (inclusive) and to (exclusive), 
+	 * with integer being strictly smaller than the next.
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return un triplet aléatoire d'entiers strictement croissant entre from inclus et to exclus
+	 * @param from
+	 * @param to
+	 * @return a triplet of integers
 	 */
 	public static int[] randomTriplet(int from, int to) {
 		int i = randomInteger(from, to);
@@ -70,23 +71,24 @@ public class Random {
 	}
 
 	/**
-	 * Random two points.
+	 * Generates two random integers between from+1 (inclusive) and to (exclusive).
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return un couple aléatoire d'entiers strictement croissant entre from exclus et to exclus
+	 * @param from
+	 * @param to
+	 * @return a couple of integers.
 	 */
 	public static int[] randomTwoPoints(int from, int to) {
 		return randomCouple(from+1, to);
 	}
 
 	/**
-	 * Random sample.
+	 * Randomly generates a list of k integers (without repetition), each integer being between
+	 * from (inclusive) and to (exclusive).
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @param k the k
-	 * @return une liste de k entiers aléatoires sans doublons entre from inclus et to exclus
+	 * @param from
+	 * @param to
+	 * @param k the number of integers
+	 * @return a list of k integers 
 	 */
 	public static List<Integer> randomSample(int from, int to, int k) {
 		List<Integer> l = new ArrayList<Integer>();
@@ -97,11 +99,11 @@ public class Random {
 	}
 
 	/**
-	 * Random shuffle.
+	 * Generates a random sequence of the integers between from and to.
 	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return the list
+	 * @param from
+	 * @param to
+	 * @return the list of integers
 	 */
 	public static List<Integer> randomShuffle(int from, int to) {
 		return randomSample(from, to, to-from);

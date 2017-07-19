@@ -11,14 +11,14 @@ import java.io.IOException;
 
 import metaheuristics.Solver;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Benchmark.
+ * The Class Benchmark contains method for writing results of tests. The methods' behavior is 
+ * adapted depending on the meta-heuristic used (Solver objects) and the instance of the problem.
  */
 public class Benchmark {
 	
 	/**
-	 * Write results.
+	 * Write results got by the Solver object in the appropriate text file.
 	 *
 	 * @param solver the solver
 	 * @throws IOException Signals that an I/O exception has occurred.
@@ -30,7 +30,7 @@ public class Benchmark {
 	}
 	
 	/**
-	 * Presentation.
+	 * Write the name of the instance in the appropriate text file.
 	 *
 	 * @param solver the solver
 	 * @param instance the instance

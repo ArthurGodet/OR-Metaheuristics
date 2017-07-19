@@ -10,9 +10,11 @@ import definition.Crossover;
 import definition.Solution;
 import util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * The one-point crossover.
+ * The one-point crossover technique. After having randomly picked a cutting point, a child is
+ * created taking the first part of the first parent in respect to the cutting point. Then the
+ * child sequence (the DNA) is completed with jobs from the second parent in the same order as
+ * they appear in the second parent's sequence. 
  */
 public class OnePoint implements Crossover {
 
@@ -21,9 +23,9 @@ public class OnePoint implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int coupure = Random.randomInteger(1, child.getInstance().getSize());
+		int cut = Random.randomInteger(1, child.getInstance().getSize());
 
-		child.copyRange(parent1, 0, coupure);
+		child.copyRange(parent1, 0, cut);
 		child.merge(parent2);
 
 		child.evaluate();

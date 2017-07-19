@@ -10,9 +10,11 @@ import definition.Crossover;
 import definition.Solution;
 import util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * The position based crossover.
+ * The position based crossover technique. The first nbInherited jobs of the child are randomly
+ * selected from the first parent and put at the same place that the one they have in the first
+ * parent's sequence. Then the child's sequence is completed with jobs of the second parent, 
+ * respecting the order of appearance in the sequence.
  */
 public class PositionBased implements Crossover {
 
@@ -21,11 +23,11 @@ public class PositionBased implements Crossover {
 	 */
 	public Solution crossover(Solution parent1, Solution parent2) {
 		Solution child = new Solution(parent1.getInstance());
-		int nbHerites = Random.randomInteger(1, child.getInstance().getSize());
+		int nbInherited = Random.randomInteger(1, child.getInstance().getSize());
 
-		// ajoute des jobs choisis aléatoirement depuis parent1
-		for(Integer i : Random.randomSample(0, child.getInstance().getSize(), nbHerites))
-			child.setOrder(parent1.getJob(i),i);
+		// add jobs randomly selected from parent1
+		for(Integer i : Random.randomSample(0, child.getInstance().getSize(), nbInherited))
+			child.setScheduling(parent1.getJob(i),i);
 
 		child.merge(parent2);
 

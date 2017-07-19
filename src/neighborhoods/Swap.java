@@ -12,30 +12,30 @@ import definition.Neighborhood;
 import definition.Solution;
 import util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
- * Voisinage basé sur la permutation de deux jobs.
+ * The Swap type of neighborhood. The neighbors are computing by exchanging the positions of two
+ * jobs from the given solution's scheduling.
  */
 public class Swap extends Neighborhood {
 
 	/**
-	 * Iterateur sur le voisinage.
+	 * The Class SwapIterator.
 	 */
 	public static class SwapIterator implements Iterator<Solution> {
 
-		/** The sol. */
-		private Solution sol;
+		/** The solution. */
+		private Solution solution;
 
-		/** The j. */
+		/** The indexes. */
 		private int i, j;
 
 		/**
 		 * Instantiates a new swap iterator.
 		 *
-		 * @param sol the sol
+		 * @param solution the solution
 		 */
-		public SwapIterator(Solution sol) {
-			this.sol = sol.clone();
+		public SwapIterator(Solution solution) {
+			this.solution = solution.clone();
 			i = 0;
 			j = 0;
 		}
@@ -44,29 +44,28 @@ public class Swap extends Neighborhood {
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			return i != sol.getInstance().getSize()-2 || j != sol.getInstance().getSize()-1;
+			return i != solution.getInstance().getSize()-2 || j != solution.getInstance().getSize()-1;
 		}
 
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#next()
 		 */
 		public Solution next() {
-			// restaurer la solution de départ sauf la première fois
 			if(j != 0)
-				sol.swap(i, j);
+				solution.swap(i, j);
 
-			// calcul des indices suivants
+			// computing the next indexes
 			j++;
-			if(j == sol.getInstance().getSize()) {
+			if(j == solution.getInstance().getSize()) {
 				i++;
 				j = i+1;
 			}
 
-			// calcul du voisin
-			sol.swap(i, j);
-			sol.evaluate();
+			// computing the neighbor
+			solution.swap(i, j);
+			solution.evaluate();
 
-			return sol;
+			return solution;
 		}
 	}
 
@@ -74,18 +73,18 @@ public class Swap extends Neighborhood {
 	 * @see definition.Neighborhood#assignRandomNeighbor(definition.Solution)
 	 */
 	@Override
-	public void assignRandomNeighbor(Solution sol) {
-		int[] couple = Random.randomCouple(0, sol.getInstance().getSize());
-		sol.swap(couple[0], couple[1]);
-		sol.evaluate();
+	public void assignRandomNeighbor(Solution solution) {
+		int[] couple = Random.randomCouple(0, solution.getInstance().getSize());
+		solution.swap(couple[0], couple[1]);
+		solution.evaluate();
 	}
 
 	/* (non-Javadoc)
 	 * @see definition.Neighborhood#getNeighbors(definition.Solution)
 	 */
 	@Override
-	public Iterable<Solution> getNeighbors(Solution sol) {
-		final Solution s = sol;
+	public Iterable<Solution> getNeighbors(Solution solution) {
+		final Solution s = solution;
 		return new Iterable<Solution>() {
 			public Iterator<Solution> iterator() {
 				return new SwapIterator(s);
