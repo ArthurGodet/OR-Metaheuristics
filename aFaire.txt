@@ -26,7 +26,7 @@ Bonus :
 Une fois que tout le reste est fait :
 [X] Traduire tous les commentaires en anglais ---> ATTENTION : Javadoc ne prend pas les accents français
 [X] Mettre en place tous les commentaires nécessaires
-[ ] ajouter une licence GNU GPL/LPGL ou BSD ou MIT au projet (ATTENTION : ne pas oublier de rajouter le texte obligatoire a chaque fichier)
+[X] ajouter une licence GNU GPL/LPGL ou BSD ou MIT au projet (ATTENTION : ne pas oublier de rajouter le texte obligatoire a chaque fichier)
 [ ] faire un README aux petits oignons
 
 Quand tout est fait :
