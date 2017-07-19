@@ -24,8 +24,8 @@ public class Random {
 	/**
 	 * Returns a random integer between from (inclusive) and to (exclusive).
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @return a random integer between from (inclusive) and to (exclusive)
 	 */
 	public static int randomInteger(int from, int to) {
@@ -36,8 +36,8 @@ public class Random {
 	 * Returns a couple of integers both between from (inclusive) and to (exclusive), and the first
 	 * integer being strictly smaller than the second one.
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @return a couple of integers
 	 */
 	public static int[] randomCouple(int from, int to) {
@@ -55,8 +55,8 @@ public class Random {
 	 * Returns a triplet of integers each one between from (inclusive) and to (exclusive), 
 	 * with integer being strictly smaller than the next.
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @return a triplet of integers
 	 */
 	public static int[] randomTriplet(int from, int to) {
@@ -78,8 +78,8 @@ public class Random {
 	/**
 	 * Generates two random integers between from+1 (inclusive) and to (exclusive).
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @return a couple of integers.
 	 */
 	public static int[] randomTwoPoints(int from, int to) {
@@ -90,8 +90,8 @@ public class Random {
 	 * Randomly generates a list of k integers (without repetition), each integer being between
 	 * from (inclusive) and to (exclusive).
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @param k the number of integers
 	 * @return a list of k integers 
 	 */
@@ -106,8 +106,8 @@ public class Random {
 	/**
 	 * Generates a random sequence of the integers between from and to.
 	 *
-	 * @param from
-	 * @param to
+	 * @param from from
+	 * @param to to
 	 * @return the list of integers
 	 */
 	public static List<Integer> randomShuffle(int from, int to) {

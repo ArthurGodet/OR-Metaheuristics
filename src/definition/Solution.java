@@ -34,7 +34,7 @@ public class Solution implements Comparable<Solution>, Cloneable{
 	/**
 	 *  Builds an empty solution for a specific instance.
 	 *
-	 * @param i the instance
+	 * @param instance the instance
 	 */
 	public Solution(Instance instance){
 		this.instance = instance;

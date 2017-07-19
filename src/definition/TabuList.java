@@ -55,7 +55,7 @@ public class TabuList {
 	/**
 	 * Adds the solution to the tabu list.
 	 *
-	 * @param s the solution to add
+	 * @param solution the solution to add
 	 */
 	public void add(Solution solution)
 	{
@@ -68,9 +68,9 @@ public class TabuList {
 	}
 	
 	/**
-	 * Checks if the list contains the solution
+	 * Checks if the list contains the solution.
 	 *
-	 * @param s the s
+	 * @param solution the solution
 	 * @return true, if successful
 	 */
 	public boolean contains(Solution solution)

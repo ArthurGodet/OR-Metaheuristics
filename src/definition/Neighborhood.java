@@ -22,14 +22,14 @@ public abstract class Neighborhood {
 	/**
 	 * Computes randomly a neighbor of the solution
 	 *
-	 * @param sol the solution
+	 * @param solution the solution
 	 */
 	public abstract void assignRandomNeighbor(Solution solution);
 
 	/**
 	 * Gets the neighborhood of the solution.
 	 *
-	 * @param sol the solution
+	 * @param solution the solution
 	 * @return an Iterable object on the solutions (that need to be cloned in order to be manipulated)
 	 */
 	public abstract Iterable<Solution> getNeighbors(Solution solution);
@@ -37,7 +37,7 @@ public abstract class Neighborhood {
 	/**
 	 * Gets the best neighbor of the solution.
 	 *
-	 * @param sol the solution
+	 * @param solution the solution
 	 * @return a best solution in the solution's neighborhood
 	 */
 	public Solution getBestNeighbor(Solution solution) {
@@ -51,7 +51,7 @@ public abstract class Neighborhood {
 	/**
 	 * Gets the neighbors list.
 	 *
-	 * @param sol the solution
+	 * @param solution the solution
 	 * @return the list of solution forming the neighborhood of the solution parameter
 	 */
 	public List<Solution> getNeighborsList(Solution solution) {
