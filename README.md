@@ -1,18 +1,31 @@
 # Operational Research Project
 
-* présenter le projet initial : Flowshop.
-* présenter l'extention faite au TSP.
+Initially, it was a school project where we were asked to implement the Memetic metaheuristic for the permutation Flowshop problem (refered as the Flowshop problem here). However, we are students interested in Optimisation as we are studying Computer Science for Decision Support. Our curiosity leads us to implement several other metaheuristics in order to compare the results got by every method. We also created our own metaheuristic, the Wolf Pack Algorithm, which is based on the behaviour of a wolf pack. Finally, we updated our system so that it can also solve instances of the famous Travelling Salesman Problem (TSP).
 
 ## Getting Started
 
-* présenter le système de fichiers texte pour les résultats (voir Benchmark.java aussi)
-* présenter notre méthode du WolfPack.
+Concerning the code in itself. 
+* The crossovers package contains different ways crossover can be made on our representation of DNA (here, an array of integers representing the order in which the tasks are done for the Flowshop problem or the order in which the cities are visited for the TSP).
+* The definition package contains several classes used to build the instances, the solution, etc.
+* The metaheuristics package contains the implementation of all the metaheuristics we worked on.
+* The neighborhoods package contains different ways to compute the neighborhood of a solution in the search space.
+* The util package contains generic methods we implemented to manage time and random numbers generation.
+
+For the rest of the project.
+* The folder doc contains the Javadoc associated to the code.
+* The folder instances contains the data for instances of the Flowshop problem and for the TSP.
+* The folder results contains all the results obtained so far by the different algorithms for the different instances of the two problems.
+* The folder summary contains the results obtained so far in a summarized shape.
+* The file summary.ods allows to see the results more easier and allows to compare the different algorithms with graphics.
+* The script summarize.py treats the data in the results folder in order to create the text files in the summary folder.
 
 ## Running the code
 
-donner une explication claire de ce que fait le Main et comment le voir
-    * |-> d'abord créer un dossier avec le nom du compte utilisateur de l'OS
-    * |-> explication sur l'utilisation et les résultats attendus pour ce Main spécifique
+Before running the code, you must create a folder in the results folder with the name of your computer's session. It is the only thing you'll have to configure in order to make our program work as it should.
+
+The Main class will then produce the following results : every metaheuristic will be called twice (the two process occurring in two different threads in the same time) on every one of the ten first instances of the Flowshop problem. The results obtained by the different algorithms are written in files with the name of the algorithm in the folder you created. 
+
+If you then execute the Python script named summarize, it will update the data in the text files in the folder summary. If you then open the file summary.ods and update the links, you will have all the results got so far on the instances, with several graphics to compare the algorthms.
 
 ## Authors
 
