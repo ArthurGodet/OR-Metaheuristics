@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import definition.Instance;
+import definition.Neighborhood;
 import definition.Solution;
 import neighborhoods.Change;
 import neighborhoods.Shift;
@@ -72,40 +73,35 @@ public class BeesAlgorithm extends Solver{
 	@Override
 	public void solve(Timer timer) {
 		this.setSolution(Greedy.solve(this.getInstance()));
+		// Initiates the colony of bees
 		this.initiation();
-		Change change = new Change();
-		Shift shift = new Shift();
-		Swap swap = new Swap();
-		Solution s;
+		Neighborhood[] neighborhoods = new Neighborhood[]{new Change(),new Shift(),new Swap()};
 		Arrays.sort(this.bees);
+		// Work of the colony : exploration and local foraging
 		while(!timer.isFinished()){
 			for(int i = 0; i<this.colonySize; i++){
+				Solution s = this.bees[i].clone();
 				if(i<this.nbForagers){
-					// Selects the best neighbor whatever the neighborhood
-					s = change.getBestNeighbor(this.bees[i]);
-					if(!this.abandonedSites.contains(s))
-						this.abandonedSites.add(s.clone());
-					Solution t = shift.getBestNeighbor(this.bees[i]);
-					if(!this.abandonedSites.contains(t))
-						this.abandonedSites.add(t.clone());
-					if(t.compareTo(s)<0)
-						s = t.clone();
-					t = swap.getBestNeighbor(this.bees[i]);
-					if(!this.abandonedSites.contains(t))
-						this.abandonedSites.add(t.clone());
-					if(t.compareTo(s)<0)
-						s = t.clone();
+					// Foraging : selects the best neighbor whatever the neighborhood
+					for(Neighborhood n : neighborhoods){
+						Solution t = n.getBestNeighbor(this.bees[i]);
+						if(!this.abandonedSites.contains(t))
+							this.abandonedSites.add(t.clone());
+						if(t.compareTo(s)<0)
+							s = t.clone();
+					}
 					
-					// Checks if the site should be abandoned
+					// Marks the site to avoid future foraging here
 					if(!this.abandonedSites.contains(this.bees[i]))
 						this.abandonedSites.add(this.bees[i]);
 					
 					if(s.compareTo(this.bees[i])<0)
 						this.bees[i] = s.clone();
 					else
-						this.bees[i] = Solution.generateSolution(this.getInstance());
+						this.bees[i] = Solution.generateSolution(this.getInstance()); // exploration
 				}
 				else{
+					// exploration for all the non-forager bees
 					do{
 						this.bees[i] = Solution.generateSolution(this.getInstance());
 					}while(this.abandonedSites.contains(this.bees[i]));
@@ -113,7 +109,7 @@ public class BeesAlgorithm extends Solver{
 			}
 			Arrays.sort(this.bees);
 			if(this.bees[0].compareTo(this.getSolution())<0)
-				this.setSolution(this.bees[0].clone());
+				this.setSolution(this.bees[0].clone()); // keeps the best solution found so far
 		}
 	}
 	
