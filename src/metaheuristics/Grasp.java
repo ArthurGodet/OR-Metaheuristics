@@ -51,8 +51,9 @@ public class Grasp extends Solver{
 			LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),s);
 			ls.solve();
 			if(ls.getSolution().compareTo(this.getSolution())<0)
-				this.setSolution(ls.getSolution().clone());
+				this.setSolution(ls.getSolution().clone()); // keeps the best solution found so far
 		}while(!timer.isFinished());
+		// until the timer is finished, generates a random solution and applies a local search
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class Grasp extends Solver{
 		List<Integer> res = new ArrayList<Integer>();
 		while(l.size() != 0)
 			res.add(l.remove((((int)(Math.random()*l.size())))));
-		return res;
+		return res; // shuffled list of cities
 	}
 
 	/**

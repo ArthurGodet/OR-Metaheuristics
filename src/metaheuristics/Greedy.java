@@ -52,6 +52,7 @@ public class Greedy extends Solver{
 				cities.add(i);
 			Solution sol = new Solution(this.getInstance());
 			sol.setScheduling(0,0);
+			// Applies nearest neighbors heuristic
 			for(int k = 1; k<this.getInstance().getSize(); k++){
 				int city = cities.get(0);
 				double dist = inst.getDistance(sol.getJob(k-1),city);
@@ -104,7 +105,7 @@ public class Greedy extends Solver{
 		this.getSolution().setScheduling(j,k);
 		this.getSolution().evaluate();
 
-		// We are looking for the best position for the Job j in the current scheduling
+		// Looks for the best position for the Job j in the current scheduling
 		Solution current = getSolution().clone();
 		for(int i = k; i>0; i--){
 			current.swap(i-1,i);
