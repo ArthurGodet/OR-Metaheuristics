@@ -39,6 +39,7 @@ public class Ils extends Solver{
 		ls.solve();
 		Solution s = ls.getSolution();
 		this.setSolution(s.clone());
+		// until the timer is finished, does a large step and applies a local search
 		do{
 			largeStep(s);
 			
@@ -47,7 +48,7 @@ public class Ils extends Solver{
 			s = ls.getSolution().clone();
 			
 			if(s.compareTo(this.getSolution())<0)
-				this.setSolution(s.clone());
+				this.setSolution(s.clone()); // keeps the best solution found so far
 		}while(!timer.isFinished());
 	}
 	

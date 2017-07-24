@@ -132,7 +132,7 @@ public class Parallel extends Solver {
 	}
 
 	/**
-	 * Prepare the numThreads solvers.
+	 * Prepares the numThreads solvers.
 	 *
 	 * @return the solver[]
 	 */

@@ -72,7 +72,7 @@ public class Memetic extends Genetic{
 			// Generates the initial population
 			ArrayList<Solution> population = this.generateInitialPopulation();
 			
-			// Applies the genetic algorithm
+			// Applies the genetic algorithm until the timer is finished or 95% of the population have the same score
 			while(population.get(0).getScore() != population.get((int)(population.size()*0.95)).getScore() && !timer.isFinished()){
 				ArrayList<Solution> newGeneration = this.generateNewGeneration(population);
 				
@@ -87,7 +87,7 @@ public class Memetic extends Genetic{
 				Collections.sort(newGeneration); // Sorts the new population by increasing score
 				population = newGeneration;
 				if(this.getSolution().getScore() > population.get(0).getScore()){
-					this.setSolution(population.get(0).clone());
+					this.setSolution(population.get(0).clone()); // keeps the best solution found so far
 				}
 			}
 		}
