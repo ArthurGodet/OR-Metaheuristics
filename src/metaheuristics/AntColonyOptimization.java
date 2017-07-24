@@ -106,11 +106,14 @@ public class AntColonyOptimization extends Solver {
 		// Loop for improvements of the solution.
 		while(!timer.isFinished()){
 			for(int k = 0; k<this.nbAnts; k++){
+				// Initializes the ant with a random first job/city
 				this.ants[k] = new Solution(this.getInstance());
 				int firstJob = (int)(Math.random()*this.getInstance().getSize());
 				this.ants[k].insertJob(firstJob,0);
 				List<Integer> candidates = generateCandidates(firstJob);
 				int pos = 1;
+				// Adds the other jobs/cities taking into account the probabilities of picking each
+				// job/city, the heuristic and pheromone factors influencing on these probabilities
 				while(candidates.size() != 0){
 					double[] proba = proba(candidates,pos,k);
 					int candidateSelected = draw(proba);
@@ -120,7 +123,7 @@ public class AntColonyOptimization extends Solver {
 				}
 				ants[k].evaluate();
 			}
-			updatePheromoneTrails();
+			updatePheromoneTrails(); // update the amount of pheromone left by each ant on the trails
 		}
 	}
 	
@@ -223,6 +226,7 @@ public class AntColonyOptimization extends Solver {
 	 */
 	public void updatePheromoneTrails(){
 		LocalSearch ls = new LocalSearch(this.getInstance(),new Shift(),this.getSolution());
+		// applies local search on each ant
 		for(int k = 0; k<this.nbAnts; k++){
 			ls.setSolution(this.ants[k]);
 			ls.solve();
@@ -230,17 +234,15 @@ public class AntColonyOptimization extends Solver {
 		}
 		Arrays.sort(ants,Collections.reverseOrder());
 		if(ants[ants.length-1].compareTo(this.getSolution())<0){
-			this.setSolution(ants[ants.length-1].clone());
+			this.setSolution(ants[ants.length-1].clone()); // keeps the best solution found so far
 		}
 		for(int i = 0; i<this.getInstance().getSize(); i++){
 			for(int j = 0; j<this.getInstance().getSize(); j++){
-				this.pheromoneTrails[i][j] *= (1-this.rho);
+				this.pheromoneTrails[i][j] *= (1-this.rho); // evaporation
 				if(ants[ants.length-1].contains(i)&&ants[ants.length-1].getIndex(i)==j)
 					this.pheromoneTrails[i][j] += this.rho/((double)(ants[ants.length-1].getScore()));
-				if(this.pheromoneTrails[i][j]>this.thoMax)
-					this.pheromoneTrails[i][j] = this.thoMax;
-				if(this.pheromoneTrails[i][j] < this.thoMin)
-					this.pheromoneTrails[i][j] = this.thoMin;
+				// makes sure that thoMin <= pheromoneTrails[i][j] <= thoMax 
+				this.pheromoneTrails[i][j] = Math.max(this.thoMin, Math.min(this.pheromoneTrails[i][j], this.thoMax)); 
 			}
 		}
 	}
