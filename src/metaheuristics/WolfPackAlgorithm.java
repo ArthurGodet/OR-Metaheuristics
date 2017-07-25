@@ -107,12 +107,12 @@ public class WolfPackAlgorithm extends Solver{
 	 */
 	private Solution communicate(double rate){
 		Solution sol = new Solution(this.getInstance());
-		List<Integer> jobs = Random.randomShuffle(0, this.getInstance().getSize());
+		List<Integer> jobs = Random.randomShuffle(0, this.getInstance().getSize()); // indexes
 		int n = (int)(this.getInstance().getSize()*rate);
-		// We keep information from the best hunter
+		// Keeps information from the best hunter for n jobs/cities
 		for(int i = 0; i < n; i++)
 			sol.setScheduling(jobs.get(i), this.wolves[0].getIndex(jobs.get(i)));
-		// We complete in a random hunt
+		// Completes in a random hunt
 		int insert = sol.getIndex(-1);
 		for(int i = n; i < this.getInstance().getSize(); i++){
 			sol.setScheduling(jobs.get(i), insert);
