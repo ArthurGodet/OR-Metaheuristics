@@ -1,6 +1,10 @@
 # Operational Research Project
 
-Initially, it was a school project where we were asked to implement the Memetic metaheuristic for the permutation Flowshop problem (refered as the Flowshop problem here). However, we are students interested in Optimisation as we are studying Computer Science for Decision Support. Our curiosity leads us to implement several other metaheuristics in order to compare the results got by every method. We also created our own metaheuristic, the Wolf Pack Algorithm, which is based on the behaviour of a wolf pack. Finally, we updated our system so that it can also solve instances of the famous Travelling Salesman Problem (TSP).
+Initially, this was a school project where we were asked to implement the Memetic metaheuristic for the permutation flowshop problem (referred as the Flowshop problem here).
+However, we are students interested in Optimisation as we are studying Computer Science for Decision Support.
+Our curiosity led us to implement several other metaheuristics in order to compare their results.
+We also created our own metaheuristic, the Wolf Pack Algorithm, which is based on the behaviour of a wolf pack.
+Finally, we updated our system so that it can also solve instances of the famous Travelling Salesman Problem (TSP).
 
 ## Getting Started
 
