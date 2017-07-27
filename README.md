@@ -25,6 +25,7 @@ For the rest of the project:
 * doc: the Javadoc associated to the code.
 * instances: the data for instances of the Flowshop problem and for the TSP.
 * results: all the results obtained so far by the different algorithms for the different instances of the two problems.
+  Results from different users are stored in separate sub-folders to avoid merge conflicts with git.
 * summary: results obtained so far in a summarized format.
 * summary.ods: speadsheet that allows to see the results more easily and compare the different algorithms with graphs.
 * summarize.py: script to read results and create the text files in the summary folder.
