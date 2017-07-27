@@ -1,5 +1,11 @@
 # Operational Research Project
 
+## Description
+
+Implementation in java of several metaheuristics to tackle the permutation flowshop problem and the travelling salesman problem (TSP).
+
+## Background
+
 Initially, this was a school project where we were asked to implement the Memetic metaheuristic for the permutation flowshop problem (referred as the Flowshop problem here).
 However, we are students interested in Optimisation as we are studying Computer Science for Decision Support.
 Our curiosity led us to implement several other metaheuristics in order to compare their results.
