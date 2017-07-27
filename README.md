@@ -30,13 +30,17 @@ For the rest of the project:
 * summary.ods: speadsheet that allows to see the results more easily and compare the different algorithms with graphs.
 * summarize.py: script to read results and create the text files in the summary folder.
 
-## Running the code
+## Running the program
 
-Before running the code, you must create a folder in the results folder with the name of your computer's session. It is the only thing you'll have to configure in order to make our program work as it should.
+Before running the program, you must create a sub-folder in the results folder named after your computer's session.
+It is the only thing you will have to configure to make it work.
 
-The Main class will then produce the following results : every metaheuristic will be called twice (the two process occurring in two different threads in the same time) on every one of the ten first instances of the Flowshop problem. The results obtained by the different algorithms are written in files with the name of the algorithm in the folder you created. 
+The Main class will then produce the following results:
+every metaheuristic will be run twice (in two different threads at the same time) on each of the first ten instances of the Flowshop problem.
+The results obtained by the different algorithms are written in files with the name of the algorithm in the folder you created.
 
-If you then execute the Python script named summarize, it will update the data in the text files in the folder summary. If you then open the file summary.ods and update the links, you will have all the results got so far on the instances, with several graphics to compare the algorthms.
+If you then execute the Python script `summarize.py`, it will update the data in the text files in the summary folder.
+When you open the `summary.ods` spreadsheet and update the links, you will have all the results got so far on the instances, with several graphics to compare the algorthms.
 
 ## Authors
 
