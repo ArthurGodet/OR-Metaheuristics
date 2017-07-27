@@ -12,22 +12,22 @@ Our curiosity led us to implement several other metaheuristics in order to compa
 We also created our own metaheuristic, the Wolf Pack Algorithm, which is based on the behaviour of a wolf pack.
 Finally, we updated our system so that it can also solve instances of the famous Travelling Salesman Problem (TSP).
 
-## Getting Started
+## Project structure
 
-Concerning the code in itself. 
-* The crossovers package contains different ways crossover can be made on our representation of DNA (here, an array of integers representing the order in which the tasks are done for the Flowshop problem or the order in which the cities are visited for the TSP).
-* The definition package contains several classes used to build the instances, the solution, etc.
-* The metaheuristics package contains the implementation of all the metaheuristics we worked on.
-* The neighborhoods package contains different ways to compute the neighborhood of a solution in the search space.
-* The util package contains generic methods we implemented to manage time and random numbers generation.
+The source code in itself is organised in the following packages in the src folder:
+* crossovers: defines different ways crossover can be made on our representation of DNA (here, an array of integers representing the order in which the tasks are done for the Flowshop problem or the order in which the cities are visited for the TSP).
+* definition: several classes used to build the instances, the solution, etc.
+* metaheuristics: the implementation of all the metaheuristics we worked on.
+* neighborhoods: contains different ways to compute the neighborhood of a solution in the search space.
+* util: generic methods we implemented to manage time and random numbers generation.
 
-For the rest of the project.
-* The folder doc contains the Javadoc associated to the code.
-* The folder instances contains the data for instances of the Flowshop problem and for the TSP.
-* The folder results contains all the results obtained so far by the different algorithms for the different instances of the two problems.
-* The folder summary contains the results obtained so far in a summarized shape.
-* The file summary.ods allows to see the results more easier and allows to compare the different algorithms with graphics.
-* The script summarize.py treats the data in the results folder in order to create the text files in the summary folder.
+For the rest of the project:
+* doc: the Javadoc associated to the code.
+* instances: the data for instances of the Flowshop problem and for the TSP.
+* results: all the results obtained so far by the different algorithms for the different instances of the two problems.
+* summary: results obtained so far in a summarized format.
+* summary.ods: speadsheet that allows to see the results more easily and compare the different algorithms with graphs.
+* summarize.py: script to read results and create the text files in the summary folder.
 
 ## Running the code
 
