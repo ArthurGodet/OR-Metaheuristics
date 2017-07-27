@@ -48,7 +48,7 @@ When you open the `summary.ods` spreadsheet and update the links, you will have 
 * **Joachim Hotonnier** - *Code (structure, factorization and utils)* - [jhtr](https://github.com/jhtr)
 * **Marie Deur** - *Code*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/jhtr/ro2/contributors) who participated in this project.
 
 ## License
 
