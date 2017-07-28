@@ -2,15 +2,14 @@
 
 ## Description
 
-Implementation in java of several metaheuristics to tackle the permutation flowshop problem and the travelling salesman problem (TSP).
+Implementation in java of several metaheuristics to tackle the permutation Flowshop problem and the Traveling Salesman Problem (TSP).
 
 ## Background
 
-Initially, this was a school project where we were asked to implement the Memetic metaheuristic for the permutation flowshop problem (referred as the Flowshop problem here).
-However, we are students interested in Optimisation as we are studying Computer Science for Decision Support.
-Our curiosity led us to implement several other metaheuristics in order to compare their results.
+Initially, this was a school project where we were asked to implement the Memetic metaheuristic for the permutation Flowshop problem (referred as the Flowshop problem here).
+However, we are students interested in Optimisation as we are studying Computer Science for Decision Support, and our curiosity led us to implement several other metaheuristics in order to compare their results.
 We also created our own metaheuristic, the Wolf Pack Algorithm, which is based on the behaviour of a wolf pack.
-Finally, we updated our system so that it can also solve instances of the famous Travelling Salesman Problem (TSP).
+Finally, we updated our system so that it can also solve instances of the famous Traveling Salesman Problem (TSP).
 
 ## Project structure
 
@@ -27,20 +26,20 @@ For the rest of the project:
 * results: all the results obtained so far by the different algorithms for the different instances of the two problems.
   Results from different users are stored in separate sub-folders to avoid merge conflicts with git.
 * summary: results obtained so far in a summarized format.
-* summary.ods: speadsheet that allows to see the results more easily and compare the different algorithms with graphs.
+* summary.ods: spreadsheet that allows to see the results more easily and compare the different algorithms with graphs.
 * summarize.py: script to read results and create the text files in the summary folder.
 
 ## Running the program
 
 Before running the program, you must create a sub-folder in the results folder named after your computer's session.
-It is the only thing you will have to configure to make it work.
+It is the only thing you will have to configure to make our program work.
 
 The Main class will then produce the following results:
 every metaheuristic will be run twice (in two different threads at the same time) on each of the first ten instances of the Flowshop problem.
 The results obtained by the different algorithms are written in files with the name of the algorithm in the folder you created.
 
 If you then execute the Python script `summarize.py`, it will update the data in the text files in the summary folder.
-When you open the `summary.ods` spreadsheet and update the links, you will have all the results got so far on the instances, with several graphics to compare the algorthms.
+When you open the `summary.ods` spreadsheet and update the links, you will have all the results got so far on the instances, with several graphics to compare the algorithms.
 
 ## Authors
 
