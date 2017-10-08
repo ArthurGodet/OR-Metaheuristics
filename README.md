@@ -51,5 +51,5 @@ See also the list of [contributors](https://github.com/jhtr/ro2/contributors) wh
 
 ## License
 
-This project is licensed under the BSD License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the Revised BSD License - see the [LICENSE.md](LICENSE.md) file for details.
     
