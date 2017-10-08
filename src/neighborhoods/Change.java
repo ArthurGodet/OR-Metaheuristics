@@ -15,11 +15,6 @@ import util.Random;
 /**
  * The Change type of neighborhood. The neighbors are computing by doing circular permutation from
  * the given solution.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Change extends Neighborhood {
 

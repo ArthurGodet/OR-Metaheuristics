@@ -27,11 +27,6 @@ import util.Timer;
 
 /**
  * The Class Main.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Main {
 

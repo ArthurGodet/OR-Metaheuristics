@@ -15,11 +15,6 @@ import util.Random;
  * sequence outside these two points is the same than its first parent's one. Then the child's
  * sequence is completed with jobs from the second parent, respecting the order of appearance 
  * in the sequence.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class TwoPointOut implements Crossover {
 

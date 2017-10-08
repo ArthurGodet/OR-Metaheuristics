@@ -15,11 +15,6 @@ import util.Random;
 /**
  * The Shift type of neighborhood. The neighbors are computing by shifting part of the given 
  * solution's scheduling.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Shift extends Neighborhood {
 

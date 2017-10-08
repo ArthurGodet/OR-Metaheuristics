@@ -19,11 +19,6 @@ import util.Timer;
 
 /**
  * Implementation of the GRASP (Greedy Randomized Adaptive Search Procedure) metaheuristic.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Grasp extends Solver{
 	

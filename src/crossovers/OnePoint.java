@@ -15,11 +15,6 @@ import util.Random;
  * created taking the first part of the first parent in respect to the cutting point. Then the
  * child sequence (the DNA) is completed with jobs from the second parent in the same order as
  * they appear in the second parent's sequence.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class OnePoint implements Crossover {
 

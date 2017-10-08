@@ -15,11 +15,6 @@ import util.Random;
 /**
  * The Swap type of neighborhood. The neighbors are computing by exchanging the positions of two
  * jobs from the given solution's scheduling.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Swap extends Neighborhood {
 

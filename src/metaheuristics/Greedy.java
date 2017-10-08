@@ -19,11 +19,6 @@ import util.Timer;
 /**
  * Implementation of a greedy algorithm : NEH for permutation flow shop problems and Nearest 
  * Neighbor for TSP.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Greedy extends Solver{
 

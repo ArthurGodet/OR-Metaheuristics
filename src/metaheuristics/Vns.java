@@ -16,11 +16,6 @@ import util.Timer;
 
 /**
  * Implementation of the VNS (Variable Neighborhood Search) metaheuristic.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Vns extends Solver{
 	

@@ -12,11 +12,6 @@ import java.util.Scanner;
 
 /**
  * Representation of an instance for the permutation flow shop problem.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class InstanceFlowshop extends Instance{
 	

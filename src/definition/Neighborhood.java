@@ -11,11 +11,6 @@ import java.util.List;
 
 /**
  * Abstract class for the different types of neighborhood that can be built from a solution.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public abstract class Neighborhood {
 

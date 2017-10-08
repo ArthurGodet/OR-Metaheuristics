@@ -14,11 +14,6 @@ import metaheuristics.Solver;
 /**
  * The Class Benchmark contains method for writing results of tests. The methods' behavior is 
  * adapted depending on the meta-heuristic used (Solver objects) and the instance of the problem.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Benchmark {
 	

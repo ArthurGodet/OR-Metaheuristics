@@ -15,11 +15,6 @@ import util.Random;
  * selected from the first parent and put at the same place that the one they have in the first
  * parent's sequence. Then the child's sequence is completed with jobs of the second parent, 
  * respecting the order of appearance in the sequence.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class PositionBased implements Crossover {
 

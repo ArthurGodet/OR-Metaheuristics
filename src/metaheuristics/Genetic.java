@@ -20,11 +20,6 @@ import util.Timer;
 
 /**
  * Implementation of a Genetic algorithm.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Genetic extends Solver{
 	

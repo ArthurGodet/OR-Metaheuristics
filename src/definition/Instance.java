@@ -9,11 +9,6 @@ package definition;
 /**
  * Abstract class for the different type of instances. Each type of instance represents a certain
  * problem.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public abstract class Instance {
 	/** The name of the specific instance of the problem. */

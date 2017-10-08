@@ -19,11 +19,6 @@ import util.Timer;
 
 /**
  * Implementation of the Wolf Pack metaheuristic, a new algorithm designed by Arthur Godet.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class WolfPackAlgorithm extends Solver{
 	

@@ -14,11 +14,6 @@ import util.Random;
 /**
  * Representation of a solution of an schedulinging problem such as the TSP or the permutation flow shop
  * problem.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Solution implements Comparable<Solution>, Cloneable{
 	

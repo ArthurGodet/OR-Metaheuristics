@@ -12,11 +12,6 @@ import java.util.Scanner;
 
 /**
  * Representation of an instance for the Traveling Salesman Problem.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class InstanceTSP extends Instance{
 	

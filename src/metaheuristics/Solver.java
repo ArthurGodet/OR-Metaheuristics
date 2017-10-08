@@ -12,11 +12,6 @@ import util.Timer;
 
 /**
  * Abstract class for algorithms and metaheuristics.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public abstract class Solver {
 	

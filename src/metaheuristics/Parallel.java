@@ -18,11 +18,6 @@ import util.Timer;
 
 /**
  * Solver running 4 solvers of the same type in parallel.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class Parallel extends Solver {
 	

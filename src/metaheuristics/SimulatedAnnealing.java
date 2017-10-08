@@ -18,11 +18,6 @@ import util.Timer;
 
 /**
  * Implementation of the Simulated Annealing metaheuristic.
- * 
- * @author Arthur Godet
- * @author Joachim Hotonnier
- * @author Marie Deur
- * @since 19/03/2017
  */
 public class SimulatedAnnealing extends Solver{
 	
