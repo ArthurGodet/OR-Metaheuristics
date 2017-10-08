@@ -1,8 +1,8 @@
-/**
+/*
  * Copyright (c) 2017, Arthur Godet, Joachim Hotonnier and Marie Deur. All rights reserved.
  *
- * Licensed under the BSD 4-clause license.
- * See LICENSE file in the project root for full license information.
+ * Licensed under the Revised BSD License.
+ * See LICENSE.md file in the project root for full license information.
  */
 package crossovers;
 
